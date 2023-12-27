@@ -41,6 +41,50 @@ Per semplificare il design e l’implementazione vi forniamo di seguito delle re
 |---|---|---|
 | Casella angolare | Non succede nulla, il turno del giocatore finisce. | Non succede nulla, il turno del giocatore finisce. |
 | Casella laterale non appartenente a nessuno dei giocatori | Può decidere se comprare il terreno (la casella), se possiede abbastanza soldi. Altrimenti finisce il turno. | Può comprare il terreno (la casella) con una probabilità del 25%, se possiede abbastanza soldi. Altrimenti, finisce il turno |
-| Casella laterale di proprietà del giocatore, senza casa/albergo | Può decidere se comprare una casa (il passaggio diretto da terreno semplice ad albergo non è possibile), se possiede abbastanza soldi. Altrimentifinisce il turno. |  |
-| Casella laterale con casa di proprietà  |  |  |
-| Casella laterale con casa/albergo di proprietà di un altro giocatore |  |  |
+| Casella laterale di proprietà del giocatore, senza casa/albergo | Può decidere se comprare una casa (il passaggio diretto da terreno semplice ad albergo non è possibile), se possiede abbastanza soldi. Altrimentifinisce il turno. | Può comprare una casa (il passaggio diretto da terreno semplice ad albergo non è possibile) con una probabilità del 25%, se possiede abbastanza soldi. |
+| Casella laterale con casa di proprietà  | Può decidere di migliorare la propria casa in albergo, se possiede abbastanza soldi. Altrimenti, finisce il turno | Può migliorare la propria casa in albergo con una probabilità del 25%, se possiede abbastanza soldi. |
+|Deve pagare il pernottamento nella struttura Casella laterale con casa/albergo di proprietà di un altro giocatore | Deve pagare il pernottamento nella struttura. | Deve pagare il pernottamento nella struttura. |
+
+* Se con il tiro di dado, un giocatore passa per la casella di partenza, ritira 20 fiorini (cioè il suo budget viene incrementato di 20)
+* I prezzi (in fiorini) per l'acquisto di una casa, il miglioramento in albergo di una casa esistente e il pernottamento nelle due diverse strutture e nelle diverse categorie di caselle, è riportato di seguito:
+
+| | economica | standard | lusso |
+|---|---|---|---|
+| Acquisto terreno | 6 | 10 | 20 |
+| Acquisto casa | 3 | 5 | 10 |
+| Miglioramento ad albergo | 3 | 5 | 10 |
+| Pernottamento in casa | 2 | 4 | 7 |
+| Pernottamento in albergo | 4 | 8 | 14 |
+
+* Un giocatore viene eliminato se non ha abbastanza fiorini al momento del pagamento del pernottamento. Gli altri giocatori continuano a giocare. Le caselle di proprietà del giocatore eliminato vengono svuotate di possibili case o alberghi e i terreni tornano ad essere disponibili per la vendita.
+* Vince l'ultimo giocatore che rimane in gioco.
+
+### 1.5 Visualizzazione
+Nel caso di partita con un giocatore umano, è possibile richiedere al programma la visualizzazione del tabellone corrente. Verranno visualizzate le caselle del tabellone, la presenza di eventuali case o alberghi e la posizione dei giocatori attualmente in gioco.
+
+La visualizzazione avviene stampando un carattere con un eventuale suffisso per ciascuna posizione:
+
+| Casella | Carattere |
+|---|---|
+| Angolare | spazio |
+| Partenza | P |
+| Economica | E |
+| Standard | S |
+| Lusso | L |
+
+| Suffissi | Carattere |
+|---|---|
+| Casa | * |
+| Albergo | ^ |
+| Giocatore | 1-4 |
+
+Esempio tabellone vuoto:
+        **1       2       3       4       5       6       7       8**
+**A**   |   |   | L |   | L |   | E |   | S |   | S |   | S |   |   |
+**B**   | L |                                                   | S |
+**C**   | S |                                                   | E |
+**D**   | L |                                                   | S |
+**E**   | S |                                                   | E |
+**F**   | E |                                                   | L |
+**G**   | E |                                                   | E |
+**H**   |   |   | S |   | S |   | L |   | S |   | E |   | E |   | P |
