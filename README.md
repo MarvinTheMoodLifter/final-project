@@ -80,7 +80,7 @@ La visualizzazione avviene stampando un carattere con un eventuale suffisso per 
 
 Esempio tabellone vuoto:
 
-|     | 1   | 2   | 3   | 4   | 5   | 6   | 7   | 8   |
+|     |*1*  |*2*  |*3*  |*4*  |*5*  |*6*  |*7*  |*8*  |
 |-----|-----|-----|-----|-----|-----|-----|-----|-----|
 | *A* |     | L   | L   | E   | S   | S   | S   |     |
 | *B* | L   |     |     |     |     |     |     | S   |
@@ -90,3 +90,16 @@ Esempio tabellone vuoto:
 | *F* | E   |     |     |     |     |     |     | L   |
 | *G* | E   |     |     |     |     |     |     | E   |
 | *H* |     | S   | S   | L   | S   | E   | E   | P   |
+
+Esempio tabellone con giocatori, case e alberghi:
+
+|     |*1*  |*2*  |*3*  |*4*  |*5*  |*6*  |*7*  |*8*  |
+|-----|-----|-----|-----|-----|-----|-----|-----|-----|
+| *A* |     | L*1 | L   | E^4 | S   | S   | S   | 3   |
+| *B* | L   |     |     |     |     |     |     | S   |
+| *C* | S   |     |     |     |     |     |     | E   |
+| *D* | L^  |     |     |     |     |     |     | S   |
+| *E* | S   |     |     |     |     |     |     | E   |
+| *F* | E   |     |     |     |     |     |     | L   |
+| *G* | E   |     |     |     |     |     |     | E   |
+| *H* |     | S*2 | S   | L   | S   | E*  | E   | P   |
