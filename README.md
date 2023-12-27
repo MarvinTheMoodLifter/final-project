@@ -79,12 +79,22 @@ La visualizzazione avviene stampando un carattere con un eventuale suffisso per 
 | Giocatore | 1-4 |
 
 Esempio tabellone vuoto:
-        **1       2       3       4       5       6       7       8**
-**A**   |   |   | L |   | L |   | E |   | S |   | S |   | S |   |   |
-**B**   | L |                                                   | S |
-**C**   | S |                                                   | E |
-**D**   | L |                                                   | S |
-**E**   | S |                                                   | E |
-**F**   | E |                                                   | L |
-**G**   | E |                                                   | E |
-**H**   |   |   | S |   | S |   | L |   | S |   | E |   | E |   | P |
+
+       *1       2       3       4       5       6       7       8*
+
+*A*   |   |   | L |   | L |   | E |   | S |   | S |   | S |   |   |
+
+*B*   | L |                                                   | S |
+
+*C*   | S |                                                   | E |
+
+*D*   | L |                                                   | S |
+
+*E*   | S |                                                   | E |
+
+*F*   | E |                                                   | L |
+
+*G*   | E |                                                   | E |
+
+*H*   |   |   | S |   | S |   | L |   | S |   | E |   | E |   | P |
+
