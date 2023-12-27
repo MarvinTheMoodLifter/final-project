@@ -2,8 +2,8 @@
 
 Vi viene richiesto di sviluppare un programma in C++ che implementi una versione semplificata del gioco Monopoly. Chi non ha familiarità con questo gioco può trovare la descrizione al link seguente:
 
-* [https://it.wikipedia.org/wiki/Monopoly]
-* [https://www.wikihow.it/Giocare-a-Monopoly] (regole ufficiali)
+* (https://it.wikipedia.org/wiki/Monopoly)
+* (https://www.wikihow.it/Giocare-a-Monopoly) (regole ufficiali)
 
 ## 1. Regole per la versione semplificata
 Per semplificare il design e l’implementazione vi forniamo di seguito delle regole semplificate a cui il vostro programma *deve* attenersi.
