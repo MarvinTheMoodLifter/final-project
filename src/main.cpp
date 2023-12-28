@@ -1,6 +1,7 @@
 // Autori: Perin Marco, Chellin Davide
 // ------------------------------
-#include "../include/Tabellone.h"
+#include "Tabellone.h"
+#include <iostream>
 #include <string>
 
 int main(int argc, char **argv) {
@@ -9,7 +10,12 @@ int main(int argc, char **argv) {
   // Inizializzo il tipo di partita di default a computer
   std::string tipoPartita = "computer";
   // Se argc == 2 allora leggo il tipo di partita da argv[1]
-  tipoPartita = argv[1];
+  if (argc == 2) {
+    tipoPartita = argv[1];
+  }
+  if (tipoPartita == "human" | tipoPartita == "computer") {
+    std::cout << "Partita " << tipoPartita << std::endl;
+  }
 
   return 0;
 }
