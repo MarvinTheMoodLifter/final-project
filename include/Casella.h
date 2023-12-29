@@ -17,9 +17,15 @@ public:
   std::string getValore();
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
+  bool validaCasella();
 
-  // Distruttore
-  ~Casella();
+  bool operator==(const Casella &c) const {
+    return (riga == c.riga && colonna == c.colonna);
+  }
+  bool operator!=(const Casella &c) const {
+    return (riga != c.riga || colonna != c.colonna);
+  }
+  Casella operator=(const Casella &c);
 
 private:
   char riga;

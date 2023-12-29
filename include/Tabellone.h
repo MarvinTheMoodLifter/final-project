@@ -3,11 +3,12 @@
 #ifndef TABELLONE_H
 #define TABELLONE_H
 #include "Casella.h"
+#include <vector>
 
 // Classe tabellone
 class Tabellone {
 private:
-  Casella tabellone[28];
+  std::vector<Casella> tabellone;
 
 public:
   // Costruttore di default
