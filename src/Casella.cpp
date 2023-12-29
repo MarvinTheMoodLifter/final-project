@@ -27,12 +27,16 @@ char Casella::getRiga() { return riga; }
 int Casella::getColonna() { return colonna; }
 std::string Casella::getValore() { return valore; }
 
+void Casella::setValore(std::string valore) { this->valore = valore; }
+
 void Casella::stampaCasella() {
   // Stampa la casella (con giocatori e immobili se presenti)
   if (valore == " ") {
-    std::cout << "| " << riga << colonna << " | ";
+    // std::cout << "| " << riga << colonna << " | ";
+    std::cout << "|   | ";
   } else {
-    std::cout << "| " << riga << colonna << valore << " | ";
+    // std::cout << "| " << riga << colonna << valore << " | ";
+    std::cout << "| " << valore << " | ";
   }
 }
 

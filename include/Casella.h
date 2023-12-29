@@ -15,6 +15,9 @@ public:
   char getRiga();
   int getColonna();
   std::string getValore();
+
+  void setValore(std::string valore);
+
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
   bool validaCasella();

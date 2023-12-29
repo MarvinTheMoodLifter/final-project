@@ -1,8 +1,16 @@
 // Autori: Perin Marco, Chellin Davide
 // ------------------------------
 #include "../include/Casella.h"
+#include "../include/Tabellone.h"
 #include <iostream>
 #include <string>
+
+void testCaselle() {
+  Casella test('A', 1, "^");
+  Casella test2('B', 1, "^2");
+  test.stampaCasella();
+  test2.stampaCasella();
+}
 
 int main(int argc, char **argv) {
   // Se argc == computer allora la partita è 4 computer
@@ -17,10 +25,11 @@ int main(int argc, char **argv) {
     std::cout << "Partita " << tipoPartita << std::endl;
   }
 
-  Casella test('A', 1, "^");
-  Casella test2('B', 1, "^2");
-  test.stampaCasella();
-  test2.stampaCasella();
+  // testCaselle();
+
+  Tabellone tabellone;
+  tabellone.inzializzaCaselleRandom();
+  tabellone.stampaTabellone();
 
   return 0;
 }
