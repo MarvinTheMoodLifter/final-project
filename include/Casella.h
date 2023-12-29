@@ -2,15 +2,19 @@
 // ------------------------------
 #ifndef CASELLA_H
 #define CASELLA_H
+#include <iostream>
+#include <string>
 
 class Casella {
 public:
   // Costruttore di default
   Casella();
+  // Costruttore con parametri
+  Casella(char riga, int colonna, std::string valore);
   // Metodi get
-  int getValore();
-  int getRiga();
+  char getRiga();
   int getColonna();
+  std::string getValore();
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
 
@@ -18,9 +22,9 @@ public:
   ~Casella();
 
 private:
-  int valore;
-  int riga;
+  char riga;
   int colonna;
+  std::string valore;
 };
 
 #endif // CASELLA_H

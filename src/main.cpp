@@ -1,6 +1,6 @@
 // Autori: Perin Marco, Chellin Davide
 // ------------------------------
-#include "Tabellone.h"
+#include "../include/Casella.h"
 #include <iostream>
 #include <string>
 
@@ -16,6 +16,11 @@ int main(int argc, char **argv) {
   if (tipoPartita == "human" | tipoPartita == "computer") {
     std::cout << "Partita " << tipoPartita << std::endl;
   }
+
+  Casella test('A', 1, "^");
+  Casella test2('B', 1, "^2");
+  test.stampaCasella();
+  test2.stampaCasella();
 
   return 0;
 }
