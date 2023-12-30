@@ -16,16 +16,15 @@ public:
   // Costruttore di default
   Tabellone();
   // Genera un numero random tra min e max
-  std::vector<std::string> randomizzaVettore(std::vector<std::string> v) const;
+  void randomizzaVettore(std::vector<std::string> &v);
   // Riempie le caselle del tabellone in maniera randomica
-  void inzializzaCaselleRandom();
+  void inizializzaCaselleRandom();
   // Stampa il Tabellone vuoto
   void stampaTabellone();
   // Stampa il Tabellone con i giocatori
-  void stampaTabelloneGiocatori();
-
-  // Distruttore
-  ~Tabellone();
+  void stampaTabelloneGiocatori() const;
+  // Restituisce il vettore contente le caselle del Tabellone
+  std::vector<Casella> getTabellone() const;
 };
 
 #endif // TABELLONE_H

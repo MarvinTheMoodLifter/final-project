@@ -1,15 +1,29 @@
-// Autori: Perin Marco, Chellin Davide
+// Autori: Chellin Davide, Perin Marco
 // ------------------------------
 #include "../include/Casella.h"
+#include "../include/Giocatore.h"
+#include "../include/Spostamento.h"
 #include "../include/Tabellone.h"
 #include <iostream>
 #include <string>
 
 void testCaselle() {
-  Casella test('A', 1, "^");
-  Casella test2('B', 1, "^2");
+  Casella test('A', 1);
+  Casella test2('B', 1);
+  test.setValore("^");
+  test2.setValore("^2");
   test.stampaCasella();
   test2.stampaCasella();
+}
+
+void testSpostamento(Tabellone tabellone) {
+  Giocatore giocatore1(1);
+  std::cout << "Posizione giocatore: " << giocatore1.getPosizione()
+            << std::endl;
+  Spostamento spostamento(tabellone);
+  spostamento.mossaGiocatore(giocatore1);
+  int posizioneGiocatore = giocatore1.getPosizione();
+  std::cout << "Posizione giocatore: " << posizioneGiocatore << std::endl;
 }
 
 int main(int argc, char **argv) {
@@ -28,8 +42,9 @@ int main(int argc, char **argv) {
   // testCaselle();
 
   Tabellone tabellone;
-  tabellone.inzializzaCaselleRandom();
+  tabellone.inizializzaCaselleRandom();
   tabellone.stampaTabellone();
+  testSpostamento(tabellone);
 
   return 0;
 }

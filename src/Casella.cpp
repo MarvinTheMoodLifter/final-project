@@ -13,19 +13,16 @@ struct Righe {
   char H = 'H';
 };
 
-Casella::Casella() {
-  // Inizializza la casella
-  riga = 'A';
-  colonna = 1;
-  valore = " ";
+Casella::Casella(char riga, int colonna) : riga(riga), colonna(colonna) {
+  coordinate.push_back(std::to_string(riga));
+  coordinate.push_back(std::to_string(colonna));
 }
 
-Casella::Casella(char riga, int colonna, std::string valore)
-    : riga(riga), colonna(colonna), valore(valore) {}
+std::string Casella::getValore() { return valore; }
 
 char Casella::getRiga() { return riga; }
+
 int Casella::getColonna() { return colonna; }
-std::string Casella::getValore() { return valore; }
 
 void Casella::setValore(std::string valore) { this->valore = valore; }
 

@@ -8,7 +8,7 @@ Tabellone::Tabellone() {
   for (char riga = 'H'; riga > 'A'; riga--) {
     for (int colonna = 8; colonna >= 1; colonna--) {
       if (riga == 'H' || colonna == 1) {
-        tabellone.push_back(Casella(riga, colonna, " "));
+        tabellone.push_back(Casella(riga, colonna));
       }
     }
   }
@@ -16,13 +16,22 @@ Tabellone::Tabellone() {
   for (char riga = 'A'; riga < 'H'; riga++) {
     for (int colonna = 1; colonna <= 8; colonna++) {
       if (riga == 'A' || colonna == 8) {
-        tabellone.push_back(Casella(riga, colonna, " "));
+        tabellone.push_back(Casella(riga, colonna));
       }
     }
   }
 }
 
-void Tabellone::inzializzaCaselleRandom() {
+void Tabellone::randomizzaVettore(std::vector<std::string> &v) {
+  // Genera un seme casuale
+  std::random_device randomSeed;
+  // Genera numeri casuali a partire dal seme generato in precedenza
+  std::mt19937 gen(randomSeed());
+  // Mescola il vettore
+  std::shuffle(v.begin(), v.end(), gen);
+}
+
+void Tabellone::inizializzaCaselleRandom() {
   // Creo un vettore di char con i tipi di caselle
   // 8 caselle economiche
   // 10 caselle standard
@@ -30,8 +39,7 @@ void Tabellone::inzializzaCaselleRandom() {
   std::vector<std::string> tipiCaselle = {
       "E", "E", "E", "E", "E", "E", "E", "E", "S", "S", "S", "S",
       "S", "S", "S", "S", "S", "S", "L", "L", "L", "L", "L", "L"};
-  std::vector<std::string> tipiCaselleRandom =
-      Tabellone::randomizzaVettore(tipiCaselle);
+  randomizzaVettore(tipiCaselle);
   // Inizializzo la casella di partenza
   tabellone[0].setValore("P");
   int count = 0;
@@ -46,27 +54,15 @@ void Tabellone::inzializzaCaselleRandom() {
       tabellone[i].setValore(" ");
       continue;
     }
-    tabellone[i].setValore(tipiCaselleRandom[i - 1 - count]);
+    tabellone[i].setValore(tipiCaselle[i - 1 - count]);
   }
-}
-
-std::vector<std::string>
-Tabellone::randomizzaVettore(std::vector<std::string> v) const {
-  // Genera un seme casuale
-  std::random_device randomSeed;
-  // Genera numeri casuali a partire dal seme generato in precedenza
-  std::mt19937 gen(randomSeed());
-  // Mescola il vettore
-  std::shuffle(v.begin(), v.end(), gen);
-  // Stampa il vettore mescolato
-  return v;
 }
 
 void Tabellone::stampaTabellone() {
   // Stampa il tabellone a partire dalla prima riga, poi le righe intermedie ed
   // infine l'ultima riga Stampa la prima riga
   // Prima riga
-  Casella casellaVuota(' ', 0, " ");
+  Casella casellaVuota(' ', 0);
   for (int i = tabellone.size() - 14; i < tabellone.size() - 6; i++) {
     tabellone[i].stampaCasella();
   }
@@ -107,5 +103,4 @@ void Tabellone::stampaTabellone() {
   std::cout << std::endl;
 }
 
-// Distruttore
-Tabellone::~Tabellone() {}
+std::vector<Casella> Tabellone::getTabellone() const { return tabellone; }

@@ -3,20 +3,21 @@
 #ifndef CASELLA_H
 #define CASELLA_H
 #include <iostream>
-#include <string>
+#include <vector>
 
 class Casella {
 public:
-  // Costruttore di default
-  Casella();
   // Costruttore con parametri
-  Casella(char riga, int colonna, std::string valore);
+  Casella(char riga, int colonna);
   // Metodi get
   char getRiga();
   int getColonna();
+  std::vector<std::string> getCoordinate();
   std::string getValore();
-
   void setValore(std::string valore);
+
+  void setImmobile(std::string immobile);
+  void unsetImmobile(std::string immobile);
 
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
@@ -33,6 +34,7 @@ public:
 private:
   char riga;
   int colonna;
+  std::vector<std::string> coordinate;
   std::string valore;
 };
 
