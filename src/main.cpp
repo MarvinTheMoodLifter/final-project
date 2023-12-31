@@ -2,7 +2,6 @@
 // ------------------------------
 #include "../include/Casella.h"
 #include "../include/Giocatore.h"
-#include "../include/Spostamento.h"
 #include "../include/Tabellone.h"
 #include <iostream>
 #include <string>
@@ -16,15 +15,7 @@ void testCaselle() {
   test2.stampaCasella();
 }
 
-void testSpostamento(Tabellone tabellone) {
-  Giocatore giocatore1(1);
-  std::cout << "Posizione giocatore: " << giocatore1.getPosizione()
-            << std::endl;
-  Spostamento spostamento(tabellone);
-  spostamento.mossaGiocatore(giocatore1);
-  int posizioneGiocatore = giocatore1.getPosizione();
-  std::cout << "Posizione giocatore: " << posizioneGiocatore << std::endl;
-}
+void testSpostamento(Giocatore &giocatore, Tabellone &tabellone) {}
 
 int main(int argc, char **argv) {
   // Se argc == computer allora la partita è 4 computer
@@ -43,8 +34,14 @@ int main(int argc, char **argv) {
 
   Tabellone tabellone;
   tabellone.inizializzaCaselleRandom();
+  std::vector<Casella> tabelloneVector = tabellone.getTabellone();
+  Giocatore giocatore1(1);
   tabellone.stampaTabellone();
-  testSpostamento(tabellone);
+  giocatore1.setPosizionePartenza(tabellone);
+  tabellone.stampaTabellone();
+  giocatore1.mossa(tabellone);
+  std::cout << giocatore1.getPosizione() << std::endl;
+  tabellone.stampaTabellone();
 
   return 0;
 }

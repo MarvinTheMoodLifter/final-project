@@ -7,7 +7,6 @@ include_directories(include)
 add_library(${PROJECT_NAME} SHARED
   src/Casella.cpp
   src/Giocatore.cpp
-  src/Spostamento.cpp
   src/Tabellone.cpp)
 
 add_executable(main src/main.cpp)

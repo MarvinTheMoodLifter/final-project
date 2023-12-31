@@ -14,14 +14,25 @@ public:
   int getColonna();
   std::vector<std::string> getCoordinate();
   std::string getValore();
-  void setValore(std::string valore);
+  void setValore(std::string v);
+  void addValore(std::string v);
 
   void setImmobile(std::string immobile);
   void unsetImmobile(std::string immobile);
 
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
-  bool validaCasella();
+
+  // Metodi per la gestione dei giocatori e degli immobili
+  // ----------------------------------
+  // Restituisce true se la casella è vuota
+  bool isVuota();
+  // Aggiunge un giocatore alla Casella
+  void aggiungiGiocatore(std::string giocatore);
+  // Rimuove un giocatore dalla Casella
+  void rimuoviGiocatore(std::string giocatore);
+  // Aggiunge un immobile alla Casella
+  void aggiungiImmobile(int giocatore);
 
   bool operator==(const Casella &c) const {
     return (riga == c.riga && colonna == c.colonna);
@@ -34,6 +45,7 @@ public:
 private:
   char riga;
   int colonna;
+  int proprietarioCasella;
   std::vector<std::string> coordinate;
   std::string valore;
 };

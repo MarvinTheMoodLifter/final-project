@@ -19,12 +19,15 @@ Casella::Casella(char riga, int colonna) : riga(riga), colonna(colonna) {
 }
 
 std::string Casella::getValore() { return valore; }
-
 char Casella::getRiga() { return riga; }
-
 int Casella::getColonna() { return colonna; }
+void Casella::setValore(std::string v) { valore = v; }
+void Casella::addValore(std::string v) { valore += v; }
 
-void Casella::setValore(std::string valore) { this->valore = valore; }
+void Casella::aggiungiGiocatore(std::string giocatore) {
+  // Aggiunge un giocatore alla Casella
+  valore += giocatore;
+}
 
 void Casella::stampaCasella() {
   // Stampa la casella (con giocatori e immobili se presenti)
@@ -37,20 +40,35 @@ void Casella::stampaCasella() {
   }
 }
 
-bool Casella::validaCasella() {
-  // Controlla se la casella è valida, ovvero se è presente nel tabellone.
-  // Se la casella è valida ritorna true, altrimenti false.
-  Righe righe;
-  // Controllo righe A e H
-  if ((riga == righe.A || riga == righe.H) & (colonna >= 1 && colonna <= 9)) {
-    return true;
+bool Casella::isVuota() {
+  // Restituisce true se la casella è vuota
+  return valore == " " ? true : false;
+}
+
+void Casella::rimuoviGiocatore(std::string giocatore) {
+  // Rimuove un giocatore dalla Casella
+  if (isVuota()) {
+    valore = " ";
+  } else {
+    // Altrimenti rimuove il giocatore dalla stringa valore
+    valore.erase(valore.find(giocatore), 1);
   }
-  // Controllo colonne 1 e 9
-  else if ((riga >= righe.B && riga <= righe.G) &&
-           (colonna == 1 || colonna == 9)) {
-    return true;
+}
+void Casella::aggiungiImmobile(int giocatore) {
+  // Aggiunge un immobile alla Casella
+  // Check se giocatore ha abbastanza soldi
+  // TODO
+  std::string casa = "*";
+  std::string albergo = "^";
+  // Se la casella è vuota, aggiunge il giocatore alla casella
+  if (isVuota()) {
+    valore += casa;
+  } else if (valore == casa) {
+    // Altrimenti aggiunge il giocatore alla stringa valore
+    valore.erase(valore.find(casa), 1);
+    // Aggiunge l'albergo PRIMA del giocatore nella stringa valore
+    valore.insert(valore.find(giocatore), albergo);
   }
-  return false;
 }
 
 Casella Casella::operator=(const Casella &c) {

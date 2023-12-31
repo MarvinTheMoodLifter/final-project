@@ -25,6 +25,12 @@ public:
   void stampaTabelloneGiocatori() const;
   // Restituisce il vettore contente le caselle del Tabellone
   std::vector<Casella> getTabellone() const;
+  // Sposta il giocatore
+  void muoviGiocatore(int giocatore, int posizione);
+  int tiraDadi();
+
+  // Overloading dell'operatore []
+  Casella &operator[](int i) { return tabellone[i]; }
 };
 
 #endif // TABELLONE_H

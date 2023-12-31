@@ -62,7 +62,6 @@ void Tabellone::stampaTabellone() {
   // Stampa il tabellone a partire dalla prima riga, poi le righe intermedie ed
   // infine l'ultima riga Stampa la prima riga
   // Prima riga
-  Casella casellaVuota(' ', 0);
   for (int i = tabellone.size() - 14; i < tabellone.size() - 6; i++) {
     tabellone[i].stampaCasella();
   }
@@ -104,3 +103,29 @@ void Tabellone::stampaTabellone() {
 }
 
 std::vector<Casella> Tabellone::getTabellone() const { return tabellone; }
+
+void Tabellone::muoviGiocatore(int giocatore, int posizione) {
+  // Muove il giocatore di valoreDadi caselle
+  // Se il giocatore supera la casella 27, riparte dalla casella di partenza e
+  // finisce di muovere
+  int valoreDadi = tiraDadi();
+  int posizioneInizialeGiocatore = posizione;
+  int posizioneFinaleGiocatore = posizioneInizialeGiocatore + valoreDadi;
+  if (posizioneFinaleGiocatore > 27) {
+    posizioneFinaleGiocatore -= 28;
+  }
+  tabellone[posizione].stampaCasella();
+  tabellone[posizioneFinaleGiocatore].aggiungiGiocatore(
+      std::to_string(giocatore));
+  stampaTabellone();
+  tabellone[posizione].rimuoviGiocatore(std::to_string(giocatore));
+  stampaTabellone();
+}
+
+int Tabellone::tiraDadi() {
+  // Genera un numero random tra 2 e 12
+  std::random_device randomSeed;
+  std::mt19937 gen(randomSeed());
+  std::uniform_int_distribution<> distribuzione(2, 12);
+  return distribuzione(gen);
+}

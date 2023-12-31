@@ -3,6 +3,7 @@
 #ifndef GIOCATORE_H
 #define GIOCATORE_H
 #include "Casella.h"
+#include "Tabellone.h"
 
 class Posizione;
 
@@ -16,8 +17,9 @@ private:
 
 public:
   Giocatore(int numeroGiocatore);
+  void setPosizionePartenza(Tabellone &tabellone);
   int getPosizione() const;
-  void setPosizione(int posizione);
+  void mossa(Tabellone &tabellone);
   int getNumeroGiocatore();
 };
 
