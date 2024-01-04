@@ -3,6 +3,7 @@
 #ifndef TABELLONE_H
 #define TABELLONE_H
 #include "Casella.h"
+#include "Spostamento.h"
 #include <algorithm>
 #include <random>
 #include <vector>

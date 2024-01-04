@@ -108,12 +108,7 @@ void Tabellone::muoviGiocatore(int giocatore, int posizione) {
   // Muove il giocatore di valoreDadi caselle
   // Se il giocatore supera la casella 27, riparte dalla casella di partenza e
   // finisce di muovere
-  int valoreDadi = tiraDadi();
-  int posizioneInizialeGiocatore = posizione;
-  int posizioneFinaleGiocatore = posizioneInizialeGiocatore + valoreDadi;
-  if (posizioneFinaleGiocatore > 27) {
-    posizioneFinaleGiocatore -= 28;
-  }
+  Spostamento spostamento;
   tabellone[posizione].stampaCasella();
   tabellone[posizioneFinaleGiocatore].aggiungiGiocatore(
       std::to_string(giocatore));
@@ -122,10 +117,11 @@ void Tabellone::muoviGiocatore(int giocatore, int posizione) {
   stampaTabellone();
 }
 
-int Tabellone::tiraDadi() {
-  // Genera un numero random tra 2 e 12
-  std::random_device randomSeed;
-  std::mt19937 gen(randomSeed());
-  std::uniform_int_distribution<> distribuzione(2, 12);
-  return distribuzione(gen);
-}
+// int Tabellone::tiraDadi() {
+// Genera un numero random tra 2 e 12
+// Metodo più sicuro di rand(), forse overkill per questo progetto
+//   std::random_device randomSeed;
+//   std::mt19937 gen(randomSeed());
+//   std::uniform_int_distribution<> distribuzione(2, 12);
+//   return distribuzione(gen);
+// }
