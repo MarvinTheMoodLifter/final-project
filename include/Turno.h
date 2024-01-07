@@ -1,18 +1,24 @@
-#include "Dadi.h"
+#include "Tabellone.h"
+#include "Giocatore.h"
+
+
 
 class Turno{
 	
-	private:
-	
-	int numeroTurni;
-	
 	public:
 	
-	Turno();
-	Turno(int numeroMaxTurni);
-	void comparaFiorini();	
-	void statoPartita(Dadi DadoPartita);
-	
+	Turno(Tabellone tab);
 
+	Turno(Tabellone tab, int n);
 	
-	};
+	turnoGiocatoreUmano(Giocatore umano);
+	
+	turnoGiocatoreNonUmano(Giocatore nonUmano);
+
+	private:
+	
+	int numeroTurniGiocati;
+	
+	
+	
+}
