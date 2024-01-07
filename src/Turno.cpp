@@ -1,66 +1,108 @@
 #include "Dadi.h"
 #include "Turno.h"
+#include "Tabellone.h"
+#include "Giocatore.h"
 
-
-	
-	Turno::Turno(){
+	Turno::Turno(Tabellone tab){
 		
 		numeroTurni=20;
-		
+
+				
 		}
 		
-	Turno::Turno(int n){
+	Turno::Turno(Tabellone tab, int n){
 		
 		numeroTurni=n;
+			
 		
 		}
+
+
+
+
+
+
+
+
+	Turno::turnoGiocatoreUmano(Giocatore umano){
 	
-	void Turno::statoPartita(Dadi DadoPartita){
-		
-		if(DadoPartita.getNumeroTiri() == numeroTurni){
-			
-			comparaFiorini();
-			
-			}
-		
-		
-		}
 	
-	void Turno::comparaFiorini(){
+		Giocatore giocatoreCorrente = umano;
 		
-		int tmp1=PrimoGiocatore.getFiorini();
-		int tmp2=SecondoGiocatore.getFiorini();
-		int tmp3=TerzoGiocatore.getFiorini();
-		int tmp4=QuartoGiocatore.getFiorini();
+		std::cout<< "È il turno di " <<umano.getNumeroGiocatore<< "/n" << "digita s per proseguire, altrimenti digita show per mostrare lo stato attuale della partita" <<"/n";
 		
-		int max;
-		max=tmp1;
+		string i;
+		string show = "show";
+		string s = "s";
+
 		
-		if(max<tmp2){
+		std::cin>> i;
+		
+		//è case sensitive
+		
+		if(i.compare(show) ==0){
 			
-			max=tmp2;
-			
-			}
-			
-		if(max<tmp3){
-			
-			max=tmp3;
-			
-			}
-			
-		if(max<tmp4){
-			
-			max=tmp4;
+			Stampa.show(Tabellone tab, Giocatore a, Giocatore b, Giocatore c, Giocatore d);
 			
 			}
 		
+		else if (i.compare(s) ==0){
+			
+			tab.muoviGiocatore(giocatoreCorrente);
+						
+			
+			}
 		
-		//comando che annuncia vincitore della funzione print
+		else () {
+			
+			std::cout<< "digita un comando valido" << "/n";
+			
+			turnoGiocatoreUmano(giocatoreCorrente);
+			
+			}
+		
+		
+	}
+	
+	Turno::turnoGiocatoreNonUmano(Giocatore nonUmano){
+		
+		
+		Giocatore giocatoreCorrente = nonUmano;
+		
+		std::cout<< "È il turno di " <<nonUmano.getNumeroGiocatore<< "/n";
+		
+		if(a.umano || b.umano || c.umano || d.umano =!0){
+			
+			numeroTurniGiocati++;
+			
+			if(numeroTurniGiocati/3==numeroTurni){
 				
-		exit();
-		
+				std::cout<< "Fine partita" <<"/n";
 				
+				comparaFiorini();   
+				
+				// l'ho scritto su turno, adra riscritto su banchiere?
+
+				
+				}
+			
+			
+			}
+			
+			
+		else(){
+			
+			
+			tab.muoviGiocatore(giocatoreCorrente);
+					
+			
+			
+			}	
+			
+					
+		
 		}
-	
-	
-	};
+		
+		
+		
+		
