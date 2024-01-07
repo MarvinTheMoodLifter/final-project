@@ -2,7 +2,7 @@
 // ------------------------------
 #ifndef CASELLA_H
 #define CASELLA_H
-#include <iostream>
+#include <string>
 #include <vector>
 
 class Casella {
@@ -10,15 +10,17 @@ public:
   // Costruttore con parametri
   Casella(char riga, int colonna);
   // Metodi get
-  char getRiga();
-  int getColonna();
-  std::vector<std::string> getCoordinate();
-  std::string getValore();
+  char getRiga() { return riga; };
+  int getColonna() { return colonna; };
+  std::vector<std::string> getCoordinate() { return coordinate; };
+  std::string getValore() { return valore; };
+  int getProprietarioCasella() { return proprietarioCasella; };
+  int getPrezzoProprietà();
   void setValore(std::string v);
   void addValore(std::string v);
-
   void setImmobile(std::string immobile);
   void unsetImmobile(std::string immobile);
+  void setProprietarioCasella(int nuovoProprietario);
 
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
@@ -45,9 +47,10 @@ public:
 private:
   char riga;
   int colonna;
-  int proprietarioCasella;
+  int proprietarioCasella = 0;
   std::vector<std::string> coordinate;
   std::string valore;
+  int prezzoProprietà;
 };
 
 #endif // CASELLA_H

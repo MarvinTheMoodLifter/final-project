@@ -1,12 +1,9 @@
 // Autore: Chellin Davide
 // ------------------------------
-
 #ifndef GIOCATORE_H
 #define GIOCATORE_H
-#include "Casella.h"
-#include "Tabellone.h"
 
-//class posizione
+class Tabellone;
 
 class Giocatore {
 private:
@@ -17,10 +14,11 @@ private:
 
 public:
   Giocatore(int numeroGiocatore);
-  void setPosizionePartenza(Tabellone &tabellone); //non convinto
-  int getPosizione() const;
+  int getPosizione() const { return posizione; };
+  int getNumeroGiocatore() const { return numeroGiocatore; };
+  int getFiorini() const { return fiorini; };
+  void setPosizione(int posizione);
   void mossa(Tabellone &tabellone);
-  int getNumeroGiocatore();
 };
 
 #endif // GIOCATORE_H

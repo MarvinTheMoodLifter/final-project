@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/atlas/Documents/Code/final-project/build",
+  "command": "/bin/clang++ -DMonopoly_EXPORTS -I/home/atlas/Documents/Code/final-project/include -std=gnu++11 -fPIC -o CMakeFiles/Monopoly.dir/src/Casella.cpp.o -c /home/atlas/Documents/Code/final-project/src/Casella.cpp",
+  "file": "/home/atlas/Documents/Code/final-project/src/Casella.cpp",
+  "output": "CMakeFiles/Monopoly.dir/src/Casella.cpp.o"
+},
+{
+  "directory": "/home/atlas/Documents/Code/final-project/build",
+  "command": "/bin/clang++ -DMonopoly_EXPORTS -I/home/atlas/Documents/Code/final-project/include -std=gnu++11 -fPIC -o CMakeFiles/Monopoly.dir/src/Giocatore.cpp.o -c /home/atlas/Documents/Code/final-project/src/Giocatore.cpp",
+  "file": "/home/atlas/Documents/Code/final-project/src/Giocatore.cpp",
+  "output": "CMakeFiles/Monopoly.dir/src/Giocatore.cpp.o"
+},
+{
+  "directory": "/home/atlas/Documents/Code/final-project/build",
+  "command": "/bin/clang++ -DMonopoly_EXPORTS -I/home/atlas/Documents/Code/final-project/include -std=gnu++11 -fPIC -o CMakeFiles/Monopoly.dir/src/Turno.cpp.o -c /home/atlas/Documents/Code/final-project/src/Turno.cpp",
+  "file": "/home/atlas/Documents/Code/final-project/src/Turno.cpp",
+  "output": "CMakeFiles/Monopoly.dir/src/Turno.cpp.o"
+},
+{
+  "directory": "/home/atlas/Documents/Code/final-project/build",
+  "command": "/bin/clang++ -DMonopoly_EXPORTS -I/home/atlas/Documents/Code/final-project/include -std=gnu++11 -fPIC -o CMakeFiles/Monopoly.dir/src/Dadi.cpp.o -c /home/atlas/Documents/Code/final-project/src/Dadi.cpp",
+  "file": "/home/atlas/Documents/Code/final-project/src/Dadi.cpp",
+  "output": "CMakeFiles/Monopoly.dir/src/Dadi.cpp.o"
+},
+{
+  "directory": "/home/atlas/Documents/Code/final-project/build",
+  "command": "/bin/clang++ -DMonopoly_EXPORTS -I/home/atlas/Documents/Code/final-project/include -std=gnu++11 -fPIC -o CMakeFiles/Monopoly.dir/src/Tabellone.cpp.o -c /home/atlas/Documents/Code/final-project/src/Tabellone.cpp",
+  "file": "/home/atlas/Documents/Code/final-project/src/Tabellone.cpp",
+  "output": "CMakeFiles/Monopoly.dir/src/Tabellone.cpp.o"
+},
+{
+  "directory": "/home/atlas/Documents/Code/final-project/build",
+  "command": "/bin/clang++  -I/home/atlas/Documents/Code/final-project/include -std=gnu++11 -o CMakeFiles/main.dir/src/main.cpp.o -c /home/atlas/Documents/Code/final-project/src/main.cpp",
+  "file": "/home/atlas/Documents/Code/final-project/src/main.cpp",
+  "output": "CMakeFiles/main.dir/src/main.cpp.o"
+}
+]

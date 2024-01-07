@@ -1,9 +1,19 @@
 // Autore: Perin Marco
 // ------------------------------
-#include "../include/Tabellone.h"
+#include "Tabellone.h"
+#include <algorithm>
 #include <iostream>
+#include <random>
 
 Tabellone::Tabellone() {
+  // Riempie la prima parte di tabellone con le caselle vuote
+  riempiTabellone();
+  // Riempie le caselle del tabellone in maniera randomica
+  riempiCaselleRandom();
+  // Crea i giocatori
+}
+
+void Tabellone::riempiTabellone() {
   // Riempie la prima parte di tabellone con le caselle vuote
   for (char riga = 'H'; riga > 'A'; riga--) {
     for (int colonna = 8; colonna >= 1; colonna--) {
@@ -31,7 +41,7 @@ void Tabellone::randomizzaVettore(std::vector<std::string> &v) {
   std::shuffle(v.begin(), v.end(), gen);
 }
 
-void Tabellone::inizializzaCaselleRandom() {
+void Tabellone::riempiCaselleRandom() {
   // Creo un vettore di char con i tipi di caselle
   // 8 caselle economiche
   // 10 caselle standard
@@ -55,6 +65,49 @@ void Tabellone::inizializzaCaselleRandom() {
       continue;
     }
     tabellone[i].setValore(tipiCaselle[i - 1 - count]);
+  }
+}
+
+void Tabellone::muoviGiocatore(Giocatore giocatore) {
+  // Prendo la posizione attuale del giocatore
+  int vecchiaPosizione = giocatore.getPosizione();
+  bool passaVia = false;
+  // Creo dadi e li tiro
+  Dadi dadi(6);
+  int mossa = dadi.tiraDadi(2);
+  // Genero l'indice della nuova posizione
+  int nuovaPosizione = vecchiaPosizione + mossa;
+  // Nel caso in cui la nuova posizione sia maggiore di 27, il giocatore passa
+  // dal via
+  if (nuovaPosizione > 27) {
+    nuovaPosizione -= 27;
+    bool passaVia = true;
+  }
+  Casella vecchiaCasella = tabellone[vecchiaPosizione];
+  Casella nuovaCasella = tabellone[nuovaPosizione];
+  int numGiocatore = giocatore.getNumeroGiocatore();
+  // Sposto il Giocatore
+  giocatore.setPosizione(nuovaPosizione);
+  // Cambio il valore della casella
+  vecchiaCasella.rimuoviGiocatore(std::to_string(numGiocatore));
+  nuovaCasella.aggiungiGiocatore(std::to_string(numGiocatore));
+  // Controllo se la casella è posseduta da un altro giocatore
+  int proprietarioCasella = nuovaCasella.getProprietarioCasella();
+  if (proprietarioCasella == giocatore.getNumeroGiocatore())
+    return;
+  if (proprietarioCasella == 0) {
+    std::cout << "La casella è libera, vuoi acquistarla? (s->si, n->no, show->"
+                 "mostra il tabellone)"
+              << std::endl;
+    for (int i = 0; i < 3; i++) {
+      if (std::cin.get() == 's' &&
+          giocatore.getFiorini() >= nuovaCasella.getPrezzoProprietà()) {
+        // Acquista la casella
+        nuovaCasella.setProprietarioCasella(numGiocatore);
+      } else if (std::cin.get() == 'show') {
+        stampaTabellone();
+      }
+    }
   }
 }
 
@@ -103,25 +156,3 @@ void Tabellone::stampaTabellone() {
 }
 
 std::vector<Casella> Tabellone::getTabellone() const { return tabellone; }
-
-void Tabellone::muoviGiocatore(int giocatore, int posizione) {
-  // Muove il giocatore di valoreDadi caselle
-  // Se il giocatore supera la casella 27, riparte dalla casella di partenza e
-  // finisce di muovere
-  Spostamento spostamento;
-  tabellone[posizione].stampaCasella();
-  tabellone[posizioneFinaleGiocatore].aggiungiGiocatore(
-      std::to_string(giocatore));
-  stampaTabellone();
-  tabellone[posizione].rimuoviGiocatore(std::to_string(giocatore));
-  stampaTabellone();
-}
-
-// int Tabellone::tiraDadi() {
-// Genera un numero random tra 2 e 12
-// Metodo più sicuro di rand(), forse overkill per questo progetto
-//   std::random_device randomSeed;
-//   std::mt19937 gen(randomSeed());
-//   std::uniform_int_distribution<> distribuzione(2, 12);
-//   return distribuzione(gen);
-// }
