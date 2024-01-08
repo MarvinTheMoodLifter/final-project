@@ -13,3 +13,18 @@ class Stampa {
 };
 
 #endif // STAMPA_H
+=======
+class Stampa{
+	
+	Stampa();
+	
+	void show();
+	
+	void stampaTabelloneGiocatori();
+	
+	void stampaFiorini();
+	
+	void stampaPossedimenti();
+	
+	
+	}
