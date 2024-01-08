@@ -2,6 +2,7 @@
 // ------------------------------
 #ifndef TABELLONE_H
 #define TABELLONE_H
+#include "Banca.h"
 #include "Casella.h"
 #include "Dadi.h"
 #include "Giocatore.h"

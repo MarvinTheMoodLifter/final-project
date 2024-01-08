@@ -1,26 +1,23 @@
 #include "Giocatore.h"
 
-Giocatore::Giocatore(int numeroGiocatore) : numeroGiocatore(numeroGiocatore) {
-  fiorini = 100;
-  inGioco = true;
-  posizione = 0;
-}
-void Giocatore::setPosizione(int p) { posizione = p; }
-void Giocatore::mossa(Tabellone &tabellone) {
-  tabellone.muoviGiocatore(numeroGiocatore, posizione);
-}
+Giocatore::Giocatore(int numeroGiocatore) {
 
-// Copy constructor
-Giocatore::Giocatore(const Giocatore &g) {
-  numeroGiocatore = g.getNumeroGiocatore();
-  fiorini = g.getFiorini();
-  posizione = g.getPosizione();
-}
+  numeroGiocatore(numeroGiocatore);
+  fiorini(100);
+  inGioco(true);
+  posizione(0);
 
-// Copy assignment (per l'uso in Tabellone)
-Giocatore &Giocatore::operator=(const Giocatore &g) {
-  numeroGiocatore = g.getNumeroGiocatore();
-  fiorini = g.getFiorini();
-  posizione = g.getPosizione();
-  return *this;
-}
+  void Giocatore::setPosizionePartenza(Tabellone & tabellone) {
+    tabellone[0].aggiungiGiocatore(std::to_string(numeroGiocatore));
+  }
+
+  void Giocatore::mossa(Tabellone & tabellone) {
+
+    tabellone.muoviGiocatore(numeroGiocatore, posizione);
+  }
+
+  int Giocatore::getPosizione() const { return posizione; }
+
+  int Giocatore::getNumeroGiocatore() { return numeroGiocatore; }
+
+  int Giocatore::getFiorini() { return fiorini; }
