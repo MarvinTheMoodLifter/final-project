@@ -6,8 +6,6 @@
 #include "Casella.h"
 #include "Tabellone.h"
 
-//class posizione
-
 class Giocatore {
 private:
   const int numeroGiocatore;
@@ -21,6 +19,7 @@ public:
   int getPosizione() const;
   void mossa(Tabellone &tabellone);
   int getNumeroGiocatore();
+  int Giocatore::getFiorini();
 };
 
 #endif // GIOCATORE_H

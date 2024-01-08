@@ -1,4 +1,4 @@
-#include "../include/Giocatore.h"
+#include "Giocatore.h"
 
 Giocatore::Giocatore(int numeroGiocatore){
 	
@@ -28,3 +28,10 @@ int Giocatore::getNumeroGiocatore() {
 	return numeroGiocatore;
 	
 	}
+	
+int Giocatore::getFiorini() {
+	
+	return fiorini;
+	
+	}
+	

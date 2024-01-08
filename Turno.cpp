@@ -1,11 +1,12 @@
-#include "Dadi.h"
 #include "Turno.h"
-#include "Tabellone.h"
-#include "Giocatore.h"
+#include <iostream>
+
+
 
 	Turno::Turno(Tabellone tab){
 		
 		numeroTurni=20;
+		
 
 				
 		}
@@ -103,6 +104,7 @@
 		
 		}
 		
-		
+		int numeroTurniGiocati=0;
+
 		
 		
