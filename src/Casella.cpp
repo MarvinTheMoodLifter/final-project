@@ -1,6 +1,7 @@
 // Autore: Perin Marco
 // ------------------------------
-#include "../include/Casella.h"
+#include "Casella.h"
+#include <iostream>
 
 struct Righe {
   char A = 'A';
@@ -18,9 +19,19 @@ Casella::Casella(char riga, int colonna) : riga(riga), colonna(colonna) {
   coordinate.push_back(std::to_string(colonna));
 }
 
-std::string Casella::getValore() { return valore; }
-char Casella::getRiga() { return riga; }
-int Casella::getColonna() { return colonna; }
+int Casella::getPrezzoProprietà() {
+  // Restituisce il prezzo della proprietà
+  // Controllo che tipo di casella è
+  // se la stringa contiene E all'indice 2, il prezzo è 100
+  if (valore.find("E") != std::string::npos) {
+    return 6;
+  } else if (valore.find("S") != std::string::npos) {
+    return 10;
+  } else {
+    return 20;
+  }
+}
+
 void Casella::setValore(std::string v) { valore = v; }
 void Casella::addValore(std::string v) { valore += v; }
 
@@ -69,6 +80,11 @@ void Casella::aggiungiImmobile(int giocatore) {
     // Aggiunge l'albergo PRIMA del giocatore nella stringa valore
     valore.insert(valore.find(giocatore), albergo);
   }
+}
+
+void Casella::setProprietarioCasella(int nuovoProprietario) {
+  // Setta il proprietario della casella
+  proprietarioCasella = nuovoProprietario;
 }
 
 Casella Casella::operator=(const Casella &c) {

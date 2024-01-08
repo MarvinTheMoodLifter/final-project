@@ -1,37 +1,23 @@
 #include "Giocatore.h"
 
-Giocatore::Giocatore(int numeroGiocatore){
-	
-	numeroGiocatore(numeroGiocatore);
-	fiorini(100);
-	inGioco(true);
-	posizione(0);
+Giocatore::Giocatore(int numeroGiocatore) {
 
-void Giocatore::setPosizionePartenza(Tabellone &tabellone) {
-  tabellone[0].aggiungiGiocatore(std::to_string(numeroGiocatore));
-}
+  numeroGiocatore(numeroGiocatore);
+  fiorini(100);
+  inGioco(true);
+  posizione(0);
 
-void Giocatore::mossa(Tabellone &tabellone) {
-	
-  tabellone.muoviGiocatore(numeroGiocatore, posizione);
-  
-}
+  void Giocatore::setPosizionePartenza(Tabellone & tabellone) {
+    tabellone[0].aggiungiGiocatore(std::to_string(numeroGiocatore));
+  }
 
-int Giocatore::getPosizione() const { 
-	
-	return posizione; 
-	
-	}
+  void Giocatore::mossa(Tabellone & tabellone) {
 
-int Giocatore::getNumeroGiocatore() {
-	
-	return numeroGiocatore;
-	
-	}
-	
-int Giocatore::getFiorini() {
-	
-	return fiorini;
-	
-	}
-	
+    tabellone.muoviGiocatore(numeroGiocatore, posizione);
+  }
+
+  int Giocatore::getPosizione() const { return posizione; }
+
+  int Giocatore::getNumeroGiocatore() { return numeroGiocatore; }
+
+  int Giocatore::getFiorini() { return fiorini; }

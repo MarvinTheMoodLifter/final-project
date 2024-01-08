@@ -1,24 +1,21 @@
+#ifndef TURNO_H
+#define TURNO_H
 #include "Tabellone.h"
-#include "Giocatore.h"
 
+class Stampa;
 
+class Turno {
+public:
+  Turno(Tabellone &tab);
+  Turno(Tabellone &tab, int n);
 
-class Turno{
-	
-	public:
-	
-	Turno(Tabellone tab);
+  void turnoGiocatoreUmano(Giocatore umano);
+  void turnoGiocatoreNonUmano(Giocatore nonUmano);
 
-	Turno(Tabellone tab, int n);
-	
-	turnoGiocatoreUmano(Giocatore umano);
-	
-	turnoGiocatoreNonUmano(Giocatore nonUmano);
+private:
+  int numeroTurniGiocati;
+  int numeroTurni;
+  Tabellone tabellone;
+};
 
-	private:
-	
-	int numeroTurniGiocati;
-	
-	
-	
-}
+#endif // TURNO_H
