@@ -10,6 +10,7 @@ add_library(${PROJECT_NAME} SHARED
   src/Turno.cpp
   src/Dadi.cpp
   src/Tabellone.cpp
+  src/Banca.cpp
   )
 
 add_executable(main src/main.cpp)

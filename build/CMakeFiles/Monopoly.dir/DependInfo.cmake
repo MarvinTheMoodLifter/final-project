@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/atlas/Documents/Code/final-project/src/Banca.cpp" "CMakeFiles/Monopoly.dir/src/Banca.cpp.o" "gcc" "CMakeFiles/Monopoly.dir/src/Banca.cpp.o.d"
   "/home/atlas/Documents/Code/final-project/src/Casella.cpp" "CMakeFiles/Monopoly.dir/src/Casella.cpp.o" "gcc" "CMakeFiles/Monopoly.dir/src/Casella.cpp.o.d"
   "/home/atlas/Documents/Code/final-project/src/Dadi.cpp" "CMakeFiles/Monopoly.dir/src/Dadi.cpp.o" "gcc" "CMakeFiles/Monopoly.dir/src/Dadi.cpp.o.d"
   "/home/atlas/Documents/Code/final-project/src/Giocatore.cpp" "CMakeFiles/Monopoly.dir/src/Giocatore.cpp.o" "gcc" "CMakeFiles/Monopoly.dir/src/Giocatore.cpp.o.d"

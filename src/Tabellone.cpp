@@ -5,12 +5,19 @@
 #include <iostream>
 #include <random>
 
-Tabellone::Tabellone() {
+Tabellone::Tabellone(std::string tipoPartita) {
   // Riempie la prima parte di tabellone con le caselle vuote
   riempiTabellone();
   // Riempie le caselle del tabellone in maniera randomica
   riempiCaselleRandom();
   // Crea i giocatori
+  if (tipoPartita == "human") {
+    giocatore1 = Giocatore(1);
+    giocatore2 = Giocatore(2);
+    giocatore3 = Giocatore(3);
+    giocatore4 = Giocatore(4);
+  }
+  Banca banca(giocatore1, giocatore2, giocatore3, giocatore4);
 }
 
 void Tabellone::riempiTabellone() {
@@ -93,20 +100,25 @@ void Tabellone::muoviGiocatore(Giocatore giocatore) {
   nuovaCasella.aggiungiGiocatore(std::to_string(numGiocatore));
   // Controllo se la casella è posseduta da un altro giocatore
   int proprietarioCasella = nuovaCasella.getProprietarioCasella();
+  // Caso in cui la casella è posseduta dal giocatore stesso
   if (proprietarioCasella == giocatore.getNumeroGiocatore())
     return;
+  // Caso in cui la casella è la casella di partenza
+  if (nuovaCasella.getValore() == "P") {
+    std::cout << "Sei passato dal via, prendi 5 fiorini" << std::endl;
+    // TODO
+    return;
+  }
   if (proprietarioCasella == 0) {
     std::cout << "La casella è libera, vuoi acquistarla? (s->si, n->no, show->"
                  "mostra il tabellone)"
               << std::endl;
-    for (int i = 0; i < 3; i++) {
-      if (std::cin.get() == 's' &&
-          giocatore.getFiorini() >= nuovaCasella.getPrezzoProprietà()) {
-        // Acquista la casella
-        nuovaCasella.setProprietarioCasella(numGiocatore);
-      } else if (std::cin.get() == 'show') {
-        stampaTabellone();
-      }
+    if (std::cin.get() == 's' &&
+        giocatore.getFiorini() >= nuovaCasella.getPrezzoProprietà()) {
+      // Acquista la casella
+      nuovaCasella.setProprietarioCasella(numGiocatore);
+    } else if (std::cin.get() == 'show') {
+      stampaTabellone();
     }
   }
 }

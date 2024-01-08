@@ -19,7 +19,7 @@ private:
 
 public:
   // Costruttore di default
-  Tabellone();
+  Tabellone(std::string tipoPartita);
   // Riempe il vettore con le caselle vuote
   void riempiTabellone();
   // Genera un numero random tra min e max

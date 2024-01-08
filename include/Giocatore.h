@@ -7,7 +7,7 @@ class Tabellone;
 
 class Giocatore {
 private:
-  const int numeroGiocatore;
+  int numeroGiocatore;
   int fiorini;
   int posizione;
   bool inGioco;
@@ -19,6 +19,10 @@ public:
   int getFiorini() const { return fiorini; };
   void setPosizione(int posizione);
   void mossa(Tabellone &tabellone);
+  // Copy constructor
+  Giocatore(const Giocatore &g);
+  // Assegnatore di copia (per l'uso in Tabellone)
+  Giocatore &operator=(const Giocatore &g);
 };
 
 #endif // GIOCATORE_H

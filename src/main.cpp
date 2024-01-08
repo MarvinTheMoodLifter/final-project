@@ -1,8 +1,8 @@
 // Autori: Chellin Davide, Perin Marco
 // ------------------------------
-#include "../include/Casella.h"
-#include "../include/Giocatore.h"
-#include "../include/Tabellone.h"
+#include "Casella.h"
+#include "Giocatore.h"
+#include "Tabellone.h"
 #include <iostream>
 #include <string>
 
@@ -32,12 +32,9 @@ int main(int argc, char **argv) {
 
   // testCaselle();
 
-  Tabellone tabellone;
-  tabellone.inizializzaCaselleRandom();
+  Tabellone tabellone(tipoPartita);
   std::vector<Casella> tabelloneVector = tabellone.getTabellone();
   Giocatore giocatore1(1);
-  tabellone.stampaTabellone();
-  giocatore1.setPosizionePartenza(tabellone);
   tabellone.stampaTabellone();
   giocatore1.mossa(tabellone);
   std::cout << giocatore1.getPosizione() << std::endl;

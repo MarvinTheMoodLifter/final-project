@@ -142,6 +142,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/Banca.o: src/Banca.cpp.o
+.PHONY : src/Banca.o
+
+# target to build an object file
+src/Banca.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Monopoly.dir/build.make CMakeFiles/Monopoly.dir/src/Banca.cpp.o
+.PHONY : src/Banca.cpp.o
+
+src/Banca.i: src/Banca.cpp.i
+.PHONY : src/Banca.i
+
+# target to preprocess a source file
+src/Banca.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Monopoly.dir/build.make CMakeFiles/Monopoly.dir/src/Banca.cpp.i
+.PHONY : src/Banca.cpp.i
+
+src/Banca.s: src/Banca.cpp.s
+.PHONY : src/Banca.s
+
+# target to generate assembly for a file
+src/Banca.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Monopoly.dir/build.make CMakeFiles/Monopoly.dir/src/Banca.cpp.s
+.PHONY : src/Banca.cpp.s
+
 src/Casella.o: src/Casella.cpp.o
 .PHONY : src/Casella.o
 
@@ -296,6 +320,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... Monopoly"
 	@echo "... main"
+	@echo "... src/Banca.o"
+	@echo "... src/Banca.i"
+	@echo "... src/Banca.s"
 	@echo "... src/Casella.o"
 	@echo "... src/Casella.i"
 	@echo "... src/Casella.s"

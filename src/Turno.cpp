@@ -1,5 +1,6 @@
 #include "Turno.h"
 #include "Tabellone.h"
+#include <iostream>
 
 Turno::Turno() { numeroTurni = 20; }
 

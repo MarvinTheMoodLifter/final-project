@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/Monopoly.dir/src/Banca.cpp.o"
+  "CMakeFiles/Monopoly.dir/src/Banca.cpp.o.d"
   "CMakeFiles/Monopoly.dir/src/Casella.cpp.o"
   "CMakeFiles/Monopoly.dir/src/Casella.cpp.o.d"
   "CMakeFiles/Monopoly.dir/src/Dadi.cpp.o"
