@@ -35,6 +35,7 @@ public:
   void rimuoviGiocatore(std::string giocatore);
   // Aggiunge un immobile alla Casella
   void aggiungiImmobile(int giocatore);
+  bool isAngolare();
 
   bool operator==(const Casella &c) const {
     return (riga == c.riga && colonna == c.colonna);

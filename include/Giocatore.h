@@ -18,6 +18,7 @@ public:
   int getPosizione() const { return posizione; };
   int getNumeroGiocatore() const { return numeroGiocatore; };
   int getFiorini() const { return fiorini; };
+  void setFiorini(int fiorini);
   void setPosizione(int posizione);
   void mossa(Tabellone &tabellone);
   // Copy constructor
