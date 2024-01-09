@@ -2,8 +2,9 @@
 
 Gioco::Gioco(){
 
-    aggiungiGiocatori(Giocarore[] giocatori);
+    
 
+    //crea i giocatori e usa il metodo di tiro per ordinare il loro ordine in gioco
 
 
 }
@@ -56,3 +57,66 @@ void Gioco::turnoGiocatoreNonUmano(GiocatoreNonUmano nonUmano) {
   }
 }
 
+gioca(argsv da terminale, int ordine dei giocatori){
+
+//4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a come viene dato al costruttore oppure trova modo diverso
+turnoGiocatoreUmano
+turnoGiocatoreNonUmano
+turnoGiocatoreNonUmano
+turnoGiocatoreNonUmano
+
+oppure
+
+
+turnoGiocatoreNonUmano
+turnoGiocatoreUmano
+turnoGiocatoreNonUmano
+turnoGiocatoreNonUmano
+
+oppure
+
+turnoGiocatoreNonUmano
+turnoGiocatoreNonUmano
+turnoGiocatoreUmano
+turnoGiocatoreNonUmano
+
+turnoGiocatoreUmano
+turnoGiocatoreNonUmano
+turnoGiocatoreNonUmano
+turnoGiocatoreNonUmano
+
+
+
+
+
+
+
+
+}
+
+gioca(argsv da terminale){
+
+//while con numero totale turno non umano diviso 4 poi annuncia fine partita
+
+turnoGiocatoreNonUmano();
+
+
+}
+
+ordineGioco(){
+
+int a Dadi.tiraDadi();
+int b Dadi.tiraDadi();
+int c Dadi.tiraDadi();
+int d Dadi.tiraDadi();
+
+//riordino i numeri e li associo 
+
+
+
+
+
+
+
+
+}

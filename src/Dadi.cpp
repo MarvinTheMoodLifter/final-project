@@ -8,16 +8,16 @@
 
 Dadi::Dadi() {
   numeroFacce = 6;
-  conteggioTiri = 0;
+ 
 }
 
 Dadi::Dadi(int numeroFacceDado) {
   numeroFacce = numeroFacceDado;
-  conteggioTiri = 0;
+  
 }
 
 int Dadi::tiraDadi(int numeroDadi) {
-  conteggioTiri = conteggioTiri + 1;
+  
   sommaDadiLanciati = 0;
   for (int i = 0; i < numeroDadi; i++) {
 
@@ -32,5 +32,3 @@ int Dadi::tiraDadi(int numeroDadi) {
 
   return sommaDadiLanciati;
 }
-
-int Dadi::getNumeroTiri() { return conteggioTiri; }
