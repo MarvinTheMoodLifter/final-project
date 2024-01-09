@@ -1,1 +1,0 @@
-/bin/clang++ CMakeFiles/main.dir/src/main.cpp.o -o main  -Wl,-rpath,/home/atlas/Documents/Code/final-project/build libMonopoly.so 

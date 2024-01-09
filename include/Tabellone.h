@@ -12,10 +12,11 @@
 class Tabellone {
 private:
   // giocatori
-  Giocatore giocatore1 = Giocatore(1);
-  Giocatore giocatore2 = Giocatore(2);
-  Giocatore giocatore3 = Giocatore(3);
-  Giocatore giocatore4 = Giocatore(4);
+  Giocatore giocatore1;
+  Giocatore giocatore2;
+  Giocatore giocatore3;
+  Giocatore giocatore4;
+  Banca banca;
   std::vector<Casella> tabellone;
 
 public:

@@ -13,6 +13,7 @@ private:
   bool inGioco;
 
 public:
+  Giocatore();
   Giocatore(int numeroGiocatore);
   int getPosizione() const { return posizione; };
   int getNumeroGiocatore() const { return numeroGiocatore; };
