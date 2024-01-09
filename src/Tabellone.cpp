@@ -17,7 +17,7 @@ Tabellone::Tabellone(std::string tipoPartita) {
     giocatore3 = Giocatore(3);
     giocatore4 = Giocatore(4);
   }
-  Banca banca(giocatore1, giocatore2, giocatore3, giocatore4);
+  banca = Banca(giocatore1, giocatore2, giocatore3, giocatore4);
 }
 
 void Tabellone::riempiTabellone() {
