@@ -3,7 +3,7 @@
 #ifndef GIOCATORE_H
 #define GIOCATORE_H
 
-class Tabellone;
+#include "Tabellone.h"
 
 class Giocatore {
 private:
@@ -13,10 +13,11 @@ private:
   bool inGioco;
 
 public:
+  Giocatore();
   Giocatore(int numeroGiocatore);
-  int getPosizione() const { return posizione; };
-  int getNumeroGiocatore() const { return numeroGiocatore; };
-  int getFiorini() const { return fiorini; };
+  int getPosizione();
+  int getNumeroGiocatore();
+  int getFiorini();
   void setPosizione(int posizione);
   void mossa(Tabellone &tabellone);
   // Copy constructor
