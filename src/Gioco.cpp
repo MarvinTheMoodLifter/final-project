@@ -1,5 +1,5 @@
 #include "Gioco.h"
-#include <algorithm> 
+#include <algorithm>
 
 Gioco::Gioco(std::string //controlla se humano o computer ){
 
@@ -9,10 +9,9 @@ Gioco::Gioco(std::string //controlla se humano o computer ){
   GiocatoreNonUmano(ordine.pop_back());
   GiocatoreNonUmano(ordine.pop_back());
   GiocatoreNonUmano(ordine.pop_back());
-
 }
 
-Gioco::Gioco(){
+Gioco::Gioco() {
 
   std::vector<int> ordine = ordineGioco();
 
@@ -20,7 +19,6 @@ Gioco::Gioco(){
   GiocatoreNonUmano(ordine.pop_back());
   GiocatoreNonUmano(ordine.pop_back());
   GiocatoreNonUmano(ordine.pop_back());
-
 }
 
 void Gioco::turnoGiocatoreUmano(GiocatoreUmano umano) {
@@ -63,73 +61,49 @@ void Gioco::turnoGiocatoreNonUmano(GiocatoreNonUmano nonUmano) {
 
 gioca(argsv da terminale){
 
-//4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a come viene dato al costruttore oppure trova modo diverso
+    // 4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a
+    // come viene dato al costruttore oppure trova modo diverso
 
+    // oppure creo solo metodfo turnoGiocatore con allinterno if else in base a
+    // flag del giocatore
+    turnoGiocatoreUmano turnoGiocatoreNonUmano turnoGiocatoreNonUmano
+        turnoGiocatoreNonUmano
 
-// oppure creo solo metodfo turnoGiocatore con allinterno if else in base a flag del giocatore
-turnoGiocatoreUmano
-turnoGiocatoreNonUmano
-turnoGiocatoreNonUmano
-turnoGiocatoreNonUmano
+            oppure
 
-oppure
+                turnoGiocatoreNonUmano turnoGiocatoreUmano
+                    turnoGiocatoreNonUmano turnoGiocatoreNonUmano
 
+                        oppure
 
-turnoGiocatoreNonUmano
-turnoGiocatoreUmano
-turnoGiocatoreNonUmano
-turnoGiocatoreNonUmano
+                            turnoGiocatoreNonUmano turnoGiocatoreNonUmano
+                                turnoGiocatoreUmano turnoGiocatoreNonUmano
 
-oppure
-
-turnoGiocatoreNonUmano
-turnoGiocatoreNonUmano
-turnoGiocatoreUmano
-turnoGiocatoreNonUmano
-
-turnoGiocatoreUmano
-turnoGiocatoreNonUmano
-turnoGiocatoreNonUmano
-turnoGiocatoreNonUmano
-
-
-
-
-
-
-
+                                    turnoGiocatoreUmano turnoGiocatoreNonUmano
+                                        turnoGiocatoreNonUmano
+                                            turnoGiocatoreNonUmano
 
 }
 
-gioca(argsv da terminale){
+gioca(argsv da terminale) {
 
-//while con numero totale turno non umano diviso 4 poi annuncia fine partita
+  // while con numero totale turno non umano diviso 4 poi annuncia fine partita
 
-turnoGiocatoreNonUmano();
-
-
+  turnoGiocatoreNonUmano();
 }
 
-std::vector<int> ordineGioco(){
+std::vector<int> ordineGioco() {
 
-int a Dadi.tiraDadi();
-int b Dadi.tiraDadi();
-int c Dadi.tiraDadi();
-int d Dadi.tiraDadi();
+  int a Dadi.tiraDadi();
+  int b Dadi.tiraDadi();
+  int c Dadi.tiraDadi();
+  int d Dadi.tiraDadi();
 
-//riordino i numeri e li associo 
-int[] ordineGiocatori = [a,b,c,d];
+  // riordino i numeri e li associo
+  int[] ordineGiocatori = [ a, b, c, d ];
 
-std::vector<int> giocatoriRiordinati(ordineGiocatori, ordineGiocatori+4);
-std::sort (giocatoriRiordinati.begin(), giocatoriRiordinati.begin()+4);
+  std::vector<int> giocatoriRiordinati(ordineGiocatori, ordineGiocatori + 4);
+  std::sort(giocatoriRiordinati.begin(), giocatoriRiordinati.begin() + 4);
 
-return giocatoriRiordinati;
-
-
-
-
-
-
-
-
+  return giocatoriRiordinati;
 }

@@ -23,62 +23,102 @@ int Casella::getPrezzoProprietà() {
   // Restituisce il prezzo della proprietà
   // Controllo che tipo di casella è
   // se la stringa contiene E all'indice 2, il prezzo è 100
-  if (valore.find("E") != std::string::npos) {
+  switch (tipologia) {
+  case 'E':
     return 6;
-  } else if (valore.find("S") != std::string::npos) {
+  case 'S':
     return 10;
-  } else {
+  case 'P':
     return 20;
+  }
+  return 0;
+}
+
+int Casella::getAffitto() {
+  // Restituisce l'affitto della casella
+  // Controllo che tipo di casella è
+  // se la stringa contiene E all'indice 2, l'affitto è 10
+  int moltiplicatoreAlbergo = 2;
+  int valoreAffitto;
+  switch (tipologia) {
+  case 'E':
+    valoreAffitto = 2;
+  case 'S':
+    valoreAffitto = 4;
+  case 'P':
+    valoreAffitto = 7;
+  }
+  // Se l'immobile è un albergo, moltiplica l'affitto per 2
+  if (immobile == '^') {
+    valoreAffitto *= moltiplicatoreAlbergo;
+  }
+  return valoreAffitto;
+}
+
+int Casella::prezzoMiglioramentoImmobile() {
+  // Restituisce il prezzo dell'immobile
+  switch (tipologia) {
+  case 'E':
+    return 3;
+  case 'S':
+    return 5;
+  case 'P':
+    return 20;
+  }
+  return 0;
+}
+
+void Casella::miglioraImmobile() {
+  // Migliora l'immobile
+  if (immobile == ' ') {
+    immobile = '*';
+  } else if (immobile == '*') {
+    immobile = '^';
   }
 }
 
-void Casella::setValore(std::string v) { valore = v; }
-void Casella::addValore(std::string v) { valore += v; }
+void Casella::setImmobile(char i) { immobile = i; }
+void Casella::setTipologia(char t) { tipologia = t; }
 
 void Casella::aggiungiGiocatore(std::string giocatore) {
   // Aggiunge un giocatore alla Casella
-  valore += giocatore;
+  giocatoriPresenti += giocatore;
+}
+void Casella::rimuoviGiocatore(std::string giocatore) {
+  if (!isVuota()) {
+    // Rimuove il giocatore dalla stringa giocatoriPresenti
+    giocatoriPresenti.erase(giocatoriPresenti.find(giocatore), 1);
+  }
 }
 
 void Casella::stampaCasella() {
   // Stampa la casella (con giocatori e immobili se presenti)
-  if (valore == " ") {
-    // std::cout << "| " << riga << colonna << " | ";
+  if (isVuota()) {
     std::cout << "|   | ";
   } else {
     // std::cout << "| " << riga << colonna << valore << " | ";
-    std::cout << "| " << valore << " | ";
+    std::cout << "| " << tipologia << immobile << giocatoriPresenti << " | ";
   }
 }
 
 bool Casella::isVuota() {
   // Restituisce true se la casella è vuota
-  return valore == " " ? true : false;
+  return giocatoriPresenti == " " ? true : false;
 }
 
-void Casella::rimuoviGiocatore(std::string giocatore) {
-  // Rimuove un giocatore dalla Casella
-  if (isVuota()) {
-    valore = " ";
-  } else {
-    // Altrimenti rimuove il giocatore dalla stringa valore
-    valore.erase(valore.find(giocatore), 1);
-  }
-}
 void Casella::aggiungiImmobile(int giocatore) {
   // Aggiunge un immobile alla Casella
   // Check se giocatore ha abbastanza soldi
   // TODO
-  std::string casa = "*";
-  std::string albergo = "^";
-  // Se la casella è vuota, aggiunge il giocatore alla casella
+  char casa = '*';
+  char albergo = '^';
+  // Se la casella è vuota
   if (isVuota()) {
-    valore += casa;
-  } else if (valore == casa) {
-    // Altrimenti aggiunge il giocatore alla stringa valore
-    valore.erase(valore.find(casa), 1);
-    // Aggiunge l'albergo PRIMA del giocatore nella stringa valore
-    valore.insert(valore.find(giocatore), albergo);
+    immobile = casa;
+  } else if (immobile == casa) {
+    immobile = albergo;
+  } else {
+    std::cout << "Impossibile costruire su questa casella" << std::endl;
   }
 }
 
@@ -100,6 +140,11 @@ bool Casella::isAngolare() {
 Casella Casella::operator=(const Casella &c) {
   riga = c.riga;
   colonna = c.colonna;
-  valore = c.valore;
+  proprietarioCasella = c.proprietarioCasella;
+  coordinate = c.coordinate;
+  immobile = c.immobile;
+  tipologia = c.tipologia;
+  giocatoriPresenti = c.giocatoriPresenti;
+  prezzoProprietà = c.prezzoProprietà;
   return *this;
 }

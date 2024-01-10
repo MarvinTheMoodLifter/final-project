@@ -9,17 +9,21 @@ class Casella {
 public:
   // Costruttore con parametri
   Casella(char riga, int colonna);
-  // Metodi get
+
+  // Funzioni get
   char getRiga() { return riga; };
   int getColonna() { return colonna; };
   std::vector<std::string> getCoordinate() { return coordinate; };
-  std::string getValore() { return valore; };
+  char getImmobile() { return immobile; };
   int getProprietarioCasella() { return proprietarioCasella; };
   int getPrezzoProprietà();
-  void setValore(std::string v);
-  void addValore(std::string v);
-  void setImmobile(std::string immobile);
-  void unsetImmobile(std::string immobile);
+  int getAffitto();
+  int prezzoMiglioramentoImmobile();
+  void miglioraImmobile();
+
+  // Funzioni set
+  void setImmobile(char immobile);
+  void setTipologia(char tipologia);
   void setProprietarioCasella(int nuovoProprietario);
 
   // Stampa il valore della casella (con giocatori e immobili se presenti)
@@ -50,8 +54,10 @@ private:
   int colonna;
   int proprietarioCasella = 0;
   std::vector<std::string> coordinate;
-  std::string valore;
-  int prezzoProprietà;
+  char immobile = ' ';
+  char tipologia = ' ';
+  std::string giocatoriPresenti = " ";
+  int prezzoProprietà = 0;
 };
 
 #endif // CASELLA_H
