@@ -2,6 +2,7 @@
 // ------------------------------
 #ifndef GIOCATORE_H
 #define GIOCATORE_H
+
 #include "Tabellone.h"
 
 class Giocatore {
@@ -17,9 +18,8 @@ public:
   int getPosizione();
   int getNumeroGiocatore();
   int getFiorini();
-  void setFiorini(int fiorini);
   void setPosizione(int posizione);
-  // void mossa(Tabellone &tabellone);
+  void mossa(Tabellone &tabellone);
   // Copy constructor
   Giocatore(const Giocatore &g);
   // Assegnatore di copia (per l'uso in Tabellone)
