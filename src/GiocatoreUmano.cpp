@@ -4,7 +4,7 @@ GiocatoreUmano::GiocatoreUmano(int numGio){
 
     setFiorini(100);
 	inGioco=true;
-    umano=false;
+    umano=true;
 	setPosizione(0);
     numeroGiocatore=numGio;
 
