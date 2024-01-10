@@ -17,7 +17,6 @@ Tabellone::Tabellone(std::string tipoPartita) {
     giocatore3 = Giocatore(3);
     giocatore4 = Giocatore(4);
   }
-  Banca banca(giocatore1, giocatore2, giocatore3, giocatore4);
 }
 
 void Tabellone::riempiTabellone() {
@@ -76,49 +75,65 @@ void Tabellone::riempiCaselleRandom() {
 }
 
 void Tabellone::muoviGiocatore(Giocatore giocatore) {
-  // Prendo la posizione attuale del giocatore
+  // Dati del giocatore
   int vecchiaPosizione = giocatore.getPosizione();
-  bool passaVia = false;
+  int numGiocatore = giocatore.getNumeroGiocatore();
   // Creo dadi e li tiro
   Dadi dadi(6);
   int mossa = dadi.tiraDadi(2);
+
   // Genero l'indice della nuova posizione
-  int nuovaPosizione = vecchiaPosizione + mossa;
   // Nel caso in cui la nuova posizione sia maggiore di 27, il giocatore passa
   // dal via
+  int nuovaPosizione = vecchiaPosizione + mossa;
   if (nuovaPosizione > 27) {
     nuovaPosizione -= 27;
-    bool passaVia = true;
+    std::cout << "Giocatore " << numGiocatore
+              << " è passato dal via e ha ritirato " << 20 << " fiorini"
+              << std::endl;
+    giocatore.setFiorini(giocatore.getFiorini() + 20);
   }
+
+  // Prendo le caselle di partenza e di arrivo
   Casella vecchiaCasella = tabellone[vecchiaPosizione];
   Casella nuovaCasella = tabellone[nuovaPosizione];
-  int numGiocatore = giocatore.getNumeroGiocatore();
-  // Sposto il Giocatore
+  // Sposto il Giocatore e cambio il valore della casella
   giocatore.setPosizione(nuovaPosizione);
-  // Cambio il valore della casella
   vecchiaCasella.rimuoviGiocatore(std::to_string(numGiocatore));
   nuovaCasella.aggiungiGiocatore(std::to_string(numGiocatore));
-  // Controllo se la casella è posseduta da un altro giocatore
-  int proprietarioCasella = nuovaCasella.getProprietarioCasella();
-  // Caso in cui la casella è posseduta dal giocatore stesso
-  if (proprietarioCasella == giocatore.getNumeroGiocatore())
-    return;
-  // Caso in cui la casella è la casella di partenza
-  if (nuovaCasella.getValore() == "P") {
-    std::cout << "Sei passato dal via, prendi 5 fiorini" << std::endl;
-    // TODO
-    return;
-  }
-  if (proprietarioCasella == 0) {
-    std::cout << "La casella è libera, vuoi acquistarla? (s->si, n->no, show->"
-                 "mostra il tabellone)"
+
+  if (nuovaCasella.getProprietarioCasella() == numGiocatore) {
+    // Caso in cui la casella è posseduta dal giocatore stesso
+    std::cout << "La casella è tua! Desideri acquistare una proprietà?"
               << std::endl;
-    if (std::cin.get() == 's' &&
-        giocatore.getFiorini() >= nuovaCasella.getPrezzoProprietà()) {
-      // Acquista la casella
-      nuovaCasella.setProprietarioCasella(numGiocatore);
-    } else if (std::cin.get() == 'show') {
-      stampaTabellone();
+  } else if (nuovaCasella.getProprietarioCasella() == 0) {
+    // Caso in cui la casella è libera
+    if (nuovaCasella.isAngolare()) {
+      return;
+    }
+    std::string risposta;
+    while (true) {
+      std::cout
+          << "La casella è libera, vuoi acquistarla? (s->si, n->no, show->"
+             "mostra il tabellone)"
+          << std::endl;
+      std::cin >> risposta;
+      if (risposta == "s" &&
+          giocatore.getFiorini() >= nuovaCasella.getPrezzoProprietà()) {
+        // Acquista la casella
+        nuovaCasella.setProprietarioCasella(numGiocatore);
+        giocatore.setFiorini(giocatore.getFiorini() -
+                             nuovaCasella.getPrezzoProprietà());
+        return;
+      } else if (risposta == "show") {
+        // Mostra il tabellone
+        stampaTabellone();
+      } else if (risposta == "n") {
+        // Non acquista la casella
+        return;
+      } else {
+        std::cout << "Risposta non valida" << std::endl;
+      }
     }
   }
 }

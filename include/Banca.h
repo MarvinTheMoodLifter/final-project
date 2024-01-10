@@ -10,6 +10,7 @@ private:
   Giocatore giocatore4;
 
 public:
+  Banca();
   Banca(Giocatore g1, Giocatore g2, Giocatore g3, Giocatore g4);
 };
 

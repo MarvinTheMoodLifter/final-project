@@ -87,6 +87,16 @@ void Casella::setProprietarioCasella(int nuovoProprietario) {
   proprietarioCasella = nuovoProprietario;
 }
 
+bool Casella::isAngolare() {
+  // Restituisce true se la casella è angolare
+  if (riga == 'A' || riga == 'H') {
+    if (colonna == 1 || colonna == 8) {
+      return true;
+    }
+  }
+  return false;
+}
+
 Casella Casella::operator=(const Casella &c) {
   riga = c.riga;
   colonna = c.colonna;

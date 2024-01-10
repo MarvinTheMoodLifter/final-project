@@ -2,7 +2,6 @@
 // ------------------------------
 #ifndef TABELLONE_H
 #define TABELLONE_H
-#include "Banca.h"
 #include "Casella.h"
 #include "Dadi.h"
 #include "Giocatore.h"
@@ -12,10 +11,10 @@
 class Tabellone {
 private:
   // giocatori
-  Giocatore giocatore1 = Giocatore(1);
-  Giocatore giocatore2 = Giocatore(2);
-  Giocatore giocatore3 = Giocatore(3);
-  Giocatore giocatore4 = Giocatore(4);
+  Giocatore giocatore1;
+  Giocatore giocatore2;
+  Giocatore giocatore3;
+  Giocatore giocatore4;
   std::vector<Casella> tabellone;
 
 public:
