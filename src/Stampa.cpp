@@ -19,7 +19,7 @@ void Stampa::stampaFiorini(Giocatore a, Giocatore b, Giocatore c, Giocatore d) {
   int giocatoreD = d.getFiorini();
 
   std::cout << a.getNumeroGiocatore() << "possiede" << giocatoreA << "/n"
-            << b.getNumeroGiocatore() << "possiede" << giocatoreB << "fiorini"
+            << b.getNumeroGiocatore()  << "possiede" << giocatoreB << "fiorini"
             << "/n" << c.getNumeroGiocatore() << "possiede" << giocatoreC
             << "fiorini"
             << "/n" << d.getNumeroGiocatore() << "possiede" << giocatoreD

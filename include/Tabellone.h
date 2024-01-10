@@ -2,6 +2,10 @@
 // ------------------------------
 #ifndef TABELLONE_H
 #define TABELLONE_H
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 #include "Casella.h"
 #include "Dadi.h"
 #include "Giocatore.h"
@@ -15,6 +19,10 @@ private:
   Giocatore giocatore2;
   Giocatore giocatore3;
   Giocatore giocatore4;
+<<<<<<< HEAD
+  
+=======
+>>>>>>> main
   std::vector<Casella> tabellone;
 
 public:
