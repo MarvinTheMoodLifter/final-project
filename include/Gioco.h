@@ -1,35 +1,32 @@
-#import "Giocatore.h"
+#include "Giocatore.h"
+#include <algorithm>
+#include <vector>
 
-class Gioco{
+class Gioco {
 
-    Gioco(flag da argv gicoatore umani e non);
-    Gioco(flag da argv giocatore non umani);
+  Gioco(int i = 0);
+  Gioco(int i = 1);
 
-    
-    turnoGiocatore();    
-    void gioca();
+  void turnoGiocatore();
+  void gioca();
 
-    std::vector<int> ordineGioco();
+  std::vector<int> ordineGioco();
 
-    //li definisco già come giocatore umano e non umano
+  // li definisco già come giocatore umano e non umano
 
+  Giocatore cp1;
+  Giocatore cp2;
+  Giocatore cp3;
+  Giocatore cp4;
 
-    Giocatore cp1;
-    Giocatore cp2;
-    Giocatore cp3;
-    Giocatore cp4;
+  Giocatore giocatoriInPartita[];
 
-   Giocatore[] giocatoriInPartita;
+  Tabellone principale();
 
-   Tabellone principale; 
+  Giocatore[] aggiungiGiocatori();
 
-   Giocatore[] aggiungiGiocatori();
-
-   bool ultimoGiocatore();
-   int comparaFiorini();
-   bool umanoInGioco();
-   void finePartita();
-
-
-}
-
+  bool ultimoGiocatore();
+  int comparaFiorini();
+  bool umanoInGioco();
+  void finePartita();
+};
