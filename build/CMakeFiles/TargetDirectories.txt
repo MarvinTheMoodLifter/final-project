@@ -1,4 +1,0 @@
-/home/atlas/Documents/Code/final-project/build/CMakeFiles/Monopoly.dir
-/home/atlas/Documents/Code/final-project/build/CMakeFiles/main.dir
-/home/atlas/Documents/Code/final-project/build/CMakeFiles/edit_cache.dir
-/home/atlas/Documents/Code/final-project/build/CMakeFiles/rebuild_cache.dir

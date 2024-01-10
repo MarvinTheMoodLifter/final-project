@@ -1,1 +1,0 @@
-/bin/clang++ -fPIC -shared -Wl,-soname,libMonopoly.so -o libMonopoly.so CMakeFiles/Monopoly.dir/src/Casella.cpp.o CMakeFiles/Monopoly.dir/src/Giocatore.cpp.o CMakeFiles/Monopoly.dir/src/Turno.cpp.o CMakeFiles/Monopoly.dir/src/Dadi.cpp.o CMakeFiles/Monopoly.dir/src/Tabellone.cpp.o CMakeFiles/Monopoly.dir/src/Banca.cpp.o 
