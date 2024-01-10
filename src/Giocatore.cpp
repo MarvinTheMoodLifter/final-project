@@ -2,7 +2,6 @@
 
 Giocatore::Giocatore() {}
 Giocatore::Giocatore(int numGio) {
-<<<<<<< HEAD
 
   numeroGiocatore = numGio;
   fiorini = 100;
@@ -14,26 +13,16 @@ Giocatore::Giocatore(int numGio) {
   //  }
 }
 
-  void Giocatore::mossa(Tabellone &tabellone) {
+void Giocatore::mossa(Tabellone &tabellone) {
   tabellone.muoviGiocatore(numeroGiocatore, posizione);
-
 }
 
-  int Giocatore::getPosizione() const { return posizione; };
-  int Giocatore::getNumeroGiocatore() const { return numeroGiocatore; };
-  int Giocatore::getFiorini() const { return fiorini; };
-  void Giocatore::setPosizione(int posizione);
-  // void mossa(Tabellone &tabellone);
-  // Copy constructor
-  Giocatore::Giocatore(const Giocatore &g);
-  // Assegnatore di copia (per l'uso in Tabellone)
-  Giocatore::Giocatore &operator=(const Giocatore &g);
-=======
-  numeroGiocatore = numGio;
-  fiorini = 100;
-  inGioco = true;
-  posizione = 0;
-}
-
-void Giocatore::setFiorini(int n) { fiorini = n; }
->>>>>>> main
+int Giocatore::getPosizione() const { return posizione; };
+int Giocatore::getNumeroGiocatore() const { return numeroGiocatore; };
+int Giocatore::getFiorini() const { return fiorini; };
+void Giocatore::setPosizione(int posizione);
+// void mossa(Tabellone &tabellone);
+// Copy constructor
+Giocatore::Giocatore(const Giocatore &g);
+// Assegnatore di copia (per l'uso in Tabellone)
+Giocatore::Giocatore &operator=(const Giocatore &g);

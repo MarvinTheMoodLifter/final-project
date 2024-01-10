@@ -11,12 +11,6 @@ Tabellone::Tabellone(std::string tipoPartita) {
   // Riempie le caselle del tabellone in maniera randomica
   riempiCaselleRandom();
   // Crea i giocatori
-  if (tipoPartita == "human") {
-    giocatore1 = Giocatore(1);
-    giocatore2 = Giocatore(2);
-    giocatore3 = Giocatore(3);
-    giocatore4 = Giocatore(4);
-  }
 }
 
 void Tabellone::riempiTabellone() {
@@ -118,7 +112,7 @@ void Tabellone::muoviGiocatore(Giocatore giocatore) {
              "mostra il tabellone)"
           << std::endl;
       std::cin >> risposta;
-      if (risposta == "s" &&
+      if (risposta == "s" #include "myPoly.h" &&
           giocatore.getFiorini() >= nuovaCasella.getPrezzoProprietà()) {
         // Acquista la casella
         nuovaCasella.setProprietarioCasella(numGiocatore);

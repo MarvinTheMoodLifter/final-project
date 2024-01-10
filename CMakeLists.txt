@@ -6,11 +6,13 @@ include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED
   src/Casella.cpp
-  src/Giocatore.cpp
-  src/Turno.cpp
   src/Dadi.cpp
+  src/Giocatore.cpp
+  src/GiocatoreNonUmano.cpp
+  src/GiocatoreUmano.cpp
+  src/Stampa.cpp
   src/Tabellone.cpp
-  src/Banca.cpp
+  src/Turno.cpp
   )
 
 add_executable(main src/main.cpp)
