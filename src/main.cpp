@@ -30,6 +30,24 @@ int main(int argc, char **argv) {
     std::cout << "Partita " << tipoPartita << std::endl;
   }
 
+  enum tipo { human = 0, computer =1};
+
+  if (tipoPartita == "human"){
+    std::cout << "Partita " << tipoPartita << std::endl;
+    Gioco(0);
+
+
+
+  }
+
+  if(tipoPartita == "computer"){
+    std::cout << "Partita " << tipoPartita << std::endl;
+    Gioco(1);
+
+
+
+  }
+
   // testCaselle();
 
   Tabellone tabellone(tipoPartita);
