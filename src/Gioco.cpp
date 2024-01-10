@@ -1,5 +1,5 @@
 #include "Gioco.h"
-#include <algorithm> 
+#include <algorithm>
 
 Gioco::Gioco(std::string controlla se humano o computer ){
   
@@ -10,6 +10,7 @@ Gioco::Gioco(std::string controlla se humano o computer ){
   cp1 = GiocatoreNonUmano(ordine.pop_back());
   cp2 =GiocatoreNonUmano(ordine.pop_back());
   cp4 =GiocatoreNonUmano(ordine.pop_back());
+
 
   giocatoriInPartita = aggiungiGiocatori(cp1,cp2,cp3,cp4); 
 
@@ -103,6 +104,7 @@ finePartita();
 
 gioca(flag tipop giooco){
 
+
 //4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a come viene dato al costruttore oppure trova modo diverso
 
 
@@ -138,6 +140,10 @@ for(int i=0, i<20, i++){
 
 
 
+    // oppure creo solo metodfo turnoGiocatore con allinterno if else in base a
+    // flag del giocatore
+    turnoGiocatoreUmano turnoGiocatoreNonUmano turnoGiocatoreNonUmano
+        turnoGiocatoreNonUmano
 
 gioca(flag su Gioco){
 
@@ -244,6 +250,10 @@ return ordinePartita;
 
 Giocatore[] aggiungiGiocatori(Giocatore p1, Giocatore p2, Giocatore p3, Giocatore p4){
 
+  int a Dadi.tiraDadi();
+  int b Dadi.tiraDadi();
+  int c Dadi.tiraDadi();
+  int d Dadi.tiraDadi();
 
 Giocatore[4] arrayOrdinatoGiocatore;
 

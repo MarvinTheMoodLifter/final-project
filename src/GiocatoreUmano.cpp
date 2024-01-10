@@ -1,6 +1,6 @@
 #include "GiocatoreUmano.h"
 
-GiocatoreUmano::GiocatoreUmano(int numGio){
+GiocatoreUmano::GiocatoreUmano(int numGio) {
 
     setFiorini(100);
 	inGioco=true;

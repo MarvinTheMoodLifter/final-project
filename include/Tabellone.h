@@ -4,18 +4,15 @@
 #define TABELLONE_H
 #include "Casella.h"
 #include "Dadi.h"
+#include "Giocatore.h"
+#include "GiocatoreNonUmano.h"
+#include "GiocatoreUmano.h"
 #include <vector>
-
-class Giocatore {};
 
 // Classe tabellone
 class Tabellone {
 private:
   // giocatori
-  Giocatore giocatore1;
-  Giocatore giocatore2;
-  Giocatore giocatore3;
-  Giocatore giocatore4;
   std::vector<Casella> tabellone;
 
 public:
@@ -24,7 +21,7 @@ public:
   // Riempe il vettore con le caselle vuote
   void riempiTabellone();
   // Genera un numero random tra min e max
-  void randomizzaVettore(std::vector<std::string> &v);
+  void randomizzaVettore(std::vector<char> &v);
   // Riempie le caselle del tabellone in maniera randomica
   void riempiCaselleRandom();
   // Stampa il Tabellone vuoto
@@ -34,8 +31,14 @@ public:
   // Restituisce il vettore contente le caselle del Tabellone
   std::vector<Casella> getTabellone() const;
   // Sposta il giocatore
-  void muoviGiocatore(Giocatore giocatore);
+  void muoviGiocatore(Giocatore &giocatore, Giocatore &giocatore2,
+                      Giocatore &giocatore3, Giocatore &giocatore4);
+  std::string chiediGiocatore(std::string messaggio);
+  bool acquistaImmobile(Giocatore &giocatore, int posizione);
   int tiraDadi();
+
+  // Copy constructor per Gioco
+  Tabellone(const Tabellone &t) : tabellone(t.tabellone) {}
 
   // Overloading dell'operatore []
   Casella &operator[](int i) { return tabellone[i]; }
