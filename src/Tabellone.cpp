@@ -242,6 +242,7 @@ void Tabellone::stampaTabellone() {
     tabellone[7 - i].stampaCasella();
   }
   std::cout << std::endl;
+  // TODO stampa i fiorini giocatori
 }
 
 std::vector<Casella> Tabellone::getTabellone() const { return tabellone; }

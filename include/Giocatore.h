@@ -18,6 +18,7 @@ public:
   int getPosizione();
   int getNumeroGiocatore() const;
   int getFiorini() const;
+  bool getInGioco() const { return inGioco; };
   void setFiorini(int valore) { fiorini = valore; }
   void setPosizione(int posizione);
 

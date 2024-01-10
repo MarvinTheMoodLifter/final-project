@@ -1,4 +1,7 @@
 #include "Gioco.h"
+#include "Giocatore.h"
+#include "GiocatoreNonUmano.h"
+#include "GiocatoreUmano.h"
 #include <algorithm>
 
 Gioco::Gioco(std::string controlla se humano o computer) {
@@ -7,8 +10,8 @@ Gioco::Gioco(std::string controlla se humano o computer) {
 
   std::vector<int> ordine = ordineGioco();
   cp1 = GiocatoreUmano(ordine.pop_back());
-  cp1 = GiocatoreNonUmano(ordine.pop_back());
   cp2 = GiocatoreNonUmano(ordine.pop_back());
+  cp3 = GiocatoreNonUmano(ordine.pop_back());
   cp4 = GiocatoreNonUmano(ordine.pop_back());
 
   giocatoriInPartita = aggiungiGiocatori(cp1, cp2, cp3, cp4);
@@ -28,13 +31,13 @@ Gioco::Gioco(tipo di partita) {
   giocatoriInPartita = aggiungiGiocatori(cp1, cp2, cp3, cp4);
 }
 
-turnoGiocatore(Giocatore p) {
+void Gioco::turnoGiocatore(Giocatore &p) {
 
   if (!ultimoGiocatore()) {
 
     if (p.umano)
 
-      if (p.inGioco) {
+      if (p.getInGioco()) {
 
         std::cout
             << "È il turno di " << p.getNumeroGiocatore() << "/n"
@@ -50,6 +53,8 @@ turnoGiocatore(Giocatore p) {
           // Stampa.show(tab, a, b, c, d);
 
         } else if (i.compare(s) == 0) {
+          // muoviGiocatore(giocatore giocante, altro giocatore, altro
+          // giocatore, altro giocatore)
           principale.muoviGiocatore(p);
         } else {
           std::cout << "digita un comando valido"

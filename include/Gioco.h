@@ -5,9 +5,9 @@
 class Gioco {
 
   Gioco(int i = 0);
-  Gioco(int i = 1);
+  Gioco(int i = 1); // Constructor cannot be declared
 
-  void turnoGiocatore();
+  void turnoGiocatore(Giocatore &p);
   void gioca();
 
   std::vector<int> ordineGioco();
