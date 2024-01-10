@@ -1,21 +1,25 @@
 #include "Gioco.h"
+#include <algorithm> 
 
-Gioco::Gioco(){
+Gioco::Gioco(std::string //controlla se humano o computer ){
 
-    
+  std::vector<int> ordine = ordineGioco();computer
 
-    //crea i giocatori e usa il metodo di tiro per ordinare il loro ordine in gioco
-
+  GiocatoreUmano(ordine.pop_back());
+  GiocatoreNonUmano(ordine.pop_back());
+  GiocatoreNonUmano(ordine.pop_back());
+  GiocatoreNonUmano(ordine.pop_back());
 
 }
 
 Gioco::Gioco(){
 
+  std::vector<int> ordine = ordineGioco();
 
-    aggiungiGiocatori(GiocaroreNonUmano[] giocatori);
-
-
-
+  GiocatoreNonUmano(ordine.pop_back());
+  GiocatoreNonUmano(ordine.pop_back());
+  GiocatoreNonUmano(ordine.pop_back());
+  GiocatoreNonUmano(ordine.pop_back());
 
 }
 
@@ -57,9 +61,12 @@ void Gioco::turnoGiocatoreNonUmano(GiocatoreNonUmano nonUmano) {
   }
 }
 
-gioca(argsv da terminale, int ordine dei giocatori){
+gioca(argsv da terminale){
 
 //4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a come viene dato al costruttore oppure trova modo diverso
+
+
+// oppure creo solo metodfo turnoGiocatore con allinterno if else in base a flag del giocatore
 turnoGiocatoreUmano
 turnoGiocatoreNonUmano
 turnoGiocatoreNonUmano
@@ -103,7 +110,7 @@ turnoGiocatoreNonUmano();
 
 }
 
-ordineGioco(){
+std::vector<int> ordineGioco(){
 
 int a Dadi.tiraDadi();
 int b Dadi.tiraDadi();
@@ -111,6 +118,12 @@ int c Dadi.tiraDadi();
 int d Dadi.tiraDadi();
 
 //riordino i numeri e li associo 
+int[] ordineGiocatori = [a,b,c,d];
+
+std::vector<int> giocatoriRiordinati(ordineGiocatori, ordineGiocatori+4);
+std::sort (giocatoriRiordinati.begin(), giocatoriRiordinati.begin()+4);
+
+return giocatoriRiordinati;
 
 
 
