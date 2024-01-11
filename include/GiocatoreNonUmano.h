@@ -1,15 +1,13 @@
 #include "Giocatore.h"
 
-class GiocatoreNonUmano : private Giocatore {
-	
-	public:
-	GiocatoreNonUmano(int numGio);
-    char scelte();
-	private:
-	bool umano;
-	
-	
-	};
+class GiocatoreNonUmano : public Giocatore {
+private:
+  bool umano;
 
+public:
+  GiocatoreNonUmano(int numGio);
+  char scelte();
+  bool isUmano() const override { return false; }
+};
 
 int generatore();

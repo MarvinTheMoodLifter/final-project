@@ -14,21 +14,25 @@ private:
 
 public:
   Giocatore();
-  Giocatore(int numeroGiocatore);
-  int getPosizione();
+  Giocatore(int numeroGiocatore, bool inGioco = true, int fiorini = 100,
+            int posizione = 0);
+  int getPosizione() const;
   int getNumeroGiocatore() const;
   int getFiorini() const;
   bool getInGioco() const { return inGioco; };
-  void setFiorini(int valore) { fiorini = valore; }
-  void setPosizione(int posizione);
-
-  void setPerso(bool v) { inGioco = v; }
+  void setFiorini(int valore);
+  void setPosizione(int p);
+  void setInGioco(bool v);
 
   // Copy constructor
   Giocatore(const Giocatore &g);
   // Assegnatore di copia (per l'uso in Tabellone)
   Giocatore &operator=(const Giocatore &g);
-  bool umano;
+  // bool umano;
+  virtual bool isUmano() const;
+
+  // Distruttore virtuale
+  virtual ~Giocatore() = default;
 };
 
 #endif // GIOCATORE_H

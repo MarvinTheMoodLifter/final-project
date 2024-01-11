@@ -10,9 +10,8 @@ add_library(${PROJECT_NAME} SHARED
   src/Giocatore.cpp
   src/GiocatoreNonUmano.cpp
   src/GiocatoreUmano.cpp
-  src/Stampa.cpp
+  src/Gioco.cpp
   src/Tabellone.cpp
-  src/Turno.cpp
   )
 
 add_executable(main src/main.cpp)
