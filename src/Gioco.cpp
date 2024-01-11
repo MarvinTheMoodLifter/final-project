@@ -4,9 +4,14 @@
 #include "GiocatoreUmano.h"
 #include <algorithm>
 
-Gioco::Gioco(std::string controlla se humano o computer) {
 
-  principale(tipo di partita); // forse necessario assignment copy
+Gioco::Gioco(std::string tipoPartita) {
+
+  if(tipoPartita == "human"){
+  
+  tipoGioco = "human";
+
+  principale(tipoPartita); // forse necessario assignment copy
 
   std::vector<int> ordine = ordineGioco();
   cp1 = GiocatoreUmano(ordine.pop_back());
@@ -15,11 +20,14 @@ Gioco::Gioco(std::string controlla se humano o computer) {
   cp4 = GiocatoreNonUmano(ordine.pop_back());
 
   giocatoriInPartita = aggiungiGiocatori(cp1, cp2, cp3, cp4);
-}
 
-Gioco::Gioco(tipo di partita) {
+  }
 
-  principale(tipo di partita);
+  else if(tipoPartita == "computer"){
+
+      tipoGioco = "computer";
+
+    principale(tipoPartita);
 
   std::vector<int> ordine = ordineGioco();
 
@@ -29,7 +37,13 @@ Gioco::Gioco(tipo di partita) {
   GiocatoreNonUmano(ordine.pop_back());
 
   giocatoriInPartita = aggiungiGiocatori(cp1, cp2, cp3, cp4);
+
+
+
+  }
+
 }
+
 
 void Gioco::turnoGiocatore(Giocatore &p) {
 
@@ -89,14 +103,14 @@ void Gioco::turnoGiocatore(Giocatore &p) {
     (ultimoGiocatore()) { finePartita(); }
 }
 
-gioca(flag tipop giooco) {
+gioca() {
 
   // 4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a
   // come viene dato al costruttore oppure trova modo diverso
 
   // oppure creo solo metodfo turnoGiocatore con allinterno if else in base a
   // flag del giocatore
-
+  if(tipoGioco =="human"){
   while (umanoInGioco()) {
     for (int i = 0, i < 4, i++) {
 
@@ -115,12 +129,7 @@ gioca(flag tipop giooco) {
     }
 }
 
-// oppure creo solo metodfo turnoGiocatore con allinterno if else in base a
-// flag del giocatore
-turnoGiocatoreUmano
-    turnoGiocatoreNonUmano turnoGiocatoreNonUmano turnoGiocatoreNonUmano
-
-    gioca(flag su Gioco) {
+else if(tipoGioco =="computer"){
 
   for (int i = 0, i < 20, i++) {
 
@@ -131,7 +140,13 @@ turnoGiocatoreUmano
   }
 
   finePartita();
+
+
 }
+
+
+}
+
 
 void finePartita() {
 
@@ -204,7 +219,7 @@ std::vector<int> ordineGioco() {
   return ordinePartita;
 }
 
-Giocatore[] aggiungiGiocatori(Giocatore p1, Giocatore p2, Giocatore p3,
+ Giocatore* aggiungiGiocatori(Giocatore p1, Giocatore p2, Giocatore p3,
                               Giocatore p4) {
 
   int a Dadi.tiraDadi();
@@ -234,4 +249,4 @@ else {
 
   return true;
 }
-}
+

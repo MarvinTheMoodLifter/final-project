@@ -5,17 +5,9 @@
 #include "Tabellone.h"
 #include <iostream>
 #include <string>
+#include "Gioco.h"
 
-void testCaselle() {
-  Casella test('A', 1);
-  Casella test2('B', 1);
-  test.setValore("^");
-  test2.setValore("^2");
-  test.stampaCasella();
-  test2.stampaCasella();
-}
 
-void testSpostamento(Giocatore &giocatore, Tabellone &tabellone) {}
 
 int main(int argc, char **argv) {
   // Se argc == computer allora la partita è 4 computer
@@ -27,36 +19,15 @@ int main(int argc, char **argv) {
     tipoPartita = argv[1];
   }
   if (tipoPartita == "human" | tipoPartita == "computer") {
-    std::cout << "Partita " << tipoPartita << std::endl;
+
+      std::cout << "Partita " << tipoPartita << std::endl;
+
+   
   }
 
-  enum tipo { human = 0, computer =1};
-
-  if (tipoPartita == "human"){
-    std::cout << "Partita " << tipoPartita << std::endl;
-    Gioco(0);
 
 
-
-  }
-
-  if(tipoPartita == "computer"){
-    std::cout << "Partita " << tipoPartita << std::endl;
-    Gioco(1);
-
+  
 
 
   }
-
-  // testCaselle();
-
-  Tabellone tabellone(tipoPartita);
-  std::vector<Casella> tabelloneVector = tabellone.getTabellone();
-  Giocatore giocatore1(1);
-  tabellone.stampaTabellone();
-  giocatore1.mossa(tabellone);
-  std::cout << giocatore1.getPosizione() << std::endl;
-  tabellone.stampaTabellone();
-
-  return 0;
-}
