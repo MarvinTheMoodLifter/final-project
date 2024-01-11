@@ -4,9 +4,8 @@
 
 class Gioco {
 
-  Gioco(int i = 0);
-  Gioco(int i = 1); // Constructor cannot be declared
-
+  Gioco(std::string tipoPartita);
+  
   void turnoGiocatore(Giocatore &p);
   void gioca();
 
@@ -19,14 +18,17 @@ class Gioco {
   Giocatore cp3;
   Giocatore cp4;
 
-  Giocatore giocatoriInPartita[];
+  
 
   Tabellone principale();
 
-  Giocatore[] aggiungiGiocatori();
+  Giocatore* aggiungiGiocatori();
+  std::string tipoGioco;
 
   bool ultimoGiocatore();
   int comparaFiorini();
   bool umanoInGioco();
   void finePartita();
+  Giocatore giocatoriInPartita[];
+ 
 };
