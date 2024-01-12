@@ -1,32 +1,26 @@
-#include "Giocatore.h"
-#include <algorithm>
-#include <vector>
+#include "Tabellone.h"
+#include <iostream>
 
 class Gioco {
-
-  Gioco(int i = 0);
-  Gioco(int i = 1); // Constructor cannot be declared
-
+public:
+  Gioco(std::string tipoPartita);
   void turnoGiocatore(Giocatore &p);
   void gioca();
+  void chiediGiocatore(std::string messaggio);
+  void ordineGioco();
+  Giocatore *aggiungiGiocatori();
+  bool ultimoGiocatore();
+  std::vector<int> comparaFiorini();
+  bool umanoInGioco();
+  void finePartita();
 
-  std::vector<int> ordineGioco();
-
-  // li definisco già come giocatore umano e non umano
-
+private:
+  std::vector<Giocatore *> giocatoriInPartita;
+  std::vector<Giocatore *> ordineGiocatoriPartita;
+  std::string tipoGioco;
   Giocatore cp1;
   Giocatore cp2;
   Giocatore cp3;
   Giocatore cp4;
-
-  Giocatore giocatoriInPartita[];
-
-  Tabellone principale();
-
-  Giocatore[] aggiungiGiocatori();
-
-  bool ultimoGiocatore();
-  int comparaFiorini();
-  bool umanoInGioco();
-  void finePartita();
+  Tabellone principale;
 };

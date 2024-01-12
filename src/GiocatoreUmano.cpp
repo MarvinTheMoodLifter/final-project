@@ -1,10 +1,4 @@
 #include "GiocatoreUmano.h"
 
-GiocatoreUmano::GiocatoreUmano(int numGio) {
-
-  setFiorini(100);
-  inGioco = true;
-  umano = true;
-  setPosizione(0);
-  numeroGiocatore = numGio;
-}
+GiocatoreUmano::GiocatoreUmano(int numGio)
+    : Giocatore(numGio, true, 100, 0), umano(true) {}

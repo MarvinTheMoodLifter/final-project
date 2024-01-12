@@ -1,147 +1,134 @@
 #include "Gioco.h"
-#include "Giocatore.h"
-#include "GiocatoreNonUmano.h"
-#include "GiocatoreUmano.h"
-#include <algorithm>
+#include <string>
 
-Gioco::Gioco(std::string controlla se humano o computer) {
-
-  principale(tipo di partita); // forse necessario assignment copy
-
-  std::vector<int> ordine = ordineGioco();
-  cp1 = GiocatoreUmano(ordine.pop_back());
-  cp2 = GiocatoreNonUmano(ordine.pop_back());
-  cp3 = GiocatoreNonUmano(ordine.pop_back());
-  cp4 = GiocatoreNonUmano(ordine.pop_back());
-
-  giocatoriInPartita = aggiungiGiocatori(cp1, cp2, cp3, cp4);
+// Costruttore
+Gioco::Gioco(std::string tipoPartita)
+    : principale(tipoPartita), tipoGioco(tipoPartita) {
+  // Se partita con 1 umano 3 computer
+  if (tipoPartita == "human") {
+    cp1 = GiocatoreUmano(1);
+    // aggiungo i giocatori al vettore giocatoriInPartita
+  } else if (tipoPartita == "computer") {
+    // Se partita con 4 computer
+    cp1 = GiocatoreNonUmano(1);
+  }
+  cp2 = GiocatoreNonUmano(2);
+  cp3 = GiocatoreNonUmano(3);
+  cp4 = GiocatoreNonUmano(4);
+  // aggiungo i giocatori al vettore giocatoriInPartita
+  giocatoriInPartita.push_back(&cp1);
+  giocatoriInPartita.push_back(&cp2);
+  giocatoriInPartita.push_back(&cp3);
+  giocatoriInPartita.push_back(&cp4);
 }
 
-Gioco::Gioco(tipo di partita) {
-
-  principale(tipo di partita);
-
-  std::vector<int> ordine = ordineGioco();
-
-  GiocatoreNonUmano(ordine.pop_back());
-  GiocatoreNonUmano(ordine.pop_back());
-  GiocatoreNonUmano(ordine.pop_back());
-  GiocatoreNonUmano(ordine.pop_back());
-
-  giocatoriInPartita = aggiungiGiocatori(cp1, cp2, cp3, cp4);
+void Gioco::chiediGiocatore(std::string messaggio) {
+  std::string risposta = "show";
+  while (risposta != "s") {
+    std::cout << messaggio << std::endl;
+    std::cin >> risposta;
+    // Rende le lettere minuscole
+    for (int i = 0; i < risposta.length(); i++) {
+      risposta[i] = tolower(risposta[i]);
+    }
+    if (risposta == "show") {
+      principale.stampaTabellone();
+    } else if (risposta != "s") {
+      std::cout << "Risposta non valida" << std::endl;
+    }
+  }
 }
 
 void Gioco::turnoGiocatore(Giocatore &p) {
-
-  if (!ultimoGiocatore()) {
-
-    if (p.umano)
-
-      if (p.getInGioco()) {
-
-        std::cout
-            << "È il turno di " << p.getNumeroGiocatore() << "/n"
-            << "digita s per proseguire, altrimenti digita show per mostrare "
-               "lo stato attuale della partita"
-            << "/n";
-        std::string i;
-        std::string show = "show";
-        std::string s = "s";
-        std::cin >> i;
-        // è case sensitive
-        if (i.compare(show) == 0) {
-          // Stampa.show(tab, a, b, c, d);
-
-        } else if (i.compare(s) == 0) {
-          // muoviGiocatore(giocatore giocante, altro giocatore, altro
-          // giocatore, altro giocatore)
-          principale.muoviGiocatore(p);
-        } else {
-          std::cout << "digita un comando valido"
-                    << "/n";
-          turnoGiocatore(p);
-        }
-
-      }
-
-      else {
-
-        return;
-      }
-
-    else {
-
-      if (p.inGioco) {
-        std::cout << "È il turno di " << p.getNumeroGiocatore() << "/n";
-
-        principale.muoviGiocatore(p);
-      }
-
-      else {
-
-        return;
-      }
+  // Creo un vettore con i giocatori da non muovere
+  std::vector<Giocatore *> giocatoriDaNonMuovere;
+  for (int i = 0; i < giocatoriInPartita.size(); i++) {
+    if (giocatoriInPartita[i] != &p) {
+      giocatoriDaNonMuovere.push_back(giocatoriInPartita[i]);
     }
-
   }
-
-  else
-    (ultimoGiocatore()) { finePartita(); }
+  if (ultimoGiocatore() && p.getInGioco()) {
+    if (p.isUmano()) {
+      // turno giocatore umano
+      std::string messaggio = "È il turno di " +
+                              std::to_string(p.getNumeroGiocatore()) +
+                              "/n digita s per proseguire, altrimenti digita "
+                              "show per mostrare lo "
+                              "stato attuale della partita/n";
+      chiediGiocatore(messaggio);
+      // Chiamo muoviGiocatore di Tabellone
+      principale.muoviGiocatore(p, *giocatoriDaNonMuovere[0],
+                                *giocatoriDaNonMuovere[1],
+                                *giocatoriDaNonMuovere[2]);
+    } else {
+      // turno giocatore computer
+      principale.muoviGiocatore(p, *giocatoriDaNonMuovere[0],
+                                *giocatoriDaNonMuovere[1],
+                                *giocatoriDaNonMuovere[2]);
+    }
+  } else if (!ultimoGiocatore() && !p.getInGioco()) {
+    return;
+  } else {
+    finePartita();
+    return;
+  }
 }
 
-gioca(flag tipop giooco) {
-
-  // 4 casi con 4 posizioni in cui fgiocatore umano può partecipare in base a
+void Gioco::gioca() {
+  // 4 casi con 4 posizioni in cui giocatore umano può partecipare in base a
   // come viene dato al costruttore oppure trova modo diverso
 
-  // oppure creo solo metodfo turnoGiocatore con allinterno if else in base a
+  // oppure creo solo metodo turnoGiocatore con all'interno if else in base a
   // flag del giocatore
-
-  while (umanoInGioco()) {
-    for (int i = 0, i < 4, i++) {
-
-      turnoGiocatore(giocatoriInPartita[i]);
+  ordineGioco();
+  if (tipoGioco == "human") {
+    while (umanoInGioco()) {
+      for (int i = 0; i < 4; i++) {
+        turnoGiocatore(*giocatoriInPartita[i]);
+      }
+      if (cp1.getInGioco())
+        for (int i = 0; i < 20; i++) {
+          for (int i = 0; i < 4; i++) {
+            turnoGiocatore(*giocatoriInPartita[i]);
+          }
+        }
     }
-  }
-
-  if (cp1.inGioco &&)
-
-    for (int i = 0, i < 20, i++) {
-
-      for (int i = 0, i < 4, i++) {
-
-        turnoGiocatore(giocatoriInPartita[i]);
+  } else if (tipoGioco == "computer") {
+    for (int i = 0; i < 20; i++) {
+      for (int i = 0; i < 4; i++) {
+        turnoGiocatore(*giocatoriInPartita[i]);
       }
     }
+    finePartita();
+  }
 }
 
-// oppure creo solo metodfo turnoGiocatore con allinterno if else in base a
-// flag del giocatore
-turnoGiocatoreUmano
-    turnoGiocatoreNonUmano turnoGiocatoreNonUmano turnoGiocatoreNonUmano
-
-    gioca(flag su Gioco) {
-
-  for (int i = 0, i < 20, i++) {
-
-    for (int i = 0, i < 4, i++) {
-
-      turnoGiocatore(giocatoriInPartita[i]);
+void Gioco::ordineGioco() {
+  Dadi dadi(6);
+  std::vector<Giocatore *> ordineGiocatoriPartita;
+  // Faccio tirare i dadi a tutti i giocatori e li metto in un vettore in
+  // ordine, con il primo che ha tirato il numero più alto e a seguire gli altri
+  // in ordine casuale
+  int max = 0;
+  for (int i = 0; i < 4; i++) {
+    int tiro = dadi.tiraDadi(2);
+    if (tiro > max) {
+      max = tiro;
+      ordineGiocatoriPartita.insert(ordineGiocatoriPartita.begin(),
+                                    giocatoriInPartita[i]);
+    } else {
+      ordineGiocatoriPartita.push_back(giocatoriInPartita[i]);
     }
   }
-
-  finePartita();
 }
 
-void finePartita() {
+void Gioco::finePartita() {
 
-  int vincitore;
-
-  vincitore = comparaFiorini();
-
-  std::cout << "Fine partita, il vincitore è il giocatore numero: " << vincitore
-            << "/n";
-
+  std::vector<int> vincitore = comparaFiorini();
+  for (int i = 0; i < vincitore.size(); i++) {
+    std::cout << "Fine partita, il vincitore è il giocatore numero: "
+              << vincitore[i] << "/n";
+  }
   // compara fiorini con il metodo
   // annuncia vincitore
   // termina programma
@@ -149,89 +136,37 @@ void finePartita() {
   // stampa finale
 }
 
-bool umanoInGioco() {
-
-  for (int i = 0, i < 4, i++) {
-
-    if (giocatoriInPartita[i].umano) {
-
-      if (giocatoriInPartita[i].inGioco) {
-
-        return true;
-
-      }
-
-      else {
-
-        return false;
-      }
+std::vector<int> Gioco::comparaFiorini() {
+  int piuRicco = 0;
+  std::vector<int> vincitori;
+  for (int i = 0; i < 4; i++) {
+    if (giocatoriInPartita[i]->getInGioco() &&
+        giocatoriInPartita[i]->getFiorini() > piuRicco) {
+      vincitori.clear();
+      vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
+      piuRicco = giocatoriInPartita[i]->getFiorini();
+    } else if (giocatoriInPartita[i]->getInGioco() &&
+               giocatoriInPartita[i]->getFiorini() == piuRicco) {
+      vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
     }
   }
+  return vincitori;
 }
 
-int comparaFiorini() {
-
-  int fp1 = giocatoriInPartita[0].getFiorini();
-  int fp2 = giocatoriInPartita[1].getFiorini();
-  int fp3 = giocatoriInPartita[2].getFiorini();
-  int fp4 = giocatoriInPartita[3].getFiorini();
-
-  if (fp1 >= fp2 && fp1 >= fp3 && fp1 >= fp4) {
-    return 0;
+bool Gioco::umanoInGioco() {
+  for (int i = 0; i < 4; i++) {
+    if (giocatoriInPartita[i]->isUmano() &&
+        giocatoriInPartita[i]->getInGioco()) {
+      return true;
+    }
   }
+  return false;
+}
 
-  else if (fp2 >= fp1 && fp2 >= fp3 && fp2 >= fp4) {
-    return 1;
+bool Gioco::ultimoGiocatore() {
+  // controllo se il giocatore umano è l'ultimo rimasto
+  if (giocatoriInPartita[0]->isUmano() && giocatoriInPartita[0]->getInGioco()) {
+    return true;
   }
-
-  else if (fp3 >= fp1 && fp3 >= fp2 && fp3 >= fp4) {
-    return 2;
-  } else {
-    return 3;
-  }
-}
-
-std::vector<int> ordineGioco() {
-
-  int a Dadi.tiraDadi();
-  int b Dadi.tiraDadi();
-  int c Dadi.tiraDadi();
-  int d Dadi.tiraDadi();
-
-  int[] ordineGiocatori = [ a, b, c, d ];
-  std::vector<int> ordinePartita(ordineGiocatori, ordineGiocatori + 4);
-
-  return ordinePartita;
-}
-
-Giocatore[] aggiungiGiocatori(Giocatore p1, Giocatore p2, Giocatore p3,
-                              Giocatore p4) {
-
-  int a Dadi.tiraDadi();
-  int b Dadi.tiraDadi();
-  int c Dadi.tiraDadi();
-  int d Dadi.tiraDadi();
-
-  Giocatore[4] arrayOrdinatoGiocatore;
-
-  arrayOrdinatoGiocatore[p1.getNumeroGiocatore - 1] = p1;
-  arrayOrdinatoGiocatore[p2.getNumeroGiocatore - 1] = p2;
-  arrayOrdinatoGiocatore[p3.getNumeroGiocatore - 1] = p3;
-  arrayOrdinatoGiocatore[p4.getNumeroGiocatore - 1] = p4;
-
-  return arrayOrdinatoGiocatore;
-}
-
-bool ultimoGiocatore() {
-
-  if (cp1.inGioco && cp2.inGioco || cp1.inGioco && cp3.inGioco ||
-      cp1.inGioco && cp4.inGioco || cp2.inGioco && cp3.inGioco ||
-      cp2.inGioco && cp4.inGioco || cp3.inGioco && cp4.inGioco)
-}
-{ return false; }
-
-else {
-
-  return true;
-}
+  return false;
 }

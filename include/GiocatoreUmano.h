@@ -1,8 +1,17 @@
+#ifndef GIOCATOREUMANO_H
+#define GIOCATOREUMANO_H
+
 #include "Giocatore.h"
 
-class GiocatoreUmano : private Giocatore {
+class GiocatoreUmano : public Giocatore {
 private:
+  bool umano;
+
 public:
   GiocatoreUmano(int numGio);
-  bool umano;
+  bool isUmano() const override { return true; }
+  // override distruttore virtuale
+  ~GiocatoreUmano() override = default;
 };
+
+#endif // GIOCATOREUMANO_H
