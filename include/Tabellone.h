@@ -40,6 +40,12 @@ public:
   // Copy constructor per Gioco
   Tabellone(const Tabellone &t) : tabellone(t.tabellone) {}
 
+  // Assignment copy per Gioco
+  Tabellone &operator=(const Tabellone &t) {
+    tabellone = t.tabellone;
+    return *this;
+  }
+
   // Overloading dell'operatore []
   Casella &operator[](int i) { return tabellone[i]; }
 };

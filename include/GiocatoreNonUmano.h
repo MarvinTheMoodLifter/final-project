@@ -8,6 +8,8 @@ public:
   GiocatoreNonUmano(int numGio);
   char scelte();
   bool isUmano() const override { return false; }
+  // override distruttore virtuale
+  ~GiocatoreNonUmano() override = default;
 };
 
 int generatore();

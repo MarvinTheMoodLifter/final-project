@@ -100,7 +100,7 @@ void Tabellone::muoviGiocatore(Giocatore &giocatore, Giocatore &giocatore2,
     // Caso in cui la casella è posseduta dal giocatore stesso
     // Controllo che immobili ci sono, se presenti.
     // Se immobile = casa
-    if (giocatore.umano) {
+    if (giocatore.isUmano()) {
       while (true) {
         std::string messaggio = "Vuoi acquistare un immobile? (s->si, n->no, "
                                 "show->mostra il tabellone)";
@@ -179,7 +179,7 @@ void Tabellone::muoviGiocatore(Giocatore &giocatore, Giocatore &giocatore2,
     } else {
       // Caso in cui il giocatore non riesce a pagare l'affitto
       giocatore.setFiorini(0);
-      giocatore.setPerso(true);
+      giocatore.setInGioco(false);
       return;
     }
   }

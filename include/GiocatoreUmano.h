@@ -10,6 +10,8 @@ private:
 public:
   GiocatoreUmano(int numGio);
   bool isUmano() const override { return true; }
+  // override distruttore virtuale
+  ~GiocatoreUmano() override = default;
 };
 
 #endif // GIOCATOREUMANO_H
