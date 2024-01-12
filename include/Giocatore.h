@@ -27,7 +27,7 @@ public:
   // Copy constructor
   Giocatore(const Giocatore &g);
   // Assegnatore di copia (per l'uso in Tabellone)
-  Giocatore &operator=(const Giocatore &g);
+  // Giocatore &operator=(const Giocatore &g);
   // bool umano;
   virtual bool isUmano() const;
 

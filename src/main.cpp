@@ -1,7 +1,9 @@
 // Autori: Chellin Davide, Perin Marco
 // ------------------------------
 #include "Casella.h"
+#include "Dadi.h"
 #include "Giocatore.h"
+#include "Gioco.h"
 #include "Tabellone.h"
 #include <iostream>
 #include <string>
@@ -9,8 +11,6 @@
 void testCaselle() {
   Casella test('A', 1);
   Casella test2('B', 1);
-  test.setValore("^");
-  test2.setValore("^2");
   test.stampaCasella();
   test2.stampaCasella();
 }
@@ -30,23 +30,7 @@ int main(int argc, char **argv) {
     std::cout << "Partita " << tipoPartita << std::endl;
   }
 
-  enum tipo { human = 0, computer =1};
-
-  if (tipoPartita == "human"){
-    std::cout << "Partita " << tipoPartita << std::endl;
-    Gioco(0);
-
-
-
-  }
-
-  if(tipoPartita == "computer"){
-    std::cout << "Partita " << tipoPartita << std::endl;
-    Gioco(1);
-
-
-
-  }
+  enum tipo { human = 0, computer = 1 };
 
   // testCaselle();
 
@@ -54,7 +38,6 @@ int main(int argc, char **argv) {
   std::vector<Casella> tabelloneVector = tabellone.getTabellone();
   Giocatore giocatore1(1);
   tabellone.stampaTabellone();
-  giocatore1.mossa(tabellone);
   std::cout << giocatore1.getPosizione() << std::endl;
   tabellone.stampaTabellone();
 

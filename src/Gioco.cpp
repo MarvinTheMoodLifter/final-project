@@ -47,7 +47,7 @@ void Gioco::turnoGiocatore(Giocatore &p) {
       giocatoriDaNonMuovere.push_back(giocatoriInPartita[i]);
     }
   }
-  if (!ultimoGiocatore() && p.getInGioco()) {
+  if (ultimoGiocatore() && p.getInGioco()) {
     if (p.isUmano()) {
       // turno giocatore umano
       std::string messaggio = "È il turno di " +
@@ -151,4 +151,22 @@ std::vector<int> Gioco::comparaFiorini() {
     }
   }
   return vincitori;
+}
+
+bool Gioco::umanoInGioco() {
+  for (int i = 0; i < 4; i++) {
+    if (giocatoriInPartita[i]->isUmano() &&
+        giocatoriInPartita[i]->getInGioco()) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Gioco::ultimoGiocatore() {
+  // controllo se il giocatore umano è l'ultimo rimasto
+  if (giocatoriInPartita[0]->isUmano() && giocatoriInPartita[0]->getInGioco()) {
+    return true;
+  }
+  return false;
 }
