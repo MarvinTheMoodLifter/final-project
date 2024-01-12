@@ -102,6 +102,7 @@ void Gioco::gioca() {
     finePartita();
   }
 }
+
 void Gioco::ordineGioco() {
   Dadi dadi(6);
   std::vector<Giocatore *> ordineGiocatoriPartita;
@@ -119,4 +120,35 @@ void Gioco::ordineGioco() {
       ordineGiocatoriPartita.push_back(giocatoriInPartita[i]);
     }
   }
+}
+
+void Gioco::finePartita() {
+
+  std::vector<int> vincitore = comparaFiorini();
+  for (int i = 0; i < vincitore.size(); i++) {
+    std::cout << "Fine partita, il vincitore è il giocatore numero: "
+              << vincitore[i] << "/n";
+  }
+  // compara fiorini con il metodo
+  // annuncia vincitore
+  // termina programma
+  // stampa su file terminale
+  // stampa finale
+}
+
+std::vector<int> Gioco::comparaFiorini() {
+  int piuRicco = 0;
+  std::vector<int> vincitori;
+  for (int i = 0; i < 4; i++) {
+    if (giocatoriInPartita[i]->getInGioco() &&
+        giocatoriInPartita[i]->getFiorini() > piuRicco) {
+      vincitori.clear();
+      vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
+      piuRicco = giocatoriInPartita[i]->getFiorini();
+    } else if (giocatoriInPartita[i]->getInGioco() &&
+               giocatoriInPartita[i]->getFiorini() == piuRicco) {
+      vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
+    }
+  }
+  return vincitori;
 }

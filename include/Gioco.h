@@ -10,7 +10,7 @@ public:
   void ordineGioco();
   Giocatore *aggiungiGiocatori();
   bool ultimoGiocatore();
-  int comparaFiorini();
+  std::vector<int> comparaFiorini();
   bool umanoInGioco();
   void finePartita();
 
