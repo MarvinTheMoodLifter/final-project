@@ -8,14 +8,7 @@
 #include <iostream>
 #include <string>
 
-void testCaselle() {
-  Casella test('A', 1);
-  Casella test2('B', 1);
-  test.stampaCasella();
-  test2.stampaCasella();
-}
-
-void testSpostamento(Giocatore &giocatore, Tabellone &tabellone) {}
+void testGioco(std::string tipoPartita);
 
 int main(int argc, char **argv) {
   // Se argc == computer allora la partita è 4 computer
@@ -31,16 +24,12 @@ int main(int argc, char **argv) {
   }
 
   enum tipo { human = 0, computer = 1 };
-
-  // testCaselle();
-
-  Tabellone tabellone(tipoPartita);
-  std::vector<Casella> tabelloneVector = tabellone.getTabellone();
-  Giocatore giocatore1(1);
-  tabellone.stampaTabellone();
-  std::cout << giocatore1.getPosizione() << std::endl;
-  tabellone.stampaTabellone();
-  Gioco gioco(tipoPartita);
+  testGioco(tipoPartita);
 
   return 0;
+}
+
+void testGioco(std::string tipoPartita) {
+  Gioco g(tipoPartita);
+  g.stampaTabellone();
 }

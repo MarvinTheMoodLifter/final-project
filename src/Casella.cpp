@@ -94,7 +94,7 @@ void Casella::rimuoviGiocatore(std::string giocatore) {
 void Casella::stampaCasella() {
   // Stampa la casella (con giocatori e immobili se presenti)
   if (isVuota()) {
-    std::cout << "|   | ";
+    std::cout << "| " << tipologia << " | ";
   } else {
     // std::cout << "| " << riga << colonna << valore << " | ";
     std::cout << "| " << tipologia << immobile << giocatoriPresenti << " | ";

@@ -5,7 +5,9 @@
 #include <iostream>
 #include <random>
 
-Tabellone::Tabellone(std::string tipoPartita) {
+Tabellone::Tabellone(std::string tipoPartita, Giocatore &g1, Giocatore &g2,
+                     Giocatore &g3, Giocatore &g4)
+    : g1(g1), g2(g2), g3(g3), g4(g4) {
   // Riempie la prima parte di tabellone con le caselle vuote
   riempiTabellone();
   // Riempie le caselle del tabellone in maniera randomica
@@ -242,7 +244,11 @@ void Tabellone::stampaTabellone() {
     tabellone[7 - i].stampaCasella();
   }
   std::cout << std::endl;
-  // TODO stampa i fiorini giocatori
+  // stampa i fiorini giocatori
+  std::cout << "Fiorini giocatore 1: " << g1.getFiorini() << std::endl;
+  std::cout << "Fiorini giocatore 2: " << g2.getFiorini() << std::endl;
+  std::cout << "Fiorini giocatore 3: " << g3.getFiorini() << std::endl;
+  std::cout << "Fiorini giocatore 4: " << g4.getFiorini() << std::endl;
 }
 
 std::vector<Casella> Tabellone::getTabellone() const { return tabellone; }

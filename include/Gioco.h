@@ -8,6 +8,7 @@ public:
   void gioca();
   void chiediGiocatore(std::string messaggio);
   void ordineGioco();
+  void stampaTabellone();
   Giocatore *aggiungiGiocatori();
   bool ultimoGiocatore();
   std::vector<int> comparaFiorini();

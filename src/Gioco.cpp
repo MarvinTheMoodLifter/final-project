@@ -3,7 +3,7 @@
 
 // Costruttore
 Gioco::Gioco(std::string tipoPartita)
-    : principale(tipoPartita), tipoGioco(tipoPartita) {
+    : principale(tipoPartita, cp1, cp2, cp3, cp4), tipoGioco(tipoPartita) {
   // Se partita con 1 umano 3 computer
   if (tipoPartita == "human") {
     cp1 = GiocatoreUmano(1);
@@ -170,3 +170,5 @@ bool Gioco::ultimoGiocatore() {
   }
   return false;
 }
+
+void Gioco::stampaTabellone() { principale.stampaTabellone(); }
