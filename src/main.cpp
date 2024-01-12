@@ -40,6 +40,7 @@ int main(int argc, char **argv) {
   tabellone.stampaTabellone();
   std::cout << giocatore1.getPosizione() << std::endl;
   tabellone.stampaTabellone();
+  Gioco gioco(tipoPartita);
 
   return 0;
 }
