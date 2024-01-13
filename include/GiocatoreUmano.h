@@ -5,7 +5,7 @@
 
 class GiocatoreUmano : public Giocatore {
 private:
-  bool umano;
+  bool umano = true;
 
 public:
   GiocatoreUmano(int numGio);

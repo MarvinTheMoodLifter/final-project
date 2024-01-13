@@ -1,8 +1,10 @@
+#ifndef GIOCATORENONUMANO_H
+#define GIOCATORENONUMANO_H
 #include "Giocatore.h"
 
 class GiocatoreNonUmano : public Giocatore {
 private:
-  bool umano;
+  bool umano = false;
 
 public:
   GiocatoreNonUmano(int numGio);
@@ -13,3 +15,5 @@ public:
 };
 
 int generatore();
+
+#endif // GIOCATORENONUMANO_H

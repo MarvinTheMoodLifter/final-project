@@ -28,7 +28,7 @@ int Casella::getPrezzoProprietà() {
     return 6;
   case 'S':
     return 10;
-  case 'P':
+  case 'L':
     return 20;
   }
   return 0;
@@ -45,7 +45,7 @@ int Casella::getAffitto() {
     valoreAffitto = 2;
   case 'S':
     valoreAffitto = 4;
-  case 'P':
+  case 'L':
     valoreAffitto = 7;
   }
   // Se l'immobile è un albergo, moltiplica l'affitto per 2
@@ -62,7 +62,7 @@ int Casella::prezzoMiglioramentoImmobile() {
     return 3;
   case 'S':
     return 5;
-  case 'P':
+  case 'L':
     return 20;
   }
   return 0;
@@ -84,6 +84,7 @@ void Casella::aggiungiGiocatore(std::string giocatore) {
   // Aggiunge un giocatore alla Casella
   giocatoriPresenti += giocatore;
 }
+
 void Casella::rimuoviGiocatore(std::string giocatore) {
   if (!isVuota()) {
     // Rimuove il giocatore dalla stringa giocatoriPresenti
@@ -94,10 +95,10 @@ void Casella::rimuoviGiocatore(std::string giocatore) {
 void Casella::stampaCasella() {
   // Stampa la casella (con giocatori e immobili se presenti)
   if (isVuota()) {
-    std::cout << "|   | ";
+    std::cout << "| " << tipologia << immobile << " | ";
   } else {
     // std::cout << "| " << riga << colonna << valore << " | ";
-    std::cout << "| " << tipologia << immobile << giocatoriPresenti << " | ";
+    std::cout << "|" << tipologia << immobile << giocatoriPresenti << "| ";
   }
 }
 
@@ -125,6 +126,11 @@ void Casella::aggiungiImmobile(int giocatore) {
 void Casella::setProprietarioCasella(int nuovoProprietario) {
   // Setta il proprietario della casella
   proprietarioCasella = nuovoProprietario;
+}
+
+void Casella::setProprietario(Giocatore *nuovoProprietario) {
+  // Setta il proprietario della casella
+  proprietario = nuovoProprietario;
 }
 
 bool Casella::isAngolare() {
