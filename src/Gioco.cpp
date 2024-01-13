@@ -2,24 +2,24 @@
 #include <string>
 
 // Costruttore
-Gioco::Gioco(std::string tipoPartita)
-    : principale(tipoPartita, cp1, cp2, cp3, cp4), tipoGioco(tipoPartita) {
+Gioco::Gioco(std::string tipoPartita) : tipoGioco(tipoPartita) {
   // Se partita con 1 umano 3 computer
   if (tipoPartita == "human") {
-    cp1 = GiocatoreUmano(1);
+    cp1 = new GiocatoreUmano(1);
     // aggiungo i giocatori al vettore giocatoriInPartita
   } else if (tipoPartita == "computer") {
     // Se partita con 4 computer
-    cp1 = GiocatoreNonUmano(1);
+    cp1 = new GiocatoreNonUmano(1);
   }
-  cp2 = GiocatoreNonUmano(2);
-  cp3 = GiocatoreNonUmano(3);
-  cp4 = GiocatoreNonUmano(4);
+  cp2 = new GiocatoreNonUmano(2);
+  cp3 = new GiocatoreNonUmano(3);
+  cp4 = new GiocatoreNonUmano(4);
   // aggiungo i giocatori al vettore giocatoriInPartita
-  giocatoriInPartita.push_back(&cp1);
-  giocatoriInPartita.push_back(&cp2);
-  giocatoriInPartita.push_back(&cp3);
-  giocatoriInPartita.push_back(&cp4);
+  giocatoriInPartita.push_back(cp1);
+  giocatoriInPartita.push_back(cp2);
+  giocatoriInPartita.push_back(cp3);
+  giocatoriInPartita.push_back(cp4);
+  principale = new Tabellone(tipoPartita, cp1, cp2, cp3, cp4);
 }
 
 void Gioco::chiediGiocatore(std::string messaggio) {
@@ -32,7 +32,7 @@ void Gioco::chiediGiocatore(std::string messaggio) {
       risposta[i] = tolower(risposta[i]);
     }
     if (risposta == "show") {
-      principale.stampaTabellone();
+      principale->stampaTabellone();
     } else if (risposta != "s") {
       std::cout << "Risposta non valida" << std::endl;
     }
@@ -57,14 +57,14 @@ void Gioco::turnoGiocatore(Giocatore &p) {
                               "stato attuale della partita/n";
       chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
-      principale.muoviGiocatore(p, *giocatoriDaNonMuovere[0],
-                                *giocatoriDaNonMuovere[1],
-                                *giocatoriDaNonMuovere[2]);
+      principale->muoviGiocatore(p, *giocatoriDaNonMuovere[0],
+                                 *giocatoriDaNonMuovere[1],
+                                 *giocatoriDaNonMuovere[2]);
     } else {
       // turno giocatore computer
-      principale.muoviGiocatore(p, *giocatoriDaNonMuovere[0],
-                                *giocatoriDaNonMuovere[1],
-                                *giocatoriDaNonMuovere[2]);
+      principale->muoviGiocatore(p, *giocatoriDaNonMuovere[0],
+                                 *giocatoriDaNonMuovere[1],
+                                 *giocatoriDaNonMuovere[2]);
     }
   } else if (!ultimoGiocatore() && !p.getInGioco()) {
     return;
@@ -86,7 +86,7 @@ void Gioco::gioca() {
       for (int i = 0; i < 4; i++) {
         turnoGiocatore(*giocatoriInPartita[i]);
       }
-      if (cp1.getInGioco())
+      if (cp1->getInGioco())
         for (int i = 0; i < 20; i++) {
           for (int i = 0; i < 4; i++) {
             turnoGiocatore(*giocatoriInPartita[i]);
@@ -107,8 +107,8 @@ void Gioco::ordineGioco() {
   Dadi dadi(6);
   std::vector<Giocatore *> ordineGiocatoriPartita;
   // Faccio tirare i dadi a tutti i giocatori e li metto in un vettore in
-  // ordine, con il primo che ha tirato il numero più alto e a seguire gli altri
-  // in ordine casuale
+  // ordine, con il primo che ha tirato il numero più alto e a seguire gli
+  // altri in ordine casuale
   int max = 0;
   for (int i = 0; i < 4; i++) {
     int tiro = dadi.tiraDadi(2);
@@ -127,7 +127,7 @@ void Gioco::finePartita() {
   std::vector<int> vincitore = comparaFiorini();
   for (int i = 0; i < vincitore.size(); i++) {
     std::cout << "Fine partita, il vincitore è il giocatore numero: "
-              << vincitore[i] << "/n";
+              << vincitore[i] << std::endl;
   }
   // compara fiorini con il metodo
   // annuncia vincitore
@@ -171,4 +171,23 @@ bool Gioco::ultimoGiocatore() {
   return false;
 }
 
-void Gioco::stampaTabellone() { principale.stampaTabellone(); }
+void Gioco::stampaTabellone() { principale->stampaTabellone(); }
+void Gioco::stampaGiocatori() {
+  for (int i = 0; i < 4; i++) {
+    // Se è umano stampa giocatore umano
+    if (giocatoriInPartita[i]->isUmano()) {
+      std::cout << "Giocatore umano numero: "
+                << giocatoriInPartita[i]->getNumeroGiocatore() << std::endl;
+    } else {
+      std::cout << "Giocatore computer numero: "
+                << giocatoriInPartita[i]->getNumeroGiocatore() << std::endl;
+    }
+  }
+}
+
+Gioco::~Gioco() {
+  delete cp1;
+  delete cp2;
+  delete cp3;
+  delete cp4;
+}

@@ -5,13 +5,19 @@
 #include <iostream>
 #include <random>
 
-Tabellone::Tabellone(std::string tipoPartita, Giocatore &g1, Giocatore &g2,
-                     Giocatore &g3, Giocatore &g4)
-    : g1(g1), g2(g2), g3(g3), g4(g4) {
+Tabellone::Tabellone(std::string tipoPartita, Giocatore *g1, Giocatore *g2,
+                     Giocatore *g3, Giocatore *g4)
+    : cp1(g1), cp2(g2), cp3(g3), cp4(g4) {
   // Riempie la prima parte di tabellone con le caselle vuote
   riempiTabellone();
   // Riempie le caselle del tabellone in maniera randomica
   riempiCaselleRandom();
+  // stampa fiorini giocatori
+  std::cout << "Creazione di Tabellone" << std::endl;
+  std::cout << "Giocatore 1: " << g1->getFiorini() << std::endl;
+  std::cout << "Giocatore 2: " << g2->getFiorini() << std::endl;
+  std::cout << "Giocatore 3: " << g3->getFiorini() << std::endl;
+  std::cout << "Giocatore 4: " << g4->getFiorini() << std::endl;
 }
 
 void Tabellone::riempiTabellone() {
@@ -245,10 +251,15 @@ void Tabellone::stampaTabellone() {
   }
   std::cout << std::endl;
   // stampa i fiorini giocatori
-  std::cout << "Fiorini giocatore 1: " << g1.getFiorini() << std::endl;
-  std::cout << "Fiorini giocatore 2: " << g2.getFiorini() << std::endl;
-  std::cout << "Fiorini giocatore 3: " << g3.getFiorini() << std::endl;
-  std::cout << "Fiorini giocatore 4: " << g4.getFiorini() << std::endl;
+  std::string g1 = cp1->isUmano() ? "(umano)" : "(computer)";
+  std::cout << "Fiorini giocatore 1 " << g1 << ": " << cp1->getFiorini()
+            << std::endl;
+  std::cout << "Fiorini giocatore 2 (computer): " << cp2->getFiorini()
+            << std::endl;
+  std::cout << "Fiorini giocatore 3 (computer): " << cp3->getFiorini()
+            << std::endl;
+  std::cout << "Fiorini giocatore 4 (computer): " << cp4->getFiorini()
+            << std::endl;
 }
 
 std::vector<Casella> Tabellone::getTabellone() const { return tabellone; }
