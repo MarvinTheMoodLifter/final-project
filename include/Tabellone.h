@@ -18,6 +18,10 @@ private:
   Giocatore *cp2;
   Giocatore *cp3;
   Giocatore *cp4;
+  std::vector<Casella *> proprietàcp1;
+  std::vector<Casella *> proprietàcp2;
+  std::vector<Casella *> proprietàcp3;
+  std::vector<Casella *> proprietàcp4;
 
 public:
   // Costruttore di default
@@ -41,6 +45,9 @@ public:
   std::string chiediGiocatore(std::string messaggio);
   bool acquistaImmobile(Giocatore *giocatore, int posizione);
   int tiraDadi();
+
+  void assegnaProprietario(Giocatore *giocatore, int posizione);
+  void rimuoviGiocatore(Giocatore *giocatore);
 
   // Copy constructor per Gioco
   Tabellone(const Tabellone *t)

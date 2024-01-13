@@ -125,37 +125,35 @@ void Gioco::ordineGioco() {
 }
 
 void Gioco::finePartita() {
-
-  std::vector<int> vincitore = comparaFiorini();
-  for (int i = 0; i < vincitore.size(); i++) {
-    std::cout << "Fine partita, il vincitore è il giocatore numero: "
-              << vincitore[i] << std::endl;
+  std::vector<Giocatore *> vincitore = comparaFiorini();
+  if (vincitore.size() == 1) {
+    std::cout << "Fine partita, il vincitore è: Giocatore "
+              << vincitore[0]->getNumeroGiocatore() << std::endl;
+    return;
+  } else {
+    std::cout << "Fine partita, i vincitori sono: " << std::endl;
+    for (int i = 0; i < vincitore.size(); i++) {
+      std::cout << "Giocatore " << vincitore[i]->getNumeroGiocatore()
+                << std::endl;
+    }
+    return;
   }
-  // compara fiorini con il metodo
-  // annuncia vincitore
-  // termina programma
-  // stampa su file terminale
-  // stampa finale
 }
 
-std::vector<int> Gioco::comparaFiorini() {
+std::vector<Giocatore *> Gioco::comparaFiorini() {
   int piuRicco = 0;
-  std::vector<int> vincitori;
+  std::vector<Giocatore *> vincitori;
   for (int i = 0; i < 4; i++) {
     if (giocatoriInPartita[i]->getInGioco() &&
         giocatoriInPartita[i]->getFiorini() > piuRicco) {
-      std::cout << "Giocatore " << giocatoriInPartita[i]->getNumeroGiocatore()
-                << " è il più ricco con " << giocatoriInPartita[i]->getFiorini()
-                << " fiorini" << std::endl;
       vincitori.clear();
-      vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
+      vincitori.push_back(giocatoriInPartita[i]);
       piuRicco = giocatoriInPartita[i]->getFiorini();
     } else if (giocatoriInPartita[i]->getInGioco() &&
                giocatoriInPartita[i]->getFiorini() == piuRicco) {
-      vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
+      vincitori.push_back(giocatoriInPartita[i]);
     }
   }
-  std::cout << "I giocatori più ricchi sono: " << vincitori.size() << std::endl;
   return vincitori;
 }
 
@@ -173,6 +171,7 @@ bool Gioco::ultimoGiocatore() {
 }
 
 void Gioco::stampaTabellone() { principale->stampaTabellone(); }
+
 void Gioco::stampaGiocatori() {
   for (int i = 0; i < 4; i++) {
     // Se è umano stampa giocatore umano

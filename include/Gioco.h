@@ -11,10 +11,12 @@ public:
   void stampaTabellone();
   Giocatore *aggiungiGiocatori();
   bool ultimoGiocatore();
-  std::vector<int> comparaFiorini();
+  std::vector<Giocatore *> comparaFiorini();
   bool umanoInGioco();
   void finePartita();
   void stampaGiocatori();
+  void rimuoviGiocatore(Giocatore *g);
+
   ~Gioco();
 
 private:

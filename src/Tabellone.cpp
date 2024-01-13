@@ -290,6 +290,54 @@ void Tabellone::stampaTabellone() {
 
 std::vector<Casella *> Tabellone::getTabellone() const { return tabellone; }
 
+void Tabellone::assegnaProprietario(Giocatore *giocatore, int posizione) {
+  tabellone[posizione]->setProprietario(giocatore);
+  switch (giocatore->getNumeroGiocatore()) {
+  case 1:
+    proprietàcp1.push_back(tabellone[posizione]);
+    break;
+  case 2:
+    proprietàcp2.push_back(tabellone[posizione]);
+    break;
+  case 3:
+    proprietàcp3.push_back(tabellone[posizione]);
+    break;
+  case 4:
+    proprietàcp4.push_back(tabellone[posizione]);
+    break;
+  }
+}
+
+void Tabellone::rimuoviGiocatore(Giocatore *giocatore) {
+  // Rimuove tutte le proprietà del giocatore
+  switch (giocatore->getNumeroGiocatore()) {
+  case 1:
+    for (int i = 0; i < proprietàcp1.size(); i++) {
+      proprietàcp1[i]->setProprietarioCasella(0);
+      proprietàcp1[i]->setProprietario(nullptr);
+    }
+    break;
+  case 2:
+    for (int i = 0; i < proprietàcp2.size(); i++) {
+      proprietàcp2[i]->setProprietarioCasella(0);
+      proprietàcp2[i]->setProprietario(nullptr);
+    }
+    break;
+  case 3:
+    for (int i = 0; i < proprietàcp3.size(); i++) {
+      proprietàcp3[i]->setProprietarioCasella(0);
+      proprietàcp3[i]->setProprietario(nullptr);
+    }
+    break;
+  case 4:
+    for (int i = 0; i < proprietàcp4.size(); i++) {
+      proprietàcp4[i]->setProprietarioCasella(0);
+      proprietàcp4[i]->setProprietario(nullptr);
+    }
+    break;
+  }
+}
+
 // Distruttore
 Tabellone::~Tabellone() {
   for (int i = 0; i < tabellone.size(); i++) {
