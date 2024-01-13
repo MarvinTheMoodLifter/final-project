@@ -83,6 +83,8 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   // Creo dadi e li tiro
   Dadi dadi(6);
   int mossa = dadi.tiraDadi(2);
+  std::cout << "Il giocatore " << numGiocatore << " ha tirato " << mossa
+            << std::endl;
 
   // Creo l'oggetto Dadi che si occupa di generare la probabilità di azione dei
   // computer
@@ -111,30 +113,24 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   if (nuovaCasella->getProprietarioCasella() == numGiocatore) {
     // Caso in cui la casella è posseduta dal giocatore stesso
     // Controllo che immobili ci sono, se presenti.
-    // Se immobile = casa
     if (giocatore->isUmano()) {
       std::string messaggio = "Vuoi acquistare un immobile? (s->si, n->no, "
                               "show->mostra il tabellone)";
       std::string risposta = chiediGiocatore(messaggio);
-      if (risposta == "s" && giocatore->getFiorini() >=
-                                 nuovaCasella->prezzoMiglioramentoImmobile()) {
+      if (risposta == "s" && nuovaCasella->getImmobile() == '^') {
         // Se è un albergo non fare nulla
-        if (nuovaCasella->getImmobile() == '^') {
-          std::cout << "Possiedi già un albergo in questa casella!"
-                    << std::endl;
-        } else {
-          // Acquista l'immobile
-          std::cout << "Acquisto dell'immobile in corso..." << std::endl;
-          nuovaCasella->miglioraImmobile();
-          giocatore->setFiorini(giocatore->getFiorini() -
-                                nuovaCasella->prezzoMiglioramentoImmobile());
-          std::cout << "Il giocatore " << numGiocatore
-                    << " ha acquistato l'immobile in questa casella"
-                    << std::endl;
-          return;
-        }
-      } else {
-        // Non acquista l'immobile
+        std::cout << "Possiedi già un albergo in questa casella!" << std::endl;
+      } else if (risposta == "s" &&
+                 giocatore->getFiorini() >=
+                     nuovaCasella->prezzoMiglioramentoImmobile()) {
+        // Acquista l'immobile
+        std::cout << "Acquisto dell'immobile in corso..." << std::endl;
+        nuovaCasella->miglioraImmobile();
+        giocatore->setFiorini(giocatore->getFiorini() -
+                              nuovaCasella->prezzoMiglioramentoImmobile());
+        std::cout << "Il giocatore " << numGiocatore
+                  << " ha acquistato l'immobile in questa casella per "
+                  << nuovaCasella->prezzoMiglioramentoImmobile() << std::endl;
         return;
       }
     } else {
@@ -147,6 +143,7 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
             nuovaCasella->prezzoMiglioramentoImmobile()) {
           // Prova ad acquistare l'immobile
           if (dadiComputer.tiraDadi(1) == 1) {
+            std::cout << "Acquisto dell'immobile in corso..." << std::endl;
             nuovaCasella->miglioraImmobile();
             giocatore->setFiorini(giocatore->getFiorini() -
                                   nuovaCasella->prezzoMiglioramentoImmobile());
@@ -167,16 +164,20 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       return;
     }
     if (giocatore->isUmano()) {
-      std::cout << "Casella vuota, non puoi acquistarla" << std::endl;
       std::string messaggio = "La casella è libera, vuoi acquistarla? (s->si, "
                               "n->no, show-> mostra il tabellone)";
       std::string risposta = chiediGiocatore(messaggio);
       if (risposta == "s" &&
           giocatore->getFiorini() >= nuovaCasella->getPrezzoProprietà()) {
         // Acquista la casella
+        std::cout << "Acquisto della casella in corso..." << std::endl;
         nuovaCasella->setProprietarioCasella(numGiocatore);
+        nuovaCasella->setProprietario(giocatore);
         giocatore->setFiorini(giocatore->getFiorini() -
                               nuovaCasella->getPrezzoProprietà());
+        std::cout << "Il giocatore " << numGiocatore
+                  << " ha acquistato la casella per "
+                  << nuovaCasella->getPrezzoProprietà() << std::endl;
         return;
       } else {
         // Non acquista la casella
@@ -185,10 +186,19 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       }
     } else {
       // Acquista la casella
-      nuovaCasella->setProprietarioCasella(numGiocatore);
-      giocatore->setFiorini(giocatore->getFiorini() -
-                            nuovaCasella->getPrezzoProprietà());
-      return;
+      if (giocatore->getFiorini() >= nuovaCasella->getPrezzoProprietà()) {
+        // Prova ad acquistare l'immobile
+        if (dadiComputer.tiraDadi(1) == 1) {
+          nuovaCasella->setProprietarioCasella(numGiocatore);
+          nuovaCasella->setProprietario(giocatore);
+          giocatore->setFiorini(giocatore->getFiorini() -
+                                nuovaCasella->getPrezzoProprietà());
+          std::cout << "Il giocatore " << numGiocatore
+                    << " ha acquistato la casella per "
+                    << nuovaCasella->getPrezzoProprietà() << std::endl;
+        }
+        return;
+      }
     }
   } else {
     // Caso in cui la casella è posseduta da un altro giocatore
@@ -197,19 +207,9 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       giocatore->setFiorini(giocatore->getFiorini() -
                             nuovaCasella->getAffitto());
       // Aggiunge i fiorini al proprietario della casella
-      int proprietarioCasella = nuovaCasella->getProprietarioCasella();
-      for (int i = 0; i < 4; i++) {
-        if (proprietarioCasella == giocatore2->getNumeroGiocatore()) {
-          giocatore2->setFiorini(giocatore2->getFiorini() +
-                                 nuovaCasella->getAffitto());
-        } else if (proprietarioCasella == giocatore3->getNumeroGiocatore()) {
-          giocatore3->setFiorini(giocatore3->getFiorini() +
-                                 nuovaCasella->getAffitto());
-        } else if (proprietarioCasella == giocatore4->getNumeroGiocatore()) {
-          giocatore4->setFiorini(giocatore4->getFiorini() +
-                                 nuovaCasella->getAffitto());
-        }
-      }
+      Giocatore *proprietario = nuovaCasella->getProprietario();
+      proprietario->setFiorini(proprietario->getFiorini() +
+                               nuovaCasella->getAffitto());
     } else {
       // Caso in cui il giocatore non riesce a pagare l'affitto
       giocatore->setFiorini(0);
@@ -249,22 +249,22 @@ void Tabellone::stampaTabellone() {
     // Stampa il logo centrale
     switch (i) {
     case 0:
-      std::cout << "  .. ..                     .       ";
+      std::cout << "     .. ..                     .          ";
       break;
     case 1:
-      std::cout << "  ::::: ::: ::: ::: ::: ::: : : :   ";
+      std::cout << "     ::::: ::: ::: ::: ::: ::: : : :      ";
       break;
     case 2:
-      std::cout << "  : : : : : : : : : : : : : : : :   ";
+      std::cout << "     : : : : : : : : : : : : : : : :      ";
       break;
     case 3:
-      std::cout << "  :. .: ::: : : ::: ::: ::: :  ::   ";
+      std::cout << "     :. .: ::: : : ::: ::: ::: :  ::      ";
       break;
     case 4:
-      std::cout << "                    :          :    ";
+      std::cout << "                       :          :       ";
       break;
     case 5:
-      std::cout << "                    \'         \'     ";
+      std::cout << "                       \'         \'        ";
       break;
     }
     // Stampa la colonna di destra

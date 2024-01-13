@@ -5,6 +5,8 @@
 #include <string>
 #include <vector>
 
+class Giocatore;
+
 class Casella {
 public:
   // Costruttore con parametri
@@ -16,6 +18,7 @@ public:
   std::vector<std::string> getCoordinate() { return coordinate; };
   char getImmobile() { return immobile; };
   int getProprietarioCasella() { return proprietarioCasella; };
+  Giocatore *getProprietario() { return proprietario; };
   int getPrezzoProprietà();
   int getAffitto();
   int prezzoMiglioramentoImmobile();
@@ -25,6 +28,7 @@ public:
   void setImmobile(char immobile);
   void setTipologia(char tipologia);
   void setProprietarioCasella(int nuovoProprietario);
+  void setProprietario(Giocatore *nuovoProprietario);
 
   // Stampa il valore della casella (con giocatori e immobili se presenti)
   void stampaCasella();
@@ -53,6 +57,7 @@ private:
   char riga;
   int colonna;
   int proprietarioCasella = 0;
+  Giocatore *proprietario = nullptr;
   std::vector<std::string> coordinate;
   char immobile = ' ';
   char tipologia = ' ';

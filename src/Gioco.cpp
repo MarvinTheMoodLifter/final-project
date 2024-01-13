@@ -50,11 +50,9 @@ void Gioco::turnoGiocatore(Giocatore *p) {
   if (ultimoGiocatore() && p->getInGioco()) {
     if (p->isUmano()) {
       // turno giocatore umano
-      std::string messaggio = "È il turno di " +
-                              std::to_string(p->getNumeroGiocatore()) +
-                              "/n digita s per proseguire, altrimenti digita "
-                              "show per mostrare lo "
-                              "stato attuale della partita/n";
+      std::string messaggio =
+          "È il turno di " + std::to_string(p->getNumeroGiocatore()) +
+          ": s->proseguire, show->stato attuale della partita";
       chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
       principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
