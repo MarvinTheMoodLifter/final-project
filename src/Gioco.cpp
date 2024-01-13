@@ -47,11 +47,12 @@ void Gioco::turnoGiocatore(Giocatore *p) {
       giocatoriDaNonMuovere.push_back(giocatoriInPartita[i]);
     }
   }
-  if (ultimoGiocatore() && p->getInGioco()) {
+  if (umanoInGioco() && p->getInGioco()) {
     if (p->isUmano()) {
       // turno giocatore umano
       std::string messaggio =
-          "È il turno di " + std::to_string(p->getNumeroGiocatore()) +
+          "È il tuo turno, giocatore " +
+          std::to_string(p->getNumeroGiocatore()) +
           ": s->proseguire, show->stato attuale della partita";
       chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
@@ -60,14 +61,14 @@ void Gioco::turnoGiocatore(Giocatore *p) {
                                  giocatoriDaNonMuovere[2]);
     } else {
       // turno giocatore computer
+      std::cout << "È il turno di giocatore " << p->getNumeroGiocatore()
+                << std::endl;
       principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
                                  giocatoriDaNonMuovere[1],
                                  giocatoriDaNonMuovere[2]);
     }
-  } else if (!ultimoGiocatore() && !p->getInGioco()) {
     return;
-  } else if (ultimoGiocatore() && p->getInGioco()) {
-    finePartita();
+  } else if (umanoInGioco() && !p->getInGioco()) {
     return;
   }
 }
@@ -97,6 +98,8 @@ void Gioco::gioca() {
         turnoGiocatore(giocatoriInPartita[i]);
         std::cout << "Turno giocatore " << i << std::endl;
       }
+      // Stampo il tabellone
+      principale->stampaTabellone();
     }
     finePartita();
   }
@@ -157,21 +160,16 @@ std::vector<int> Gioco::comparaFiorini() {
 }
 
 bool Gioco::umanoInGioco() {
-  for (int i = 0; i < 4; i++) {
-    if (giocatoriInPartita[i]->isUmano() &&
-        giocatoriInPartita[i]->getInGioco()) {
-      return true;
-    }
-  }
-  return false;
+  return giocatoriInPartita[0]->getInGioco() ? true : false;
 }
 
 bool Gioco::ultimoGiocatore() {
   // controllo se il giocatore umano è l'ultimo rimasto
-  if (giocatoriInPartita[0]->isUmano() && giocatoriInPartita[0]->getInGioco()) {
-    return true;
-  }
-  return false;
+  return umanoInGioco() && !giocatoriInPartita[1]->getInGioco() &&
+                 !giocatoriInPartita[2]->getInGioco() &&
+                 !giocatoriInPartita[3]->getInGioco()
+             ? true
+             : false;
 }
 
 void Gioco::stampaTabellone() { principale->stampaTabellone(); }
