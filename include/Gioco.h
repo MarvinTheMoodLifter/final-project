@@ -4,7 +4,7 @@
 class Gioco {
 public:
   Gioco(std::string tipoPartita);
-  void turnoGiocatore(Giocatore &p);
+  void turnoGiocatore(Giocatore *p);
   void gioca();
   void chiediGiocatore(std::string messaggio);
   void ordineGioco();

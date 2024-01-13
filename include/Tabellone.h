@@ -13,7 +13,7 @@
 class Tabellone {
 private:
   // giocatori
-  std::vector<Casella> tabellone;
+  std::vector<Casella *> tabellone;
   Giocatore *cp1;
   Giocatore *cp2;
   Giocatore *cp3;
@@ -34,18 +34,18 @@ public:
   // Stampa il Tabellone con i giocatori
   void stampaTabelloneGiocatori() const;
   // Restituisce il vettore contente le caselle del Tabellone
-  std::vector<Casella> getTabellone() const;
+  std::vector<Casella *> getTabellone() const;
   // Sposta il giocatore
-  void muoviGiocatore(Giocatore &giocatore, Giocatore &giocatore2,
-                      Giocatore &giocatore3, Giocatore &giocatore4);
+  void muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
+                      Giocatore *giocatore3, Giocatore *giocatore4);
   std::string chiediGiocatore(std::string messaggio);
-  bool acquistaImmobile(Giocatore &giocatore, int posizione);
+  bool acquistaImmobile(Giocatore *giocatore, int posizione);
   int tiraDadi();
 
   // Copy constructor per Gioco
-  Tabellone(const Tabellone &t)
-      : tabellone(t.tabellone), cp1(t.cp1), cp2(t.cp2), cp3(t.cp3), cp4(t.cp4) {
-  }
+  Tabellone(const Tabellone *t)
+      : tabellone(t->tabellone), cp1(t->cp1), cp2(t->cp2), cp3(t->cp3),
+        cp4(t->cp4) {}
 
   // Assignment copy per Gioco
   Tabellone &operator=(const Tabellone &t) {
@@ -54,7 +54,10 @@ public:
   }
 
   // Overloading dell'operatore []
-  Casella &operator[](int i) { return tabellone[i]; }
+  Casella &operator[](int i) { return *tabellone[i]; }
+
+  // Distruttore
+  ~Tabellone();
 };
 
 #endif // TABELLONE_H

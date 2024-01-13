@@ -84,6 +84,7 @@ void Casella::aggiungiGiocatore(std::string giocatore) {
   // Aggiunge un giocatore alla Casella
   giocatoriPresenti += giocatore;
 }
+
 void Casella::rimuoviGiocatore(std::string giocatore) {
   if (!isVuota()) {
     // Rimuove il giocatore dalla stringa giocatoriPresenti
@@ -94,10 +95,10 @@ void Casella::rimuoviGiocatore(std::string giocatore) {
 void Casella::stampaCasella() {
   // Stampa la casella (con giocatori e immobili se presenti)
   if (isVuota()) {
-    std::cout << "| " << tipologia << " | ";
+    std::cout << "| " << tipologia << immobile << " | ";
   } else {
     // std::cout << "| " << riga << colonna << valore << " | ";
-    std::cout << "| " << tipologia << immobile << giocatoriPresenti << " | ";
+    std::cout << "|" << tipologia << immobile << giocatoriPresenti << "| ";
   }
 }
 

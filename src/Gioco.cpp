@@ -39,36 +39,36 @@ void Gioco::chiediGiocatore(std::string messaggio) {
   }
 }
 
-void Gioco::turnoGiocatore(Giocatore &p) {
+void Gioco::turnoGiocatore(Giocatore *p) {
   // Creo un vettore con i giocatori da non muovere
   std::vector<Giocatore *> giocatoriDaNonMuovere;
   for (int i = 0; i < giocatoriInPartita.size(); i++) {
-    if (giocatoriInPartita[i] != &p) {
+    if (giocatoriInPartita[i] != p) {
       giocatoriDaNonMuovere.push_back(giocatoriInPartita[i]);
     }
   }
-  if (ultimoGiocatore() && p.getInGioco()) {
-    if (p.isUmano()) {
+  if (ultimoGiocatore() && p->getInGioco()) {
+    if (p->isUmano()) {
       // turno giocatore umano
       std::string messaggio = "È il turno di " +
-                              std::to_string(p.getNumeroGiocatore()) +
+                              std::to_string(p->getNumeroGiocatore()) +
                               "/n digita s per proseguire, altrimenti digita "
                               "show per mostrare lo "
                               "stato attuale della partita/n";
       chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
-      principale->muoviGiocatore(p, *giocatoriDaNonMuovere[0],
-                                 *giocatoriDaNonMuovere[1],
-                                 *giocatoriDaNonMuovere[2]);
+      principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
+                                 giocatoriDaNonMuovere[1],
+                                 giocatoriDaNonMuovere[2]);
     } else {
       // turno giocatore computer
-      principale->muoviGiocatore(p, *giocatoriDaNonMuovere[0],
-                                 *giocatoriDaNonMuovere[1],
-                                 *giocatoriDaNonMuovere[2]);
+      principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
+                                 giocatoriDaNonMuovere[1],
+                                 giocatoriDaNonMuovere[2]);
     }
-  } else if (!ultimoGiocatore() && !p.getInGioco()) {
+  } else if (!ultimoGiocatore() && !p->getInGioco()) {
     return;
-  } else {
+  } else if (ultimoGiocatore() && p->getInGioco()) {
     finePartita();
     return;
   }
@@ -84,19 +84,20 @@ void Gioco::gioca() {
   if (tipoGioco == "human") {
     while (umanoInGioco()) {
       for (int i = 0; i < 4; i++) {
-        turnoGiocatore(*giocatoriInPartita[i]);
+        turnoGiocatore(giocatoriInPartita[i]);
       }
       if (cp1->getInGioco())
         for (int i = 0; i < 20; i++) {
           for (int i = 0; i < 4; i++) {
-            turnoGiocatore(*giocatoriInPartita[i]);
+            turnoGiocatore(giocatoriInPartita[i]);
           }
         }
     }
   } else if (tipoGioco == "computer") {
     for (int i = 0; i < 20; i++) {
       for (int i = 0; i < 4; i++) {
-        turnoGiocatore(*giocatoriInPartita[i]);
+        turnoGiocatore(giocatoriInPartita[i]);
+        std::cout << "Turno giocatore " << i << std::endl;
       }
     }
     finePartita();
@@ -142,6 +143,9 @@ std::vector<int> Gioco::comparaFiorini() {
   for (int i = 0; i < 4; i++) {
     if (giocatoriInPartita[i]->getInGioco() &&
         giocatoriInPartita[i]->getFiorini() > piuRicco) {
+      std::cout << "Giocatore " << giocatoriInPartita[i]->getNumeroGiocatore()
+                << " è il più ricco con " << giocatoriInPartita[i]->getFiorini()
+                << " fiorini" << std::endl;
       vincitori.clear();
       vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
       piuRicco = giocatoriInPartita[i]->getFiorini();
@@ -150,6 +154,7 @@ std::vector<int> Gioco::comparaFiorini() {
       vincitori.push_back(giocatoriInPartita[i]->getNumeroGiocatore());
     }
   }
+  std::cout << "I giocatori più ricchi sono: " << vincitori.size() << std::endl;
   return vincitori;
 }
 
