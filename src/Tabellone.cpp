@@ -85,11 +85,9 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   int mossa = dadi.tiraDadi(2);
   std::cout << "Il giocatore " << numGiocatore << " ha tirato " << mossa
             << std::endl;
-
   // Creo l'oggetto Dadi che si occupa di generare la probabilità di azione dei
   // computer
   Dadi dadiComputer(4);
-
   // Genero l'indice della nuova posizione
   // Nel caso in cui la nuova posizione sia maggiore di 27, il giocatore passa
   // dal via
@@ -173,6 +171,7 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
         std::cout << "Acquisto della casella in corso..." << std::endl;
         nuovaCasella->setProprietarioCasella(numGiocatore);
         nuovaCasella->setProprietario(giocatore);
+        aggiungiProprietario(giocatore, nuovaCasella);
         giocatore->setFiorini(giocatore->getFiorini() -
                               nuovaCasella->getPrezzoProprietà());
         std::cout << "Il giocatore " << numGiocatore
@@ -191,6 +190,7 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
         if (dadiComputer.tiraDadi(1) == 1) {
           nuovaCasella->setProprietarioCasella(numGiocatore);
           nuovaCasella->setProprietario(giocatore);
+          aggiungiProprietario(giocatore, nuovaCasella);
           giocatore->setFiorini(giocatore->getFiorini() -
                                 nuovaCasella->getPrezzoProprietà());
           std::cout << "Il giocatore " << numGiocatore
@@ -214,8 +214,27 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       // Caso in cui il giocatore non riesce a pagare l'affitto
       giocatore->setFiorini(0);
       giocatore->setInGioco(false);
+      rimuoviGiocatore(giocatore);
       return;
     }
+  }
+}
+
+void Tabellone::aggiungiProprietario(Giocatore *giocatore, Casella *casella) {
+  // Aggiunge il giocatore al vettore proprietà
+  switch (giocatore->getNumeroGiocatore()) {
+  case 1:
+    proprietàcp1.push_back(casella);
+    break;
+  case 2:
+    proprietàcp2.push_back(casella);
+    break;
+  case 3:
+    proprietàcp3.push_back(casella);
+    break;
+  case 4:
+    proprietàcp4.push_back(casella);
+    break;
   }
 }
 
@@ -277,6 +296,44 @@ void Tabellone::stampaTabellone() {
   }
   std::cout << std::endl;
   // stampa i fiorini giocatori
+  stampaFiorini();
+  // Stampa le proprietà dei giocatori dal vettore proprietà
+  stampaPossedimenti();
+}
+
+void Tabellone::stampaPossedimenti() const {
+  // Stampa le proprietà dei giocatori dal vettore proprietà
+  std::cout << "Giocatore 1 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp1.size(); i++) {
+    std::cout << proprietàcp1[i]->getRiga() << proprietàcp1[i]->getColonna()
+              << proprietàcp1[i]->getTipologia()
+              << proprietàcp1[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+  std::cout << "Giocatore 2 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp2.size(); i++) {
+    std::cout << proprietàcp2[i]->getRiga() << proprietàcp2[i]->getColonna()
+              << proprietàcp2[i]->getTipologia()
+              << proprietàcp2[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+  std::cout << "Giocatore 3 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp3.size(); i++) {
+    std::cout << proprietàcp3[i]->getRiga() << proprietàcp3[i]->getColonna()
+              << proprietàcp3[i]->getTipologia()
+              << proprietàcp3[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+  std::cout << "Giocatore 4 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp4.size(); i++) {
+    std::cout << proprietàcp4[i]->getRiga() << proprietàcp4[i]->getColonna()
+              << proprietàcp4[i]->getTipologia()
+              << proprietàcp4[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+}
+
+void Tabellone::stampaFiorini() const {
   std::string g1 = cp1->isUmano() ? "(umano)" : "(computer)";
   std::cout << "Fiorini giocatore 1 " << g1 << ": " << cp1->getFiorini()
             << std::endl;

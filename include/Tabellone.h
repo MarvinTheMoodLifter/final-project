@@ -33,15 +33,18 @@ public:
   void randomizzaVettore(std::vector<char> &v);
   // Riempie le caselle del tabellone in maniera randomica
   void riempiCaselleRandom();
-  // Stampa il Tabellone vuoto
+  // Stampa il tabellone
   void stampaTabellone();
-  // Stampa il Tabellone con i giocatori
-  void stampaTabelloneGiocatori() const;
+  // Stampa i fiorini dei giocatori
+  void stampaFiorini() const;
+  // Stampa i possedimenti dei giocatori
+  void stampaPossedimenti() const;
   // Restituisce il vettore contente le caselle del Tabellone
   std::vector<Casella *> getTabellone() const;
   // Sposta il giocatore
   void muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
                       Giocatore *giocatore3, Giocatore *giocatore4);
+  void aggiungiProprietario(Giocatore *giocatore, Casella *casella);
   std::string chiediGiocatore(std::string messaggio);
   bool acquistaImmobile(Giocatore *giocatore, int posizione);
   int tiraDadi();

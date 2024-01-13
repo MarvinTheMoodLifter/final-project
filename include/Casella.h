@@ -16,6 +16,7 @@ public:
   char getRiga() { return riga; };
   int getColonna() { return colonna; };
   std::vector<std::string> getCoordinate() { return coordinate; };
+  char getTipologia() { return tipologia; };
   char getImmobile() { return immobile; };
   int getProprietarioCasella() { return proprietarioCasella; };
   Giocatore *getProprietario() { return proprietario; };

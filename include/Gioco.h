@@ -15,7 +15,6 @@ public:
   bool umanoInGioco();
   void finePartita();
   void stampaGiocatori();
-  void rimuoviGiocatore(Giocatore *g);
 
   ~Gioco();
 
