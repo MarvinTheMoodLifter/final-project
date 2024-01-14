@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <iostream>
 #include <random>
+#include <string>
 
 Tabellone::Tabellone(std::string tipoPartita, Giocatore *g1, Giocatore *g2,
                      Giocatore *g3, Giocatore *g4)
@@ -160,9 +161,12 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   } else if (nuovaCasella->getProprietarioCasella() == 0) {
     // Caso in cui la casella è libera
     if (nuovaCasella->isAngolare()) {
-      std::string risposta;
-      std::string messaggio = "Casella vuota, non puoi acquistarla. Vuoi "
-                              "vedere il tabellone? show->mostra il tabellone)";
+      if (giocatore->isUmano()) {
+        std::string messaggio =
+            "Casella vuota, non puoi acquistarla. Vuoi "
+            "vedere il tabellone? show->mostra il tabellone)";
+        std::string risposta = chiediGiocatore(messaggio);
+      }
       return;
     }
     if (giocatore->isUmano()) {
@@ -172,19 +176,22 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       if (risposta == "s" &&
           giocatore->getFiorini() >= nuovaCasella->getPrezzoProprietà()) {
         // Acquista la casella
-        std::cout << "Acquisto della casella in corso..." << std::endl;
         nuovaCasella->setProprietarioCasella(numGiocatore);
         nuovaCasella->setProprietario(giocatore);
         aggiungiProprietario(giocatore, nuovaCasella);
         giocatore->setFiorini(giocatore->getFiorini() -
                               nuovaCasella->getPrezzoProprietà());
-        std::cout << "Il giocatore " << numGiocatore
-                  << " ha acquistato la casella per "
-                  << nuovaCasella->getPrezzoProprietà() << std::endl;
+        std::string acquisto =
+            "- Giocatore " + std::to_string(numGiocatore) +
+            " ha acquistato il terreno " + nuovaCasella->getRiga() +
+            std::to_string(nuovaCasella->getColonna()) + " per " +
+            std::to_string(nuovaCasella->getPrezzoProprietà()) + "\n";
+        stampaLog(acquisto);
         return;
       } else {
         // Non acquista la casella
-        std::cout << "Casella non acquistata" << std::endl;
+        std::string messaggio = "Casella non acquistata\n";
+        stampaLog(messaggio);
         return;
       }
     } else {
@@ -197,9 +204,12 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
           aggiungiProprietario(giocatore, nuovaCasella);
           giocatore->setFiorini(giocatore->getFiorini() -
                                 nuovaCasella->getPrezzoProprietà());
-          std::cout << "Il giocatore " << numGiocatore
-                    << " ha acquistato la casella per "
-                    << nuovaCasella->getPrezzoProprietà() << std::endl;
+          std::string acquisto =
+              "- Giocatore " + std::to_string(numGiocatore) +
+              " ha acquistato il terreno " + nuovaCasella->getRiga() +
+              std::to_string(nuovaCasella->getColonna()) + " per " +
+              std::to_string(nuovaCasella->getPrezzoProprietà()) + "\n";
+          stampaLog(acquisto);
         }
         return;
       }
@@ -214,8 +224,20 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       Giocatore *proprietario = nuovaCasella->getProprietario();
       proprietario->setFiorini(proprietario->getFiorini() +
                                nuovaCasella->getAffitto());
+      std::string pagamentoAffitto =
+          "- Giocatore " + std::to_string(numGiocatore) + " ha pagato " +
+          std::to_string(nuovaCasella->getAffitto()) +
+          " fiorini al giocatore " +
+          std::to_string(nuovaCasella->getProprietarioCasella()) +
+          " per pernottamento nella casella " + nuovaCasella->getRiga() +
+          std::to_string(nuovaCasella->getColonna()) + "\n";
+      stampaLog(pagamentoAffitto);
     } else {
       // Caso in cui il giocatore non riesce a pagare l'affitto
+      std::string giocatoreEliminato =
+          "- Giocatore " + std::to_string(numGiocatore) + " è stato eliminato";
+      stampaLog(giocatoreEliminato);
+      // Rimuove il giocatore dal vettore giocatoriInPartita
       giocatore->setFiorini(0);
       giocatore->setInGioco(false);
       rimuoviGiocatore(giocatore);

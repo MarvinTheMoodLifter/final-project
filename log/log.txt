@@ -1,5 +1,291 @@
 Benvenuto in Monopoly, il gioco inizia ora, buona fortuna!
-Fiorini giocatore 1 (umano): 100
+Fiorini giocatore 1 (computer): 100
 Fiorini giocatore 2 (computer): 100
 Fiorini giocatore 3 (computer): 100
 Fiorini giocatore 4 (computer): 100
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 1 ha acquistato il terreno H3 per 10
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 4
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 9
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 4 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella H3
+Fiorini giocatore 1 (computer): 97
+Fiorini giocatore 2 (computer): 100
+Fiorini giocatore 3 (computer): 100
+Fiorini giocatore 4 (computer): 93
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 10
+- Giocatore 1 ha acquistato il terreno A2 per 10
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 9
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 5
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 3
+Fiorini giocatore 1 (computer): 87
+Fiorini giocatore 2 (computer): 100
+Fiorini giocatore 3 (computer): 100
+Fiorini giocatore 4 (computer): 93
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 3
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 6
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 9
+Fiorini giocatore 1 (computer): 87
+Fiorini giocatore 2 (computer): 100
+Fiorini giocatore 3 (computer): 100
+Fiorini giocatore 4 (computer): 93
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 1 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 10
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 3
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 8
+Fiorini giocatore 1 (computer): 107
+Fiorini giocatore 2 (computer): 100
+Fiorini giocatore 3 (computer): 100
+Fiorini giocatore 4 (computer): 93
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 7
+- Giocatore 2 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 3 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 4 è passato dal via e ha ritirato 20 fiorini
+Fiorini giocatore 1 (computer): 107
+Fiorini giocatore 2 (computer): 120
+Fiorini giocatore 3 (computer): 120
+Fiorini giocatore 4 (computer): 113
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 1 ha acquistato il terreno A3 per 10
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 8
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 8
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 10
+Fiorini giocatore 1 (computer): 97
+Fiorini giocatore 2 (computer): 120
+Fiorini giocatore 3 (computer): 120
+Fiorini giocatore 4 (computer): 113
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 12
+- Giocatore 1 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 10
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 6
+- Giocatore 4 ha acquistato il terreno C8 per 6
+Fiorini giocatore 1 (computer): 117
+Fiorini giocatore 2 (computer): 120
+Fiorini giocatore 3 (computer): 120
+Fiorini giocatore 4 (computer): 107
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 2 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 3
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 4
+Fiorini giocatore 1 (computer): 117
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 120
+Fiorini giocatore 4 (computer): 107
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 9
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 6
+- Giocatore 3 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 3 ha acquistato il terreno H7 per 10
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 3
+- Giocatore 4 è passato dal via e ha ritirato 20 fiorini
+Fiorini giocatore 1 (computer): 117
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 130
+Fiorini giocatore 4 (computer): 127
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 10
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 9
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 3
+- Giocatore 4 ha acquistato il terreno H2 per 6
+Fiorini giocatore 1 (computer): 117
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 130
+Fiorini giocatore 4 (computer): 121
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 8
+- Giocatore 1 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 1 ha pagato 7 fiorini al giocatore 4 per pernottamento nella casella H2
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 6
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 8
+- Giocatore 3 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella A3
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 4
+Fiorini giocatore 1 (computer): 137
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 123
+Fiorini giocatore 4 (computer): 128
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 5
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 2
+- Giocatore 2 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 2 ha acquistato il terreno H6 per 20
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 5
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 4 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella A2
+Fiorini giocatore 1 (computer): 144
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 123
+Fiorini giocatore 4 (computer): 121
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 5
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 6
+- Giocatore 3 ha acquistato il terreno G8 per 20
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 4
+Fiorini giocatore 1 (computer): 144
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 103
+Fiorini giocatore 4 (computer): 121
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 1 ha pagato 7 fiorini al giocatore 3 per pernottamento nella casella G8
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 4
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 8
+- Giocatore 3 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 3
+- Giocatore 4 ha acquistato il terreno B8 per 6
+Fiorini giocatore 1 (computer): 137
+Fiorini giocatore 2 (computer): 140
+Fiorini giocatore 3 (computer): 130
+Fiorini giocatore 4 (computer): 115
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 4
+- Giocatore 1 è passato dal via e ha ritirato 20 fiorini
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 4
+- Giocatore 2 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella A2
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 9
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 10
+- Giocatore 4 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 4 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella H3
+Fiorini giocatore 1 (computer): 171
+Fiorini giocatore 2 (computer): 133
+Fiorini giocatore 3 (computer): 130
+Fiorini giocatore 4 (computer): 128
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 1 ha acquistato il terreno F1 per 6
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 5
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 6
+- Giocatore 3 ha pagato 7 fiorini al giocatore 4 per pernottamento nella casella C8
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 11
+- Giocatore 4 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella A3
+Fiorini giocatore 1 (computer): 172
+Fiorini giocatore 2 (computer): 133
+Fiorini giocatore 3 (computer): 123
+Fiorini giocatore 4 (computer): 128
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 6
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 6
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 3 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 3 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella H3
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 4
+Fiorini giocatore 1 (computer): 179
+Fiorini giocatore 2 (computer): 133
+Fiorini giocatore 3 (computer): 136
+Fiorini giocatore 4 (computer): 128
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 8
+- Giocatore 1 ha pagato 7 fiorini al giocatore 4 per pernottamento nella casella C8
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 7
+- Giocatore 2 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 2 ha pagato 7 fiorini al giocatore 4 per pernottamento nella casella H2
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 8
+- Giocatore 4 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 4 ha pagato 7 fiorini al giocatore 3 per pernottamento nella casella H7
+Fiorini giocatore 1 (computer): 172
+Fiorini giocatore 2 (computer): 146
+Fiorini giocatore 3 (computer): 143
+Fiorini giocatore 4 (computer): 155
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 6
+- Giocatore 1 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 1 ha pagato 7 fiorini al giocatore 2 per pernottamento nella casella H6
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 10
+- Giocatore 2 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella A3
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 8
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 4 ha acquistato il terreno E1 per 20
+Fiorini giocatore 1 (computer): 192
+Fiorini giocatore 2 (computer): 146
+Fiorini giocatore 3 (computer): 143
+Fiorini giocatore 4 (computer): 135
+:: Turno giocatore 1 ::
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 7
+:: Turno giocatore 2 ::
+- Giocatore 2 ha tirato i dadi ottenendo un valore di 5
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 9
+- Giocatore 3 è passato dal via e ha ritirato 20 fiorini
+- Giocatore 3 ha pagato 7 fiorini al giocatore 2 per pernottamento nella casella H6
+:: Turno giocatore 4 ::
+- Giocatore 4 ha tirato i dadi ottenendo un valore di 5
+- Giocatore 4 ha pagato 7 fiorini al giocatore 1 per pernottamento nella casella A2
+Fiorini giocatore 1 (computer): 196
+Fiorini giocatore 2 (computer): 153
+Fiorini giocatore 3 (computer): 156
+Fiorini giocatore 4 (computer): 128
