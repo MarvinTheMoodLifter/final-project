@@ -81,8 +81,9 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   int mossa = dadi.tiraDadi(2);
   std::string inizioTurno =
       ":: Turno giocatore " + std::to_string(numGiocatore) + " ::\n";
-  std::string tiroDadi = "Il giocatore " + std::to_string(numGiocatore) +
-                         " ha fatto " + std::to_string(mossa) + "\n";
+  std::string tiroDadi = "- Giocatore " + std::to_string(numGiocatore) +
+                         " ha tirato i dadi ottenendo un valore di " +
+                         std::to_string(mossa) + "\n";
   stampaLog(inizioTurno);
   stampaLog(tiroDadi);
   // Creo l'oggetto Dadi che si occupa di generare la probabilità di azione dei
@@ -94,12 +95,11 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   int nuovaPosizione = vecchiaPosizione + mossa;
   if (nuovaPosizione > 27) {
     nuovaPosizione -= 27;
-    std::string passaggioVia = "Il giocatore " + std::to_string(numGiocatore) +
+    std::string passaggioVia = "- Giocatore " + std::to_string(numGiocatore) +
                                " è passato dal via e ha ritirato 20 fiorini\n";
     giocatore->setFiorini(giocatore->getFiorini() + 20);
     stampaLog(passaggioVia);
   }
-
   // Prendo le caselle di partenza e di arrivo
   Casella *vecchiaCasella = tabellone[vecchiaPosizione];
   Casella *nuovaCasella = tabellone[nuovaPosizione];
@@ -107,7 +107,11 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   giocatore->setPosizione(nuovaPosizione);
   vecchiaCasella->rimuoviGiocatore(std::to_string(numGiocatore));
   nuovaCasella->aggiungiGiocatore(std::to_string(numGiocatore));
-
+  // Messaggio di spostamento
+  std::string spostamento = "- Giocatore " + std::to_string(numGiocatore) +
+                            " è arrivato alla casella " +
+                            vecchiaCasella->getRiga() +
+                            std::to_string(vecchiaCasella->getColonna()) + "\n";
   if (nuovaCasella->getProprietarioCasella() == numGiocatore) {
     // Caso in cui la casella è posseduta dal giocatore stesso
     // Controllo che immobili ci sono, se presenti.
@@ -255,6 +259,12 @@ std::string Tabellone::chiediGiocatore(std::string messaggio) {
 }
 
 void Tabellone::stampaTabellone() {
+  // Stampa la prima riga con i numeri di colonna
+  std::cout << "     ";
+  for (int i = 1; i <= 8; i++) {
+    std::cout << i << "      ";
+  }
+  std::cout << std::endl << "A  ";
   // Stampa il tabellone a partire dalla prima riga, poi le righe intermedie
   // ed infine l'ultima riga Stampa la prima riga Prima riga
   for (int i = tabellone.size() - 14; i < tabellone.size() - 6; i++) {
@@ -264,6 +274,7 @@ void Tabellone::stampaTabellone() {
   // Righe intermedie
   for (int i = 0; i < 6; i++) {
     // Stampa la colonna di sinistra
+    std::cout << tabellone[13 - i]->getRiga() << "  ";
     tabellone[13 - i]->stampaCasella();
     // Stampa il logo centrale
     switch (i) {
@@ -291,6 +302,7 @@ void Tabellone::stampaTabellone() {
     std::cout << std::endl;
   }
   // Ultima riga
+  std::cout << "H  ";
   for (int i = 0; i < 8; i++) {
     tabellone[7 - i]->stampaCasella();
   }
@@ -306,28 +318,28 @@ void Tabellone::stampaPossedimenti() const {
   std::cout << "Giocatore 1 possiede: " << std::endl << " · ";
   for (int i = 0; i < proprietàcp1.size(); i++) {
     std::cout << proprietàcp1[i]->getRiga() << proprietàcp1[i]->getColonna()
-              << proprietàcp1[i]->getTipologia()
+              << " " << proprietàcp1[i]->getTipologia()
               << proprietàcp1[i]->getImmobile() << " · ";
   }
   std::cout << std::endl;
   std::cout << "Giocatore 2 possiede: " << std::endl << " · ";
   for (int i = 0; i < proprietàcp2.size(); i++) {
     std::cout << proprietàcp2[i]->getRiga() << proprietàcp2[i]->getColonna()
-              << proprietàcp2[i]->getTipologia()
+              << " " << proprietàcp2[i]->getTipologia()
               << proprietàcp2[i]->getImmobile() << " · ";
   }
   std::cout << std::endl;
   std::cout << "Giocatore 3 possiede: " << std::endl << " · ";
   for (int i = 0; i < proprietàcp3.size(); i++) {
     std::cout << proprietàcp3[i]->getRiga() << proprietàcp3[i]->getColonna()
-              << proprietàcp3[i]->getTipologia()
+              << " " << proprietàcp3[i]->getTipologia()
               << proprietàcp3[i]->getImmobile() << " · ";
   }
   std::cout << std::endl;
   std::cout << "Giocatore 4 possiede: " << std::endl << " · ";
   for (int i = 0; i < proprietàcp4.size(); i++) {
     std::cout << proprietàcp4[i]->getRiga() << proprietàcp4[i]->getColonna()
-              << proprietàcp4[i]->getTipologia()
+              << " " << proprietàcp4[i]->getTipologia()
               << proprietàcp4[i]->getImmobile() << " · ";
   }
   std::cout << std::endl;
