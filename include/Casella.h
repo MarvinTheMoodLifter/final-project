@@ -8,6 +8,17 @@
 class Giocatore;
 
 class Casella {
+private:
+  char riga;
+  int colonna;
+  int proprietarioCasella = 0;
+  Giocatore *proprietario = nullptr;
+  std::vector<std::string> coordinate;
+  char immobile = ' ';
+  char tipologia = ' ';
+  std::string giocatoriPresenti = " ";
+  int prezzoProprietà = 0;
+
 public:
   // Costruttore con parametri
   Casella(char riga, int colonna);
@@ -53,17 +64,6 @@ public:
     return (riga != c.riga || colonna != c.colonna);
   }
   Casella operator=(const Casella &c);
-
-private:
-  char riga;
-  int colonna;
-  int proprietarioCasella = 0;
-  Giocatore *proprietario = nullptr;
-  std::vector<std::string> coordinate;
-  char immobile = ' ';
-  char tipologia = ' ';
-  std::string giocatoriPresenti = " ";
-  int prezzoProprietà = 0;
 };
 
 #endif // CASELLA_H

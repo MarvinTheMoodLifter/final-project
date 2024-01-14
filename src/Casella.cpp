@@ -23,12 +23,11 @@ int Casella::getPrezzoProprietà() {
   // Restituisce il prezzo della proprietà
   // Controllo che tipo di casella è
   // se la stringa contiene E all'indice 2, il prezzo è 100
-  switch (tipologia) {
-  case 'E':
+  if (tipologia == 'E') {
     return 6;
-  case 'S':
+  } else if (tipologia == 'S') {
     return 10;
-  case 'L':
+  } else if (tipologia == 'L') {
     return 20;
   }
   return 0;
@@ -57,12 +56,11 @@ int Casella::getAffitto() {
 
 int Casella::prezzoMiglioramentoImmobile() {
   // Restituisce il prezzo dell'immobile
-  switch (tipologia) {
-  case 'E':
+  if (tipologia == 'E') {
     return 3;
-  case 'S':
+  } else if (tipologia == 'S') {
     return 5;
-  case 'L':
+  } else if (tipologia == 'L') {
     return 20;
   }
   return 0;
