@@ -31,8 +31,6 @@ int main(int argc, char **argv) {
 
 void testGioco(std::string tipoPartita) {
   Gioco g(tipoPartita);
-  g.stampaTabellone();
-  g.stampaGiocatori();
   // Test per il metodo gioca
   g.gioca();
 }

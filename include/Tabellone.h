@@ -7,6 +7,7 @@
 #include "Giocatore.h"
 #include "GiocatoreNonUmano.h"
 #include "GiocatoreUmano.h"
+#include <fstream>
 #include <vector>
 
 // Classe tabellone
@@ -39,6 +40,8 @@ public:
   void stampaFiorini() const;
   // Stampa i possedimenti dei giocatori
   void stampaPossedimenti() const;
+  // Stampa un messaggio in un file di log
+  void stampaLog(std::string messaggio) const;
   // Restituisce il vettore contente le caselle del Tabellone
   std::vector<Casella *> getTabellone() const;
   // Sposta il giocatore

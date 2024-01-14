@@ -20,6 +20,15 @@ Gioco::Gioco(std::string tipoPartita) : tipoGioco(tipoPartita) {
   giocatoriInPartita.push_back(cp3);
   giocatoriInPartita.push_back(cp4);
   principale = new Tabellone(tipoPartita, cp1, cp2, cp3, cp4);
+  // Messaggio di benvenuto e spiegazione del gioco (cout e file di log)
+  std::string titolo =
+      "Benvenuto in Monopoly, il gioco inizia ora, buona fortuna!";
+  std::ofstream log;
+  log.open("../log/log.txt", std::ios::out | std::ios::trunc);
+  log << titolo << std::endl;
+  log.close();
+  std::cout << titolo << std::endl;
+  principale->stampaTabellone();
 }
 
 void Gioco::chiediGiocatore(std::string messaggio) {
@@ -53,7 +62,7 @@ void Gioco::turnoGiocatore(Giocatore *p) {
       std::string messaggio =
           "È il tuo turno, giocatore " +
           std::to_string(p->getNumeroGiocatore()) +
-          ": s->proseguire, show->stato attuale della partita";
+          ": s->tira i dadi, show->stato attuale della partita";
       chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
       principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
@@ -61,8 +70,6 @@ void Gioco::turnoGiocatore(Giocatore *p) {
                                  giocatoriDaNonMuovere[2]);
     } else {
       // turno giocatore computer
-      std::cout << "È il turno di giocatore " << p->getNumeroGiocatore()
-                << std::endl;
       principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
                                  giocatoriDaNonMuovere[1],
                                  giocatoriDaNonMuovere[2]);
@@ -84,8 +91,10 @@ void Gioco::gioca() {
     while (umanoInGioco()) {
       for (int i = 0; i < 4; i++) {
         turnoGiocatore(giocatoriInPartita[i]);
+        // Aspetta 1 secondo
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       }
-      if (cp1->getInGioco())
+      if (!cp1->getInGioco())
         for (int i = 0; i < 20; i++) {
           for (int i = 0; i < 4; i++) {
             turnoGiocatore(giocatoriInPartita[i]);

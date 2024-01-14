@@ -1,0 +1,19 @@
+Benvenuto in Monopoly, il gioco inizia ora, buona fortuna!
+Fiorini giocatore 1 (umano): 100
+Fiorini giocatore 2 (computer): 100
+Fiorini giocatore 3 (computer): 100
+Fiorini giocatore 4 (computer): 100
+:: Turno giocatore 1 ::
+Il giocatore 1 ha fatto 2
+:: Turno giocatore 2 ::
+Il giocatore 2 ha fatto 9
+:: Turno giocatore 3 ::
+Il giocatore 3 ha fatto 5
+:: Turno giocatore 4 ::
+Il giocatore 4 ha fatto 6
+:: Turno giocatore 1 ::
+Il giocatore 1 ha fatto 2
+Fiorini giocatore 1 (umano): 90
+Fiorini giocatore 2 (computer): 94
+Fiorini giocatore 3 (computer): 100
+Fiorini giocatore 4 (computer): 100

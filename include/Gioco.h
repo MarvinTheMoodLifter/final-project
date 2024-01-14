@@ -1,5 +1,7 @@
 #include "Tabellone.h"
+#include <chrono>
 #include <iostream>
+#include <thread>
 
 class Gioco {
 public:

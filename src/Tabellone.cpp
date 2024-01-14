@@ -13,11 +13,7 @@ Tabellone::Tabellone(std::string tipoPartita, Giocatore *g1, Giocatore *g2,
   // Riempie le caselle del tabellone in maniera randomica
   riempiCaselleRandom();
   // stampa fiorini giocatori
-  std::cout << "Creazione di Tabellone" << std::endl;
-  std::cout << "Giocatore 1: " << g1->getFiorini() << std::endl;
-  std::cout << "Giocatore 2: " << g2->getFiorini() << std::endl;
-  std::cout << "Giocatore 3: " << g3->getFiorini() << std::endl;
-  std::cout << "Giocatore 4: " << g4->getFiorini() << std::endl;
+  std::cout << "Creazione del Tabellone..." << std::endl;
 }
 
 void Tabellone::riempiTabellone() {
@@ -83,8 +79,12 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   // Creo dadi e li tiro
   Dadi dadi(6);
   int mossa = dadi.tiraDadi(2);
-  std::cout << "Il giocatore " << numGiocatore << " ha tirato " << mossa
-            << std::endl;
+  std::string inizioTurno =
+      ":: Turno giocatore " + std::to_string(numGiocatore) + " ::\n";
+  std::string tiroDadi = "Il giocatore " + std::to_string(numGiocatore) +
+                         " ha fatto " + std::to_string(mossa) + "\n";
+  stampaLog(inizioTurno);
+  stampaLog(tiroDadi);
   // Creo l'oggetto Dadi che si occupa di generare la probabilità di azione dei
   // computer
   Dadi dadiComputer(4);
@@ -94,10 +94,10 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   int nuovaPosizione = vecchiaPosizione + mossa;
   if (nuovaPosizione > 27) {
     nuovaPosizione -= 27;
-    std::cout << "Giocatore " << numGiocatore
-              << " è passato dal via e ha ritirato " << 20 << " fiorini"
-              << std::endl;
+    std::string passaggioVia = "Il giocatore " + std::to_string(numGiocatore) +
+                               " è passato dal via e ha ritirato 20 fiorini\n";
     giocatore->setFiorini(giocatore->getFiorini() + 20);
+    stampaLog(passaggioVia);
   }
 
   // Prendo le caselle di partenza e di arrivo
@@ -335,14 +335,33 @@ void Tabellone::stampaPossedimenti() const {
 
 void Tabellone::stampaFiorini() const {
   std::string g1 = cp1->isUmano() ? "(umano)" : "(computer)";
-  std::cout << "Fiorini giocatore 1 " << g1 << ": " << cp1->getFiorini()
-            << std::endl;
-  std::cout << "Fiorini giocatore 2 (computer): " << cp2->getFiorini()
-            << std::endl;
-  std::cout << "Fiorini giocatore 3 (computer): " << cp3->getFiorini()
-            << std::endl;
-  std::cout << "Fiorini giocatore 4 (computer): " << cp4->getFiorini()
-            << std::endl;
+  // Crea i messaggi da stampare
+  // Poi chiama la funzione stampaLog per scrivere il messaggio a schermo e in
+  // un file di log
+  std::string messaggio1 = "Fiorini giocatore 1 " + g1 + ": " +
+                           std::to_string(cp1->getFiorini()) + "\n";
+  std::string messaggio2 =
+      "Fiorini giocatore 2 (computer): " + std::to_string(cp2->getFiorini()) +
+      "\n";
+  std::string messaggio3 =
+      "Fiorini giocatore 3 (computer): " + std::to_string(cp3->getFiorini()) +
+      "\n";
+  std::string messaggio4 =
+      "Fiorini giocatore 4 (computer): " + std::to_string(cp4->getFiorini()) +
+      "\n";
+  stampaLog(messaggio1);
+  stampaLog(messaggio2);
+  stampaLog(messaggio3);
+  stampaLog(messaggio4);
+}
+
+void Tabellone::stampaLog(std::string messaggio) const {
+  // Scrive il messaggio in un file di log
+  std::cout << messaggio;
+  std::ofstream log;
+  log.open("../log/log.txt", std::ios::app);
+  log << messaggio;
+  log.close();
 }
 
 std::vector<Casella *> Tabellone::getTabellone() const { return tabellone; }
