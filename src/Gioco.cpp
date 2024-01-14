@@ -106,13 +106,13 @@ void Gioco::gioca() {
     for (int i = 0; i < 20; i++) {
       for (int i = 0; i < 4; i++) {
         turnoGiocatore(giocatoriInPartita[i]);
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       }
       // Stampo il tabellone
       principale->stampaTabellone();
     }
-    finePartita();
   }
+  finePartita();
 }
 
 void Gioco::ordineGioco() {
@@ -173,18 +173,23 @@ void Gioco::ordineGioco() {
 
 void Gioco::finePartita() {
   std::vector<Giocatore *> vincitore = comparaFiorini();
+  std::string messaggioVincitore = "";
   if (vincitore.size() == 1) {
-    std::cout << "Fine partita, il vincitore è: Giocatore "
-              << vincitore[0]->getNumeroGiocatore() << std::endl;
-    return;
+    messaggioVincitore += "- Giocatore " +
+                          std::to_string(vincitore[0]->getNumeroGiocatore()) +
+                          " ha vinto la partita";
   } else {
-    std::cout << "Fine partita, i vincitori sono: " << std::endl;
+    messaggioVincitore = "- Pareggio tra i giocatori, i vincitori "
+                         "sono: ";
+    messaggioVincitore += "Fine partita, i vincitori sono: \n";
     for (int i = 0; i < vincitore.size(); i++) {
-      std::cout << "Giocatore " << vincitore[i]->getNumeroGiocatore()
-                << std::endl;
+      messaggioVincitore += "- Giocatore " +
+                            std::to_string(vincitore[i]->getNumeroGiocatore()) +
+                            "\n";
     }
-    return;
   }
+  principale->stampaLog(messaggioVincitore);
+  return;
 }
 
 std::vector<Giocatore *> Gioco::comparaFiorini() {

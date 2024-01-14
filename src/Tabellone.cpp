@@ -111,14 +111,15 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
   // Messaggio di spostamento
   std::string spostamento = "- Giocatore " + std::to_string(numGiocatore) +
                             " è arrivato alla casella " +
-                            vecchiaCasella->getRiga() +
-                            std::to_string(vecchiaCasella->getColonna()) + "\n";
+                            nuovaCasella->getRiga() +
+                            std::to_string(nuovaCasella->getColonna()) + "\n";
+  stampaLog(spostamento);
   if (nuovaCasella->getProprietarioCasella() == numGiocatore) {
     // Caso in cui la casella è posseduta dal giocatore stesso
     // Controllo che immobili ci sono, se presenti.
     if (giocatore->isUmano()) {
       std::string messaggio = "Vuoi acquistare un immobile? (s->si, n->no, "
-                              "show->mostra il tabellone)";
+                              "show->mostra il tabellone";
       std::string risposta = chiediGiocatore(messaggio);
       if (risposta == "s" && nuovaCasella->getImmobile() == '^') {
         // Se è un albergo non fare nulla
@@ -127,33 +128,55 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
                  giocatore->getFiorini() >=
                      nuovaCasella->prezzoMiglioramentoImmobile()) {
         // Acquista l'immobile
-        std::cout << "Acquisto dell'immobile in corso..." << std::endl;
         nuovaCasella->miglioraImmobile();
         giocatore->setFiorini(giocatore->getFiorini() -
                               nuovaCasella->prezzoMiglioramentoImmobile());
-        std::cout << "Il giocatore " << numGiocatore
-                  << " ha acquistato l'immobile in questa casella per "
-                  << nuovaCasella->prezzoMiglioramentoImmobile() << std::endl;
+        std::string acquistoImmobile = "";
+        if (nuovaCasella->getImmobile() == '^') {
+          acquistoImmobile = "- Giocatore " + std::to_string(numGiocatore) +
+                             " ha migliorato una casa in albergo sul terreno " +
+                             nuovaCasella->getRiga() +
+                             std::to_string(nuovaCasella->getColonna()) + "\n";
+        } else {
+          acquistoImmobile = "- Giocatore " + std::to_string(numGiocatore) +
+                             " ha costruito una casa sul terreno " +
+                             nuovaCasella->getRiga() +
+                             std::to_string(nuovaCasella->getColonna()) + "\n";
+        }
+        stampaLog(acquistoImmobile);
         return;
       }
     } else {
       // Se è un albergo non fare nulla
       if (nuovaCasella->getImmobile() == '^') {
-        std::cout << "Giocatore" << numGiocatore
-                  << " possiede già un albergo in questa casella!" << std::endl;
+        std::string albergoPosseduto =
+            "- Giocatore" + std::to_string(numGiocatore) +
+            " possiede già un albergo in questa casella!";
+        stampaLog(albergoPosseduto);
       } else {
         if (giocatore->getFiorini() >=
             nuovaCasella->prezzoMiglioramentoImmobile()) {
+          std::string acquistoImmobile = "";
           // Prova ad acquistare l'immobile
           if (dadiComputer.tiraDadi(1) == 1) {
-            std::cout << "Acquisto dell'immobile in corso..." << std::endl;
             nuovaCasella->miglioraImmobile();
             giocatore->setFiorini(giocatore->getFiorini() -
                                   nuovaCasella->prezzoMiglioramentoImmobile());
-            std::cout << "Il giocatore " << numGiocatore
-                      << " ha acquistato l'immobile in questa casella"
-                      << std::endl;
+            if (nuovaCasella->getImmobile() == '^') {
+              acquistoImmobile =
+                  "- Giocatore " + std::to_string(numGiocatore) +
+                  " ha migliorato una casa in albergo sul terreno " +
+                  nuovaCasella->getRiga() +
+                  std::to_string(nuovaCasella->getColonna()) + "\n";
+            } else {
+              acquistoImmobile = "- Giocatore " + std::to_string(numGiocatore) +
+                                 " ha costruito una casa sul terreno " +
+                                 nuovaCasella->getRiga() +
+                                 std::to_string(nuovaCasella->getColonna()) +
+                                 "\n";
+            }
           }
+          stampaLog(acquistoImmobile);
         }
         return;
       }
@@ -164,14 +187,14 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       if (giocatore->isUmano()) {
         std::string messaggio =
             "Casella vuota, non puoi acquistarla. Vuoi "
-            "vedere il tabellone? show->mostra il tabellone)";
+            "vedere il tabellone? show->mostra il tabellone";
         std::string risposta = chiediGiocatore(messaggio);
       }
       return;
     }
     if (giocatore->isUmano()) {
-      std::string messaggio = "La casella è libera, vuoi acquistarla? (s->si, "
-                              "n->no, show-> mostra il tabellone)";
+      std::string messaggio = "La casella è libera, vuoi acquistarla? s->si, "
+                              "n->no, show-> mostra il tabellone";
       std::string risposta = chiediGiocatore(messaggio);
       if (risposta == "s" &&
           giocatore->getFiorini() >= nuovaCasella->getPrezzoProprietà()) {
@@ -321,7 +344,7 @@ void Tabellone::stampaTabellone() {
       break;
     }
     // Stampa la colonna di destra
-    tabellone[27 - i]->stampaCasella();
+    tabellone[22 + i]->stampaCasella();
     std::cout << std::endl;
   }
   // Ultima riga

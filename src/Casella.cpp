@@ -60,7 +60,7 @@ int Casella::prezzoMiglioramentoImmobile() {
   } else if (tipologia == 'S') {
     return 5;
   } else if (tipologia == 'L') {
-    return 20;
+    return 10;
   }
   return 0;
 }
