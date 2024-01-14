@@ -39,12 +39,11 @@ int Casella::getAffitto() {
   // se la stringa contiene E all'indice 2, l'affitto è 10
   int moltiplicatoreAlbergo = 2;
   int valoreAffitto;
-  switch (tipologia) {
-  case 'E':
+  if (tipologia == 'E') {
     valoreAffitto = 2;
-  case 'S':
+  } else if (tipologia == 'S') {
     valoreAffitto = 4;
-  case 'L':
+  } else if (tipologia == 'L') {
     valoreAffitto = 7;
   }
   // Se l'immobile è un albergo, moltiplica l'affitto per 2
