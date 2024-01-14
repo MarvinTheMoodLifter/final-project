@@ -155,8 +155,11 @@ void Gioco::ordineGioco() {
       }
       // Se il tiro è minore del massimo allora lo lascio nella posizione
     }
-    std::string messaggio = ":. Pareggio, si ripete il tiro dei dadi .:\n";
-    principale->stampaLog(messaggio);
+    if (pareggi != 0) {
+      // Se non ci sono pareggi allora ho finito
+      std::string messaggio = ":. Pareggio, si ripete il tiro dei dadi .:\n";
+      principale->stampaLog(messaggio);
+    }
     count = pareggi;
     pareggi = 0;
     max = 0;
