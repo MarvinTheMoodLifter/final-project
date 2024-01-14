@@ -264,6 +264,7 @@ void Tabellone::aggiungiProprietario(Giocatore *giocatore, Casella *casella) {
   }
 }
 
+// Aggiungo controllo input
 std::string Tabellone::chiediGiocatore(std::string messaggio) {
   std::string risposta = "show";
   while (risposta != "s" && risposta != "n") {

@@ -7,6 +7,7 @@
 #include "Giocatore.h"
 #include "GiocatoreNonUmano.h"
 #include "GiocatoreUmano.h"
+#include <algorithm>
 #include <fstream>
 #include <vector>
 

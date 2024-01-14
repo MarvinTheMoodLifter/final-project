@@ -98,6 +98,7 @@ void Gioco::gioca() {
         for (int i = 0; i < 20; i++) {
           for (int i = 0; i < 4; i++) {
             turnoGiocatore(giocatoriInPartita[i]);
+            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
           }
         }
     }
@@ -105,7 +106,7 @@ void Gioco::gioca() {
     for (int i = 0; i < 20; i++) {
       for (int i = 0; i < 4; i++) {
         turnoGiocatore(giocatoriInPartita[i]);
-        std::cout << "Turno giocatore " << i << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       }
       // Stampo il tabellone
       principale->stampaTabellone();
@@ -116,20 +117,54 @@ void Gioco::gioca() {
 
 void Gioco::ordineGioco() {
   Dadi dadi(6);
-  std::vector<Giocatore *> ordineGiocatoriPartita;
   // Faccio tirare i dadi a tutti i giocatori e li metto in un vettore in
   // ordine, con il primo che ha tirato il numero più alto e a seguire gli
   // altri in ordine casuale
   int max = 0;
-  for (int i = 0; i < 4; i++) {
-    int tiro = dadi.tiraDadi(2);
-    if (tiro > max) {
-      max = tiro;
-      ordineGiocatoriPartita.insert(ordineGiocatoriPartita.begin(),
-                                    giocatoriInPartita[i]);
-    } else {
-      ordineGiocatoriPartita.push_back(giocatoriInPartita[i]);
+  int pareggi = 0;
+  int count = 3;
+  // Copio il vettore giocatoriInPartita in ordineGiocatoriPartita
+  ordineGiocatoriPartita = giocatoriInPartita;
+  // stampa ordineGioatoriPartita
+  while (count != 0) {
+    for (int i = 0; i <= count; i++) {
+      int tiro = dadi.tiraDadi(2);
+      std::string messaggio =
+          "Giocatore " +
+          std::to_string(giocatoriInPartita[i]->getNumeroGiocatore()) +
+          " ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto " +
+          std::to_string(tiro) + "\n";
+      principale->stampaLog(messaggio);
+      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+      // Se il tiro è maggiore del massimo allora lo metto in prima posizione
+      if (tiro > max) {
+        max = tiro;
+        pareggi = 0;
+        // Sposto il giocatore che ha tirato il numero più alto in prima
+        // posizione
+        Giocatore *temp = giocatoriInPartita[i];
+        giocatoriInPartita[i] = giocatoriInPartita[0];
+        giocatoriInPartita[0] = temp;
+      } else if (tiro == max) {
+        // Se il tiro è uguale al massimo allora lo cambio con il giocatore in
+        // posizione count
+        pareggi++;
+        Giocatore *temp = giocatoriInPartita[i];
+        giocatoriInPartita[i] = giocatoriInPartita[pareggi];
+        giocatoriInPartita[pareggi] = temp;
+      }
+      // Se il tiro è minore del massimo allora lo lascio nella posizione
     }
+    std::string messaggio = ":. Pareggio, si ripete il tiro dei dadi .:\n";
+    principale->stampaLog(messaggio);
+    count = pareggi;
+    pareggi = 0;
+    max = 0;
+  }
+  std::cout << "L'ordine di gioco è: " << std::endl;
+  for (int i = 0; i < 4; i++) {
+    std::cout << "Giocatore " << giocatoriInPartita[i]->getNumeroGiocatore()
+              << std::endl;
   }
 }
 
