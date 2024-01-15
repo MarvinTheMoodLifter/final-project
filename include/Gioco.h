@@ -1,3 +1,7 @@
+// Autore: Chellin Davide
+// ------------------------------
+#ifndef GIOCO_H
+#define GIOCO_H
 #include "Tabellone.h"
 #include <chrono>
 #include <iostream>
@@ -5,6 +9,7 @@
 
 class Gioco {
 public:
+  // Costruttore
   Gioco(std::string tipoPartita);
   void turnoGiocatore(Giocatore *p);
   void gioca();
@@ -30,3 +35,5 @@ private:
   Giocatore *cp4;
   Tabellone *principale;
 };
+
+#endif // GIOCO_H

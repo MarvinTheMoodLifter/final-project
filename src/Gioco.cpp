@@ -32,6 +32,8 @@ Gioco::Gioco(std::string tipoPartita) : tipoGioco(tipoPartita) {
 }
 
 void Gioco::chiediGiocatore(std::string messaggio) {
+  // Chiede al giocatore se vuole vedere lo stato attuale della partita o
+  // continuare
   std::string risposta = "show";
   while (risposta != "s") {
     std::cout << messaggio << std::endl;
@@ -49,21 +51,25 @@ void Gioco::chiediGiocatore(std::string messaggio) {
 }
 
 void Gioco::turnoGiocatore(Giocatore *p) {
+  // Chiama muoviGiocatore di Tabellone per il giocatore p
   // Creo un vettore con i giocatori da non muovere
   std::vector<Giocatore *> giocatoriDaNonMuovere;
   for (int i = 0; i < giocatoriInPartita.size(); i++) {
     if (giocatoriInPartita[i] != p) {
+      // Se il giocatore non è p allora lo aggiungo al vettore dei giocatori da
+      // non muovere
       giocatoriDaNonMuovere.push_back(giocatoriInPartita[i]);
     }
   }
   if (umanoInGioco() && p->getInGioco()) {
+    // Se il giocatore umano e il giocatore p sono in gioco
     if (p->isUmano()) {
       // turno giocatore umano
       std::string messaggio =
           "È il tuo turno, giocatore " +
           std::to_string(p->getNumeroGiocatore()) +
           ": s->tira i dadi, show->stato attuale della partita";
-      // chiediGiocatore(messaggio);
+      chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
       principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
                                  giocatoriDaNonMuovere[1],
@@ -75,7 +81,7 @@ void Gioco::turnoGiocatore(Giocatore *p) {
                                  giocatoriDaNonMuovere[2]);
     }
   } else if (!umanoInGioco() && p->getInGioco()) {
-    // turno giocatore computer
+    // turno giocatore computer se l'umano non è in gioco
     principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
                                giocatoriDaNonMuovere[1],
                                giocatoriDaNonMuovere[2]);
@@ -87,23 +93,26 @@ void Gioco::gioca() {
   // Stabilisco l'ordine di gioco
   ordineGioco();
   if (tipoGioco == "human") {
-    // Gioco finchè il giocatore umano non perde
     while (umanoInGioco()) {
+      // Gioco finchè il giocatore umano non perde
       principale->stampaTabellone();
       for (int i = 0; i < 4; i++) {
         // Chiamo turnoGiocatore per ogni giocatore
         if (ordineGiocatoriPartita[i]->getInGioco()) {
           turnoGiocatore(ordineGiocatoriPartita[i]);
           // Aspetto 1 secondo prima di passare al prossimo giocatore
-          // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+          std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
         if (ultimoGiocatore()) {
           // Se l'ultimo giocatore è l'umano allora la partita è finita
           finePartita();
           return;
         } else if (!umanoInGioco()) {
-          // Se l'umano non è più in gioco allora la partita è finita
-          std::cout << "Hai perso, la partita è finita" << std::endl;
+          // Se l'umano non è più in gioco allora la partita continua con i
+          // giocatori computer
+          std::cout
+              << "Hai perso, la partita continua con i giocatori computer."
+              << std::endl;
           break;
         }
       }
@@ -191,6 +200,7 @@ void Gioco::ordineGioco() {
 }
 
 void Gioco::finePartita() {
+  // Controllo chi ha più fiorini chiamando comparaFiorini e stampo il vincitore
   std::vector<Giocatore *> vincitore = comparaFiorini();
   std::string messaggioVincitore = "";
   if (vincitore.size() == 1) {
@@ -211,23 +221,32 @@ void Gioco::finePartita() {
 }
 
 std::vector<Giocatore *> Gioco::comparaFiorini() {
+  // Controllo chi ha più fiorini e restituisco un vettore con i vincitori
   int piuRicco = 0;
   std::vector<Giocatore *> vincitori;
   for (int i = 0; i < 4; i++) {
+    // Controllo se il giocatore è in gioco e se ha più fiorini del precedente
     if (giocatoriInPartita[i]->getInGioco() &&
         giocatoriInPartita[i]->getFiorini() > piuRicco) {
+      // Se è in gioco e ha più fiorini del precedente allora svuoto il vettore
+      // vincitori
       vincitori.clear();
       vincitori.push_back(giocatoriInPartita[i]);
       piuRicco = giocatoriInPartita[i]->getFiorini();
     } else if (giocatoriInPartita[i]->getInGioco() &&
                giocatoriInPartita[i]->getFiorini() == piuRicco) {
+      // Se è in gioco e ha lo stesso numero di fiorini del precedente allora lo
+      // aggiungo al vettore vincitori
       vincitori.push_back(giocatoriInPartita[i]);
     }
   }
   return vincitori;
 }
 
-bool Gioco::umanoInGioco() { return cp1->getInGioco() ? true : false; }
+bool Gioco::umanoInGioco() {
+  // controllo se il giocatore umano è in gioco
+  return cp1->getInGioco() ? true : false;
+}
 
 bool Gioco::ultimoGiocatore() {
   // controllo se il giocatore umano è l'ultimo rimasto
@@ -241,7 +260,7 @@ void Gioco::stampaTabellone() { principale->stampaTabellone(); }
 
 void Gioco::stampaGiocatori() {
   for (int i = 0; i < 4; i++) {
-    // Se è umano stampa giocatore umano
+    // Stampo i giocatori in partita
     if (giocatoriInPartita[i]->isUmano()) {
       std::cout << "Giocatore umano numero: "
                 << giocatoriInPartita[i]->getNumeroGiocatore() << std::endl;
@@ -252,6 +271,7 @@ void Gioco::stampaGiocatori() {
   }
 }
 
+// Distruttore
 Gioco::~Gioco() {
   delete cp1;
   delete cp2;

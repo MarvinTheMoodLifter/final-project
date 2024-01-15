@@ -59,6 +59,9 @@ public:
   }
   // Copy assignment operator
   Casella operator=(const Casella &c);
+
+  // Distruttore
+  ~Casella() = default;
 };
 
 #endif // CASELLA_H
