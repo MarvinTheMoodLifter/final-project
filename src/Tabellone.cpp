@@ -153,10 +153,7 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
     } else {
       // Se è un albergo non fare nulla
       if (nuovaCasella->getImmobile() == '^') {
-        std::string albergoPosseduto =
-            "- Giocatore" + std::to_string(numGiocatore) +
-            " possiede già un albergo in questa casella!\n";
-        stampaLog(albergoPosseduto);
+        return;
       } else {
         if (giocatore->getFiorini() >=
             nuovaCasella->prezzoMiglioramentoImmobile()) {

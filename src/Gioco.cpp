@@ -89,6 +89,7 @@ void Gioco::gioca() {
   if (tipoGioco == "human") {
     // Gioco finchè il giocatore umano non perde
     while (umanoInGioco()) {
+      principale->stampaTabellone();
       for (int i = 0; i < 4; i++) {
         // Chiamo turnoGiocatore per ogni giocatore
         if (ordineGiocatoriPartita[i]->getInGioco()) {
@@ -111,6 +112,7 @@ void Gioco::gioca() {
       // Se almeno due computer sono in gioco allora continuo a giocare 20
       // turni
       for (int i = 0; i < 20; i++) {
+        principale->stampaTabellone();
         for (int i = 0; i < 4; i++) {
           turnoGiocatore(ordineGiocatoriPartita[i]);
           std::this_thread::sleep_for(std::chrono::milliseconds(1000));
@@ -197,8 +199,7 @@ void Gioco::finePartita() {
                           " ha vinto la partita";
   } else {
     messaggioVincitore = "- Pareggio tra i giocatori, i vincitori "
-                         "sono: ";
-    messaggioVincitore += "Fine partita, i vincitori sono: \n";
+                         "sono:\n";
     for (int i = 0; i < vincitore.size(); i++) {
       messaggioVincitore += "- Giocatore " +
                             std::to_string(vincitore[i]->getNumeroGiocatore()) +
