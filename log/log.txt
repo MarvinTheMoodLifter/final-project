@@ -1,33 +1,18 @@
 Benvenuto in Monopoly, il gioco inizia ora, buona fortuna!
-Fiorini giocatore 1 (umano): 100
+Fiorini giocatore 1 (computer): 100
 Fiorini giocatore 2 (computer): 100
 Fiorini giocatore 3 (computer): 100
 Fiorini giocatore 4 (computer): 100
-Giocatore 1 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 8
-Giocatore 2 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 10
-Giocatore 3 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 4
-Giocatore 4 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 5
-Fiorini giocatore 1 (umano): 100
-Fiorini giocatore 2 (computer): 100
-Fiorini giocatore 3 (computer): 100
-Fiorini giocatore 4 (computer): 100
-:: Turno giocatore 2 ::
-- Giocatore 2 ha tirato i dadi ottenendo un valore di 7
-- Giocatore 2 è arrivato alla casella H1
+Giocatore 1 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 10
+Giocatore 2 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 4
+Giocatore 3 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 9
+Giocatore 4 ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto 4
 :: Turno giocatore 1 ::
-- Giocatore 1 ha tirato i dadi ottenendo un valore di 8
-- Giocatore 1 è arrivato alla casella G1
-Casella non acquistata
-:: Turno giocatore 3 ::
-- Giocatore 3 ha tirato i dadi ottenendo un valore di 4
-- Giocatore 3 è arrivato alla casella H4
-:: Turno giocatore 4 ::
-- Giocatore 4 ha tirato i dadi ottenendo un valore di 6
-- Giocatore 4 è arrivato alla casella H2
-Fiorini giocatore 1 (umano): 100
-Fiorini giocatore 2 (computer): 100
-Fiorini giocatore 3 (computer): 100
-Fiorini giocatore 4 (computer): 100
+- Giocatore 1 ha tirato i dadi ottenendo un valore di 4
+- Giocatore 1 è arrivato alla casella H4
 :: Turno giocatore 2 ::
 - Giocatore 2 ha tirato i dadi ottenendo un valore di 5
-- Giocatore 2 è arrivato alla casella C1
+- Giocatore 2 è arrivato alla casella H3
+:: Turno giocatore 3 ::
+- Giocatore 3 ha tirato i dadi ottenendo un valore di 6
+- Giocatore 3 è arrivato alla casella H2
