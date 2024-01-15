@@ -50,6 +50,9 @@ int Casella::getAffitto() {
   if (immobile == '^') {
     valoreAffitto *= moltiplicatoreAlbergo;
   }
+  if (immobile == ' ') {
+    valoreAffitto = 0;
+  }
   return valoreAffitto;
 }
 

@@ -63,7 +63,7 @@ void Gioco::turnoGiocatore(Giocatore *p) {
           "È il tuo turno, giocatore " +
           std::to_string(p->getNumeroGiocatore()) +
           ": s->tira i dadi, show->stato attuale della partita";
-      chiediGiocatore(messaggio);
+      // chiediGiocatore(messaggio);
       // Chiamo muoviGiocatore di Tabellone
       principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
                                  giocatoriDaNonMuovere[1],
@@ -74,39 +74,55 @@ void Gioco::turnoGiocatore(Giocatore *p) {
                                  giocatoriDaNonMuovere[1],
                                  giocatoriDaNonMuovere[2]);
     }
-    return;
-  } else if (umanoInGioco() && !p->getInGioco()) {
-    return;
+  } else if (!umanoInGioco() && p->getInGioco()) {
+    // turno giocatore computer
+    principale->muoviGiocatore(p, giocatoriDaNonMuovere[0],
+                               giocatoriDaNonMuovere[1],
+                               giocatoriDaNonMuovere[2]);
   }
+  return;
 }
 
 void Gioco::gioca() {
-  // 4 casi con 4 posizioni in cui giocatore umano può partecipare in base a
-  // come viene dato al costruttore oppure trova modo diverso
-
-  // oppure creo solo metodo turnoGiocatore con all'interno if else in base a
-  // flag del giocatore
+  // Stabilisco l'ordine di gioco
   ordineGioco();
   if (tipoGioco == "human") {
+    // Gioco finchè il giocatore umano non perde
     while (umanoInGioco()) {
       for (int i = 0; i < 4; i++) {
-        turnoGiocatore(giocatoriInPartita[i]);
-        // Aspetta 1 secondo
-        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-      }
-      if (!cp1->getInGioco())
-        for (int i = 0; i < 20; i++) {
-          for (int i = 0; i < 4; i++) {
-            turnoGiocatore(giocatoriInPartita[i]);
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
-          }
+        // Chiamo turnoGiocatore per ogni giocatore
+        if (ordineGiocatoriPartita[i]->getInGioco()) {
+          turnoGiocatore(ordineGiocatoriPartita[i]);
+          // Aspetto 1 secondo prima di passare al prossimo giocatore
+          // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
         }
+        if (ultimoGiocatore()) {
+          // Se l'ultimo giocatore è l'umano allora la partita è finita
+          finePartita();
+          return;
+        } else if (!umanoInGioco()) {
+          // Se l'umano non è più in gioco allora la partita è finita
+          std::cout << "Hai perso, la partita è finita" << std::endl;
+          break;
+        }
+      }
+    }
+    if (ordineGiocatoriPartita.size() > 1) {
+      // Se almeno due computer sono in gioco allora continuo a giocare 20
+      // turni
+      for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 4; i++) {
+          turnoGiocatore(ordineGiocatoriPartita[i]);
+          std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        }
+      }
     }
   } else if (tipoGioco == "computer") {
+    // Gioco 20 turni con i 4 computer
     for (int i = 0; i < 20; i++) {
       for (int i = 0; i < 4; i++) {
-        turnoGiocatore(giocatoriInPartita[i]);
-        // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        turnoGiocatore(ordineGiocatoriPartita[i]);
+        std::this_thread::sleep_for(std::chrono::milliseconds(1000));
       }
       // Stampo il tabellone
       principale->stampaTabellone();
@@ -125,13 +141,13 @@ void Gioco::ordineGioco() {
   int count = 3;
   // Copio il vettore giocatoriInPartita in ordineGiocatoriPartita
   ordineGiocatoriPartita = giocatoriInPartita;
-  // stampa ordineGioatoriPartita
   while (count != 0) {
     for (int i = 0; i <= count; i++) {
+      // Faccio tirare i dadi a tutti i giocatori
       int tiro = dadi.tiraDadi(2);
       std::string messaggio =
           "Giocatore " +
-          std::to_string(giocatoriInPartita[i]->getNumeroGiocatore()) +
+          std::to_string(ordineGiocatoriPartita[i]->getNumeroGiocatore()) +
           " ha tirato i dadi per stabilire l'ordine di gioco e ha ottenuto " +
           std::to_string(tiro) + "\n";
       principale->stampaLog(messaggio);
@@ -142,16 +158,16 @@ void Gioco::ordineGioco() {
         pareggi = 0;
         // Sposto il giocatore che ha tirato il numero più alto in prima
         // posizione
-        Giocatore *temp = giocatoriInPartita[i];
-        giocatoriInPartita[i] = giocatoriInPartita[0];
-        giocatoriInPartita[0] = temp;
+        Giocatore *temp = ordineGiocatoriPartita[i];
+        ordineGiocatoriPartita[i] = ordineGiocatoriPartita[0];
+        ordineGiocatoriPartita[0] = temp;
       } else if (tiro == max) {
         // Se il tiro è uguale al massimo allora lo cambio con il giocatore in
         // posizione count
         pareggi++;
-        Giocatore *temp = giocatoriInPartita[i];
-        giocatoriInPartita[i] = giocatoriInPartita[pareggi];
-        giocatoriInPartita[pareggi] = temp;
+        Giocatore *temp = ordineGiocatoriPartita[i];
+        ordineGiocatoriPartita[i] = ordineGiocatoriPartita[pareggi];
+        ordineGiocatoriPartita[pareggi] = temp;
       }
       // Se il tiro è minore del massimo allora lo lascio nella posizione
     }
@@ -164,9 +180,10 @@ void Gioco::ordineGioco() {
     pareggi = 0;
     max = 0;
   }
+  // Stampo l'ordine di gioco
   std::cout << "L'ordine di gioco è: " << std::endl;
   for (int i = 0; i < 4; i++) {
-    std::cout << "Giocatore " << giocatoriInPartita[i]->getNumeroGiocatore()
+    std::cout << "Giocatore " << ordineGiocatoriPartita[i]->getNumeroGiocatore()
               << std::endl;
   }
 }
@@ -209,15 +226,12 @@ std::vector<Giocatore *> Gioco::comparaFiorini() {
   return vincitori;
 }
 
-bool Gioco::umanoInGioco() {
-  return giocatoriInPartita[0]->getInGioco() ? true : false;
-}
+bool Gioco::umanoInGioco() { return cp1->getInGioco() ? true : false; }
 
 bool Gioco::ultimoGiocatore() {
   // controllo se il giocatore umano è l'ultimo rimasto
-  return umanoInGioco() && !giocatoriInPartita[1]->getInGioco() &&
-                 !giocatoriInPartita[2]->getInGioco() &&
-                 !giocatoriInPartita[3]->getInGioco()
+  return umanoInGioco() && !cp2->getInGioco() && !cp3->getInGioco() &&
+                 !cp4->getInGioco()
              ? true
              : false;
 }

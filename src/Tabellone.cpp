@@ -74,6 +74,10 @@ void Tabellone::riempiCaselleRandom() {
 
 void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
                                Giocatore *giocatore3, Giocatore *giocatore4) {
+  // Se il giocatore non è in gioco non fare nulla
+  if (!giocatore->getInGioco()) {
+    return;
+  }
   // Dati del giocatore
   int vecchiaPosizione = giocatore->getPosizione();
   int numGiocatore = giocatore->getNumeroGiocatore();
@@ -118,7 +122,7 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
     // Caso in cui la casella è posseduta dal giocatore stesso
     // Controllo che immobili ci sono, se presenti.
     if (giocatore->isUmano()) {
-      std::string messaggio = "Vuoi acquistare un immobile? (s->si, n->no, "
+      std::string messaggio = "Vuoi acquistare un immobile? s->si, n->no, "
                               "show->mostra il tabellone";
       std::string risposta = chiediGiocatore(messaggio);
       if (risposta == "s" && nuovaCasella->getImmobile() == '^') {
@@ -151,7 +155,7 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       if (nuovaCasella->getImmobile() == '^') {
         std::string albergoPosseduto =
             "- Giocatore" + std::to_string(numGiocatore) +
-            " possiede già un albergo in questa casella!";
+            " possiede già un albergo in questa casella!\n";
         stampaLog(albergoPosseduto);
       } else {
         if (giocatore->getFiorini() >=
@@ -237,8 +241,11 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
         return;
       }
     }
-  } else {
+  } else if (nuovaCasella->getProprietarioCasella() != numGiocatore) {
     // Caso in cui la casella è posseduta da un altro giocatore
+    if (nuovaCasella->getImmobile() == ' ') {
+      return;
+    }
     if (giocatore->getFiorini() >= nuovaCasella->getAffitto()) {
       // Paga l'affitto
       giocatore->setFiorini(giocatore->getFiorini() -
@@ -257,33 +264,31 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
       stampaLog(pagamentoAffitto);
     } else {
       // Caso in cui il giocatore non riesce a pagare l'affitto
-      std::string giocatoreEliminato =
-          "- Giocatore " + std::to_string(numGiocatore) + " è stato eliminato";
-      stampaLog(giocatoreEliminato);
-      // Rimuove il giocatore dal vettore giocatoriInPartita
       giocatore->setFiorini(0);
       giocatore->setInGioco(false);
       rimuoviGiocatore(giocatore);
-      return;
+      std::string giocatoreEliminato = "- Giocatore " +
+                                       std::to_string(numGiocatore) +
+                                       " è stato eliminato\n";
+      stampaLog(giocatoreEliminato);
+      // Rimuove il giocatore dal vettore giocatoriInPartita
     }
   }
 }
 
 void Tabellone::aggiungiProprietario(Giocatore *giocatore, Casella *casella) {
   // Aggiunge il giocatore al vettore proprietà
-  switch (giocatore->getNumeroGiocatore()) {
-  case 1:
+  if (giocatore->getNumeroGiocatore() == 1) {
     proprietàcp1.push_back(casella);
-    break;
-  case 2:
+  }
+  if (giocatore->getNumeroGiocatore() == 2) {
     proprietàcp2.push_back(casella);
-    break;
-  case 3:
+  }
+  if (giocatore->getNumeroGiocatore() == 3) {
     proprietàcp3.push_back(casella);
-    break;
-  case 4:
+  }
+  if (giocatore->getNumeroGiocatore() == 4) {
     proprietàcp4.push_back(casella);
-    break;
   }
 }
 
@@ -427,48 +432,56 @@ std::vector<Casella *> Tabellone::getTabellone() const { return tabellone; }
 void Tabellone::assegnaProprietario(Giocatore *giocatore, int posizione) {
   tabellone[posizione]->setProprietario(giocatore);
   switch (giocatore->getNumeroGiocatore()) {
-  case 1:
-    proprietàcp1.push_back(tabellone[posizione]);
-    break;
-  case 2:
-    proprietàcp2.push_back(tabellone[posizione]);
-    break;
-  case 3:
-    proprietàcp3.push_back(tabellone[posizione]);
-    break;
-  case 4:
-    proprietàcp4.push_back(tabellone[posizione]);
-    break;
+    if (giocatore->getNumeroGiocatore() == 1) {
+      proprietàcp1.push_back(tabellone[posizione]);
+    }
+    if (giocatore->getNumeroGiocatore() == 2) {
+      proprietàcp2.push_back(tabellone[posizione]);
+    }
+    if (giocatore->getNumeroGiocatore() == 3) {
+      proprietàcp3.push_back(tabellone[posizione]);
+    }
+    if (giocatore->getNumeroGiocatore() == 4) {
+      proprietàcp4.push_back(tabellone[posizione]);
+    }
   }
 }
 
 void Tabellone::rimuoviGiocatore(Giocatore *giocatore) {
   // Rimuove tutte le proprietà del giocatore
-  switch (giocatore->getNumeroGiocatore()) {
-  case 1:
-    for (int i = 0; i < proprietàcp1.size(); i++) {
-      proprietàcp1[i]->setProprietarioCasella(0);
-      proprietàcp1[i]->setProprietario(nullptr);
+  int dimensioneVettoreProprietà;
+  if (giocatore->getNumeroGiocatore() == 1) {
+    dimensioneVettoreProprietà = proprietàcp1.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp1[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp1[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp1[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp1.pop_back();
     }
-    break;
-  case 2:
-    for (int i = 0; i < proprietàcp2.size(); i++) {
-      proprietàcp2[i]->setProprietarioCasella(0);
-      proprietàcp2[i]->setProprietario(nullptr);
+  } else if (giocatore->getNumeroGiocatore() == 2) {
+    dimensioneVettoreProprietà = proprietàcp2.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp2[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp2[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp2[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp2.pop_back();
     }
-    break;
-  case 3:
-    for (int i = 0; i < proprietàcp3.size(); i++) {
-      proprietàcp3[i]->setProprietarioCasella(0);
-      proprietàcp3[i]->setProprietario(nullptr);
+  } else if (giocatore->getNumeroGiocatore() == 3) {
+    dimensioneVettoreProprietà = proprietàcp3.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp3[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp3[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp3[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp3.pop_back();
     }
-    break;
-  case 4:
-    for (int i = 0; i < proprietàcp4.size(); i++) {
-      proprietàcp4[i]->setProprietarioCasella(0);
-      proprietàcp4[i]->setProprietario(nullptr);
+  } else if (giocatore->getNumeroGiocatore() == 4) {
+    dimensioneVettoreProprietà = proprietàcp4.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp4[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp4[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp4[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp4.pop_back();
     }
-    break;
   }
 }
 
