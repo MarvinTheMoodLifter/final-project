@@ -1,3 +1,5 @@
+// Autore: Chellin Davide
+// ------------------------------
 #include "GiocatoreUmano.h"
 
 GiocatoreUmano::GiocatoreUmano(int numGio)

@@ -1,3 +1,5 @@
+// Autore: Chellin Davide
+// ------------------------------
 #include "Gioco.h"
 #include <string>
 

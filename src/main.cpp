@@ -1,4 +1,4 @@
-// Autori: Chellin Davide, Perin Marco
+// Autore: Perin Marco
 // ------------------------------
 #include "Casella.h"
 #include "Dadi.h"
