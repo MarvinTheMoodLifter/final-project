@@ -219,23 +219,6 @@ void Tabellone::aggiungiProprietario(Giocatore *giocatore, Casella *casella) {
     proprietàcp4.push_back(casella);
   }
 }
-void Tabellone::assegnaProprietario(Giocatore *giocatore, int posizione) {
-  tabellone[posizione]->setProprietario(giocatore);
-  switch (giocatore->getNumeroGiocatore()) {
-    if (giocatore->getNumeroGiocatore() == 1) {
-      proprietàcp1.push_back(tabellone[posizione]);
-    }
-    if (giocatore->getNumeroGiocatore() == 2) {
-      proprietàcp2.push_back(tabellone[posizione]);
-    }
-    if (giocatore->getNumeroGiocatore() == 3) {
-      proprietàcp3.push_back(tabellone[posizione]);
-    }
-    if (giocatore->getNumeroGiocatore() == 4) {
-      proprietàcp4.push_back(tabellone[posizione]);
-    }
-  }
-}
 void Tabellone::rimuoviGiocatore(Giocatore *giocatore) {
   // Rimuove tutte le proprietà del giocatore
   int dimensioneVettoreProprietà;

@@ -47,7 +47,6 @@ public:
 
   // Setters
   void aggiungiProprietario(Giocatore *giocatore, Casella *casella);
-  void assegnaProprietario(Giocatore *giocatore, int posizione);
   void rimuoviGiocatore(Giocatore *giocatore);
 
   // Sposta il giocatore
