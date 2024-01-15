@@ -23,7 +23,7 @@ public:
   // Costruttore con parametri
   Casella(char riga, int colonna);
 
-  // Funzioni get
+  // Getters
   char getRiga() { return riga; };
   int getColonna() { return colonna; };
   std::vector<std::string> getCoordinate() { return coordinate; };
@@ -34,35 +34,30 @@ public:
   int getPrezzoProprietà();
   int getAffitto();
   int prezzoMiglioramentoImmobile();
-  void miglioraImmobile();
+  bool isVuota();
+  bool isAngolare();
 
-  // Funzioni set
+  // Setters
   void setImmobile(char immobile);
   void setTipologia(char tipologia);
   void setProprietarioCasella(int nuovoProprietario);
   void setProprietario(Giocatore *nuovoProprietario);
+  void aggiungiGiocatore(std::string giocatore);
+  void rimuoviGiocatore(std::string giocatore);
+  void miglioraImmobile();
 
-  // Stampa il valore della casella (con giocatori e immobili se presenti)
+  // Stampa
   void stampaCasella();
 
-  // Metodi per la gestione dei giocatori e degli immobili
-  // ----------------------------------
-  // Restituisce true se la casella è vuota
-  bool isVuota();
-  // Aggiunge un giocatore alla Casella
-  void aggiungiGiocatore(std::string giocatore);
-  // Rimuove un giocatore dalla Casella
-  void rimuoviGiocatore(std::string giocatore);
-  // Aggiunge un immobile alla Casella
-  void aggiungiImmobile(int giocatore);
-  bool isAngolare();
-
   bool operator==(const Casella &c) const {
+    // Overloading dell'operatore di uguaglianza
     return (riga == c.riga && colonna == c.colonna);
   }
   bool operator!=(const Casella &c) const {
+    // Overloading dell'operatore di disuguaglianza
     return (riga != c.riga || colonna != c.colonna);
   }
+  // Copy assignment operator
   Casella operator=(const Casella &c);
 };
 

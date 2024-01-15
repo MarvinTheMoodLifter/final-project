@@ -6,6 +6,7 @@
 #include <random>
 #include <string>
 
+// Costruttore
 Tabellone::Tabellone(std::string tipoPartita, Giocatore *g1, Giocatore *g2,
                      Giocatore *g3, Giocatore *g4)
     : cp1(g1), cp2(g2), cp3(g3), cp4(g4) {
@@ -17,6 +18,7 @@ Tabellone::Tabellone(std::string tipoPartita, Giocatore *g1, Giocatore *g2,
   std::cout << "Creazione del Tabellone..." << std::endl;
 }
 
+// Costruzione Tabellone
 void Tabellone::riempiTabellone() {
   // Riempie la prima parte di tabellone con le caselle vuote
   for (char riga = 'H'; riga > 'A'; riga--) {
@@ -35,7 +37,6 @@ void Tabellone::riempiTabellone() {
     }
   }
 }
-
 void Tabellone::randomizzaVettore(std::vector<char> &v) {
   // Genera un seme casuale
   std::random_device randomSeed;
@@ -44,7 +45,6 @@ void Tabellone::randomizzaVettore(std::vector<char> &v) {
   // Mescola il vettore
   std::shuffle(v.begin(), v.end(), gen);
 }
-
 void Tabellone::riempiCaselleRandom() {
   // Creo un vettore di char con i tipi di caselle
   // 8 caselle economiche
@@ -72,6 +72,212 @@ void Tabellone::riempiCaselleRandom() {
   }
 }
 
+// Stampa
+void Tabellone::stampaTabellone() {
+  // Stampa la prima riga con i numeri di colonna
+  std::cout << "     ";
+  for (int i = 1; i <= 8; i++) {
+    std::cout << i << "      ";
+  }
+  std::cout << std::endl << "A  ";
+  // Stampa il tabellone a partire dalla prima riga, poi le righe intermedie
+  // ed infine l'ultima riga Stampa la prima riga Prima riga
+  for (int i = tabellone.size() - 14; i < tabellone.size() - 6; i++) {
+    tabellone[i]->stampaCasella();
+  }
+  std::cout << std::endl;
+  // Righe intermedie
+  for (int i = 0; i < 6; i++) {
+    // Stampa la colonna di sinistra
+    std::cout << tabellone[13 - i]->getRiga() << "  ";
+    tabellone[13 - i]->stampaCasella();
+    // Stampa il logo centrale
+    switch (i) {
+    case 0:
+      std::cout << "     .. ..                     .          ";
+      break;
+    case 1:
+      std::cout << "     ::::: ::: ::: ::: ::: ::: : : :      ";
+      break;
+    case 2:
+      std::cout << "     : : : : : : : : : : : : : : : :      ";
+      break;
+    case 3:
+      std::cout << "     :. .: ::: : : ::: ::: ::: :  ::      ";
+      break;
+    case 4:
+      std::cout << "                       :          :       ";
+      break;
+    case 5:
+      std::cout << "                       \'         \'        ";
+      break;
+    }
+    // Stampa la colonna di destra
+    tabellone[22 + i]->stampaCasella();
+    std::cout << std::endl;
+  }
+  // Ultima riga
+  std::cout << "H  ";
+  for (int i = 0; i < 8; i++) {
+    tabellone[7 - i]->stampaCasella();
+  }
+  std::cout << std::endl;
+  // stampa i fiorini giocatori
+  stampaFiorini();
+  // Stampa le proprietà dei giocatori dal vettore proprietà
+  stampaPossedimenti();
+}
+void Tabellone::stampaFiorini() const {
+  std::string g1 = cp1->isUmano() ? "(umano)" : "(computer)";
+  // Crea i messaggi da stampare
+  // Poi chiama la funzione stampaLog per scrivere il messaggio a schermo e in
+  // un file di log
+  std::string messaggio1 = "Fiorini giocatore 1 " + g1 + ": " +
+                           std::to_string(cp1->getFiorini()) + "\n";
+  std::string messaggio2 =
+      "Fiorini giocatore 2 (computer): " + std::to_string(cp2->getFiorini()) +
+      "\n";
+  std::string messaggio3 =
+      "Fiorini giocatore 3 (computer): " + std::to_string(cp3->getFiorini()) +
+      "\n";
+  std::string messaggio4 =
+      "Fiorini giocatore 4 (computer): " + std::to_string(cp4->getFiorini()) +
+      "\n";
+  stampaLog(messaggio1);
+  stampaLog(messaggio2);
+  stampaLog(messaggio3);
+  stampaLog(messaggio4);
+}
+void Tabellone::stampaPossedimenti() const {
+  // Stampa le proprietà dei giocatori dal vettore proprietà
+  std::cout << "Giocatore 1 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp1.size(); i++) {
+    std::cout << proprietàcp1[i]->getRiga() << proprietàcp1[i]->getColonna()
+              << " " << proprietàcp1[i]->getTipologia()
+              << proprietàcp1[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+  std::cout << "Giocatore 2 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp2.size(); i++) {
+    std::cout << proprietàcp2[i]->getRiga() << proprietàcp2[i]->getColonna()
+              << " " << proprietàcp2[i]->getTipologia()
+              << proprietàcp2[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+  std::cout << "Giocatore 3 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp3.size(); i++) {
+    std::cout << proprietàcp3[i]->getRiga() << proprietàcp3[i]->getColonna()
+              << " " << proprietàcp3[i]->getTipologia()
+              << proprietàcp3[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+  std::cout << "Giocatore 4 possiede: " << std::endl << " · ";
+  for (int i = 0; i < proprietàcp4.size(); i++) {
+    std::cout << proprietàcp4[i]->getRiga() << proprietàcp4[i]->getColonna()
+              << " " << proprietàcp4[i]->getTipologia()
+              << proprietàcp4[i]->getImmobile() << " · ";
+  }
+  std::cout << std::endl;
+}
+void Tabellone::stampaLog(std::string messaggio) const {
+  // Scrive il messaggio in un file di log
+  std::cout << messaggio;
+  std::ofstream log;
+  log.open("../log/log.txt", std::ios::app);
+  log << messaggio;
+  log.close();
+}
+std::string Tabellone::chiediGiocatore(std::string messaggio) {
+  std::string risposta = "show";
+  while (risposta != "s" && risposta != "n") {
+    std::cout << messaggio << std::endl;
+    std::cin >> risposta;
+    // Rende le lettere minuscole
+    for (int i = 0; i < risposta.length(); i++) {
+      risposta[i] = tolower(risposta[i]);
+    }
+    if (risposta == "show") {
+      stampaTabellone();
+    }
+  }
+  return risposta;
+}
+
+// Setters
+void Tabellone::aggiungiProprietario(Giocatore *giocatore, Casella *casella) {
+  // Aggiunge il giocatore al vettore proprietà
+  if (giocatore->getNumeroGiocatore() == 1) {
+    proprietàcp1.push_back(casella);
+  }
+  if (giocatore->getNumeroGiocatore() == 2) {
+    proprietàcp2.push_back(casella);
+  }
+  if (giocatore->getNumeroGiocatore() == 3) {
+    proprietàcp3.push_back(casella);
+  }
+  if (giocatore->getNumeroGiocatore() == 4) {
+    proprietàcp4.push_back(casella);
+  }
+}
+void Tabellone::assegnaProprietario(Giocatore *giocatore, int posizione) {
+  tabellone[posizione]->setProprietario(giocatore);
+  switch (giocatore->getNumeroGiocatore()) {
+    if (giocatore->getNumeroGiocatore() == 1) {
+      proprietàcp1.push_back(tabellone[posizione]);
+    }
+    if (giocatore->getNumeroGiocatore() == 2) {
+      proprietàcp2.push_back(tabellone[posizione]);
+    }
+    if (giocatore->getNumeroGiocatore() == 3) {
+      proprietàcp3.push_back(tabellone[posizione]);
+    }
+    if (giocatore->getNumeroGiocatore() == 4) {
+      proprietàcp4.push_back(tabellone[posizione]);
+    }
+  }
+}
+void Tabellone::rimuoviGiocatore(Giocatore *giocatore) {
+  // Rimuove tutte le proprietà del giocatore
+  int dimensioneVettoreProprietà;
+  if (giocatore->getNumeroGiocatore() == 1) {
+    dimensioneVettoreProprietà = proprietàcp1.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp1[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp1[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp1[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp1.pop_back();
+    }
+  } else if (giocatore->getNumeroGiocatore() == 2) {
+    dimensioneVettoreProprietà = proprietàcp2.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp2[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp2[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp2[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp2.pop_back();
+    }
+  } else if (giocatore->getNumeroGiocatore() == 3) {
+    dimensioneVettoreProprietà = proprietàcp3.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp3[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp3[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp3[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp3.pop_back();
+    }
+  } else if (giocatore->getNumeroGiocatore() == 4) {
+    dimensioneVettoreProprietà = proprietàcp4.size();
+    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
+      proprietàcp4[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
+      proprietàcp4[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
+      proprietàcp4[dimensioneVettoreProprietà - i]->setImmobile(' ');
+      proprietàcp4.pop_back();
+    }
+  }
+}
+
+// Getters
+std::vector<Casella *> Tabellone::getTabellone() const { return tabellone; }
+
+// Sposta il giocatore
 void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
                                Giocatore *giocatore3, Giocatore *giocatore4) {
   // Se il giocatore non è in gioco non fare nulla
@@ -269,215 +475,6 @@ void Tabellone::muoviGiocatore(Giocatore *giocatore, Giocatore *giocatore2,
                                        " è stato eliminato\n";
       stampaLog(giocatoreEliminato);
       // Rimuove il giocatore dal vettore giocatoriInPartita
-    }
-  }
-}
-
-void Tabellone::aggiungiProprietario(Giocatore *giocatore, Casella *casella) {
-  // Aggiunge il giocatore al vettore proprietà
-  if (giocatore->getNumeroGiocatore() == 1) {
-    proprietàcp1.push_back(casella);
-  }
-  if (giocatore->getNumeroGiocatore() == 2) {
-    proprietàcp2.push_back(casella);
-  }
-  if (giocatore->getNumeroGiocatore() == 3) {
-    proprietàcp3.push_back(casella);
-  }
-  if (giocatore->getNumeroGiocatore() == 4) {
-    proprietàcp4.push_back(casella);
-  }
-}
-
-// Aggiungo controllo input
-std::string Tabellone::chiediGiocatore(std::string messaggio) {
-  std::string risposta = "show";
-  while (risposta != "s" && risposta != "n") {
-    std::cout << messaggio << std::endl;
-    std::cin >> risposta;
-    // Rende le lettere minuscole
-    for (int i = 0; i < risposta.length(); i++) {
-      risposta[i] = tolower(risposta[i]);
-    }
-    if (risposta == "show") {
-      stampaTabellone();
-    }
-  }
-  return risposta;
-}
-
-void Tabellone::stampaTabellone() {
-  // Stampa la prima riga con i numeri di colonna
-  std::cout << "     ";
-  for (int i = 1; i <= 8; i++) {
-    std::cout << i << "      ";
-  }
-  std::cout << std::endl << "A  ";
-  // Stampa il tabellone a partire dalla prima riga, poi le righe intermedie
-  // ed infine l'ultima riga Stampa la prima riga Prima riga
-  for (int i = tabellone.size() - 14; i < tabellone.size() - 6; i++) {
-    tabellone[i]->stampaCasella();
-  }
-  std::cout << std::endl;
-  // Righe intermedie
-  for (int i = 0; i < 6; i++) {
-    // Stampa la colonna di sinistra
-    std::cout << tabellone[13 - i]->getRiga() << "  ";
-    tabellone[13 - i]->stampaCasella();
-    // Stampa il logo centrale
-    switch (i) {
-    case 0:
-      std::cout << "     .. ..                     .          ";
-      break;
-    case 1:
-      std::cout << "     ::::: ::: ::: ::: ::: ::: : : :      ";
-      break;
-    case 2:
-      std::cout << "     : : : : : : : : : : : : : : : :      ";
-      break;
-    case 3:
-      std::cout << "     :. .: ::: : : ::: ::: ::: :  ::      ";
-      break;
-    case 4:
-      std::cout << "                       :          :       ";
-      break;
-    case 5:
-      std::cout << "                       \'         \'        ";
-      break;
-    }
-    // Stampa la colonna di destra
-    tabellone[22 + i]->stampaCasella();
-    std::cout << std::endl;
-  }
-  // Ultima riga
-  std::cout << "H  ";
-  for (int i = 0; i < 8; i++) {
-    tabellone[7 - i]->stampaCasella();
-  }
-  std::cout << std::endl;
-  // stampa i fiorini giocatori
-  stampaFiorini();
-  // Stampa le proprietà dei giocatori dal vettore proprietà
-  stampaPossedimenti();
-}
-
-void Tabellone::stampaPossedimenti() const {
-  // Stampa le proprietà dei giocatori dal vettore proprietà
-  std::cout << "Giocatore 1 possiede: " << std::endl << " · ";
-  for (int i = 0; i < proprietàcp1.size(); i++) {
-    std::cout << proprietàcp1[i]->getRiga() << proprietàcp1[i]->getColonna()
-              << " " << proprietàcp1[i]->getTipologia()
-              << proprietàcp1[i]->getImmobile() << " · ";
-  }
-  std::cout << std::endl;
-  std::cout << "Giocatore 2 possiede: " << std::endl << " · ";
-  for (int i = 0; i < proprietàcp2.size(); i++) {
-    std::cout << proprietàcp2[i]->getRiga() << proprietàcp2[i]->getColonna()
-              << " " << proprietàcp2[i]->getTipologia()
-              << proprietàcp2[i]->getImmobile() << " · ";
-  }
-  std::cout << std::endl;
-  std::cout << "Giocatore 3 possiede: " << std::endl << " · ";
-  for (int i = 0; i < proprietàcp3.size(); i++) {
-    std::cout << proprietàcp3[i]->getRiga() << proprietàcp3[i]->getColonna()
-              << " " << proprietàcp3[i]->getTipologia()
-              << proprietàcp3[i]->getImmobile() << " · ";
-  }
-  std::cout << std::endl;
-  std::cout << "Giocatore 4 possiede: " << std::endl << " · ";
-  for (int i = 0; i < proprietàcp4.size(); i++) {
-    std::cout << proprietàcp4[i]->getRiga() << proprietàcp4[i]->getColonna()
-              << " " << proprietàcp4[i]->getTipologia()
-              << proprietàcp4[i]->getImmobile() << " · ";
-  }
-  std::cout << std::endl;
-}
-
-void Tabellone::stampaFiorini() const {
-  std::string g1 = cp1->isUmano() ? "(umano)" : "(computer)";
-  // Crea i messaggi da stampare
-  // Poi chiama la funzione stampaLog per scrivere il messaggio a schermo e in
-  // un file di log
-  std::string messaggio1 = "Fiorini giocatore 1 " + g1 + ": " +
-                           std::to_string(cp1->getFiorini()) + "\n";
-  std::string messaggio2 =
-      "Fiorini giocatore 2 (computer): " + std::to_string(cp2->getFiorini()) +
-      "\n";
-  std::string messaggio3 =
-      "Fiorini giocatore 3 (computer): " + std::to_string(cp3->getFiorini()) +
-      "\n";
-  std::string messaggio4 =
-      "Fiorini giocatore 4 (computer): " + std::to_string(cp4->getFiorini()) +
-      "\n";
-  stampaLog(messaggio1);
-  stampaLog(messaggio2);
-  stampaLog(messaggio3);
-  stampaLog(messaggio4);
-}
-
-void Tabellone::stampaLog(std::string messaggio) const {
-  // Scrive il messaggio in un file di log
-  std::cout << messaggio;
-  std::ofstream log;
-  log.open("../log/log.txt", std::ios::app);
-  log << messaggio;
-  log.close();
-}
-
-std::vector<Casella *> Tabellone::getTabellone() const { return tabellone; }
-
-void Tabellone::assegnaProprietario(Giocatore *giocatore, int posizione) {
-  tabellone[posizione]->setProprietario(giocatore);
-  switch (giocatore->getNumeroGiocatore()) {
-    if (giocatore->getNumeroGiocatore() == 1) {
-      proprietàcp1.push_back(tabellone[posizione]);
-    }
-    if (giocatore->getNumeroGiocatore() == 2) {
-      proprietàcp2.push_back(tabellone[posizione]);
-    }
-    if (giocatore->getNumeroGiocatore() == 3) {
-      proprietàcp3.push_back(tabellone[posizione]);
-    }
-    if (giocatore->getNumeroGiocatore() == 4) {
-      proprietàcp4.push_back(tabellone[posizione]);
-    }
-  }
-}
-
-void Tabellone::rimuoviGiocatore(Giocatore *giocatore) {
-  // Rimuove tutte le proprietà del giocatore
-  int dimensioneVettoreProprietà;
-  if (giocatore->getNumeroGiocatore() == 1) {
-    dimensioneVettoreProprietà = proprietàcp1.size();
-    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
-      proprietàcp1[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
-      proprietàcp1[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
-      proprietàcp1[dimensioneVettoreProprietà - i]->setImmobile(' ');
-      proprietàcp1.pop_back();
-    }
-  } else if (giocatore->getNumeroGiocatore() == 2) {
-    dimensioneVettoreProprietà = proprietàcp2.size();
-    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
-      proprietàcp2[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
-      proprietàcp2[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
-      proprietàcp2[dimensioneVettoreProprietà - i]->setImmobile(' ');
-      proprietàcp2.pop_back();
-    }
-  } else if (giocatore->getNumeroGiocatore() == 3) {
-    dimensioneVettoreProprietà = proprietàcp3.size();
-    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
-      proprietàcp3[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
-      proprietàcp3[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
-      proprietàcp3[dimensioneVettoreProprietà - i]->setImmobile(' ');
-      proprietàcp3.pop_back();
-    }
-  } else if (giocatore->getNumeroGiocatore() == 4) {
-    dimensioneVettoreProprietà = proprietàcp4.size();
-    for (int i = 1; i <= dimensioneVettoreProprietà; i++) {
-      proprietàcp4[dimensioneVettoreProprietà - i]->setProprietarioCasella(0);
-      proprietàcp4[dimensioneVettoreProprietà - i]->setProprietario(nullptr);
-      proprietàcp4[dimensioneVettoreProprietà - i]->setImmobile(' ');
-      proprietàcp4.pop_back();
     }
   }
 }
