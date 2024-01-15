@@ -208,7 +208,7 @@ void Gioco::finePartita() {
   if (vincitore.size() == 1) {
     messaggioVincitore += "- Giocatore " +
                           std::to_string(vincitore[0]->getNumeroGiocatore()) +
-                          " ha vinto la partita";
+                          " ha vinto la partita!\n";
   } else {
     messaggioVincitore = "- Pareggio tra i giocatori, i vincitori "
                          "sono:\n";
