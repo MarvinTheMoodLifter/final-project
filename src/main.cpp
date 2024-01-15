@@ -21,6 +21,10 @@ int main(int argc, char **argv) {
   }
   if (tipoPartita == "human" | tipoPartita == "computer") {
     std::cout << "Partita " << tipoPartita << std::endl;
+  } else {
+    std::cout << "Tipo di partita non valido" << std::endl;
+    std::cout << "Uso: ./main [human|computer]" << std::endl;
+    return 0;
   }
 
   enum tipo { human = 0, computer = 1 };
